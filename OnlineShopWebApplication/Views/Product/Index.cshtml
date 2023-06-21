@@ -1,0 +1,22 @@
+﻿@model Product
+
+<h2>@Model.Name</h2>
+
+<div class="border">
+
+    <div class="row">
+        <div class="col-7">
+            <img class="card-img-top" src="@Url.Content(Model.ImgPath)" />
+        </div>
+        <div class="col-5">
+            <p>@Html.Raw(Model.Description.Replace("\n", "<br>"))</p>
+        </div>
+    </div>
+</div>
+
+<div class="col">
+    <h5>Цена: @Model.Cost руб.</h5>
+    <a class="btn btn-dark" role="button" href="/cart/add?productId=@Model.Id">Добавить в корзину</a>
+    <br />
+    <a style="margin-top: 5px" class="btn btn-dark" role="button" href="@Url.Action("Index", "Home")">Продолжить покупки</a>
+</div>
