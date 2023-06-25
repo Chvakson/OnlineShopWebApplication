@@ -1,0 +1,36 @@
+﻿
+<form>
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Email</label>
+        <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Введите Email">
+        <label for="exampleInputPassword1" class="form-label"></label>
+        <input type="email" class="form-control" id="repit-email" placeholder="Повторите Email (только ручной ввод)">
+    </div>
+    @*<div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+            <label class="form-check-label" for="exampleCheck1">Check me out</label>
+        </div>*@
+
+    <a role="button" class="btn btn-dark" onclick="Accept()">Подтвердить</a>
+
+    <script>
+        function Accept() {
+            event.preventDefault();
+            Swal.fire({
+                icon: 'success',
+                title: 'Ваш заказ успешно оформлен!',
+                showConfirmButton: false,
+                timer: 1000
+            })
+            setTimeout(function () {
+                window.location.href="@Url.Action("Arrange", "Order")";
+            }, 1000);
+        }
+    </script>
+</form>
+
+<script>
+    document.getElementById("repit-email").addEventListener("paste", function (e) {
+        e.preventDefault();
+    });
+</script>
