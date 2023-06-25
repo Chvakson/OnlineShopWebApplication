@@ -9,9 +9,9 @@ namespace OnlineShopWebApplication.Controllers
     {
         private readonly ProductsStorage productStorage;
 
-        public ProductController()
+        public ProductController(ProductsStorage productsStorage)
         {
-            productStorage = new ProductsStorage();
+            productStorage = productsStorage;
         }
 
 

@@ -8,9 +8,9 @@ namespace OnlineShopWebApplication.Controllers
     {
         private readonly ProductsStorage productStorage;
 
-        public HomeController()
+        public HomeController(ProductsStorage productStorage)
         {
-            productStorage = new ProductsStorage();
+            this.productStorage = productStorage;
         }
         public IActionResult Index()
         {
