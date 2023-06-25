@@ -24,7 +24,19 @@
                     <tr>
                         <td class="col-5">@item.Product.Name</td>
                         <td class="col-3">@item.Product.Cost руб.</td>
-                        <td class="col-3">@item.Amount</td>
+                        <td class="col-3 plus-minus">
+                            <a id="minus">
+                                <span class="material-icons" onclick="window.location.href='/cart/remove?productId=@item.Product.Id'" style="cursor: pointer;">
+                                    remove_circle_outline
+                                </span>
+                            </a>
+                            @item.Amount
+                            <a id="plus">
+                                <span class="material-icons" onclick="window.location.href='/cart/add?productId=@item.Product.Id'" style="cursor: pointer;">
+                                    add_circle_outline
+                                </span>
+                            </a>
+                        </td>
                         <td class="col-1">@item.Cost руб.</td>
                     </tr>
                 }
@@ -39,7 +51,10 @@
         <div class="text-center">
             <a role="button" class="btn btn-dark" href="@Url.Action("Index", "Home")">Продолжить покупки</a>
             <a role="button" class="btn btn-dark">Оформить заказ</a>
+            <a role="button" class="btn btn-dark"  href="@Url.Action("RemoveAll", "Cart")">Очистить корзину</a>
         </div>
     }
 }
+
+
 
