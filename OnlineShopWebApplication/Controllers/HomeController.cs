@@ -6,9 +6,9 @@ namespace OnlineShopWebApplication.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ProductsStorage productStorage;
+        private readonly IProductsStorage productStorage;
 
-        public HomeController(ProductsStorage productStorage)
+        public HomeController(IProductsStorage productStorage)
         {
             this.productStorage = productStorage;
         }

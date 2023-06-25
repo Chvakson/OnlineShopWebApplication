@@ -3,7 +3,7 @@ using OnlineShopWebApplication.Models;
 
 namespace OnlineShopWebApplication
 {
-    public class ProductsStorage
+    public class ProductsStorage : IProductsStorage
     {
         public List<Product> Products = new List<Product>
         {

@@ -4,9 +4,9 @@ namespace OnlineShopWebApplication.Controllers
 {
     public class CartController : Controller
     {
-        private readonly ProductsStorage productsStorage;
-        private readonly CartsStorage cartsStorage;
-        public CartController(ProductsStorage productsStorage, CartsStorage cartsStorage)
+        private readonly IProductsStorage productsStorage;
+        private readonly ICartsStorage cartsStorage;
+        public CartController(IProductsStorage productsStorage, ICartsStorage cartsStorage)
         {
             this.productsStorage = productsStorage;
             this.cartsStorage = cartsStorage;

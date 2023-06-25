@@ -2,7 +2,7 @@
 
 namespace OnlineShopWebApplication
 {
-    public class CartsStorage
+    public class CartsStorage : ICartsStorage
     {
         private List<Cart> carts = new List<Cart>();
 
