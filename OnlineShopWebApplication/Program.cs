@@ -10,6 +10,8 @@ builder.Services.AddSingleton<ICartsStorage, CartsInMemoryStorage>();
 
 builder.Services.AddSingleton<IOrdersStorage, OrdersInMemoryStorage>();
 
+builder.Services.AddSingleton<IFavoriteStorage, FavoriteInMemoryStorage>();
+
 var app = builder.Build();
 
 app.UseStaticFiles();
