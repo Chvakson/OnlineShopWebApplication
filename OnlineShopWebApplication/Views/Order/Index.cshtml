@@ -1,10 +1,10 @@
 ﻿
 <form>
-    <div class="mb-3">
+    <div class="col-3">
         <label for="exampleInputEmail1" class="form-label">Email</label>
         <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Введите Email">
         <label for="exampleInputPassword1" class="form-label"></label>
-        <input type="email" class="form-control" id="repit-email" placeholder="Повторите Email (только ручной ввод)">
+        <input type="email" class="form-control" id="repit-email" placeholder="Повторите Email (только ручной ввод)" style="margin-bottom: 15px">
     </div>
     @*<div class="mb-3 form-check">
             <input type="checkbox" class="form-check-input" id="exampleCheck1">
@@ -23,7 +23,7 @@
                 timer: 1000
             })
             setTimeout(function () {
-                window.location.href="@Url.Action("Arrange", "Order")";
+                window.location.href="@Url.Action("Buy", "Order")";
             }, 1000);
         }
     </script>

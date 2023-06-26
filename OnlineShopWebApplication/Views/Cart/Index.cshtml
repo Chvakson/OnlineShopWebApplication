@@ -3,7 +3,7 @@
 <h2>Моя корзина</h2>
 
 @{
-    if (Model == null)
+    if (Model == null || Model.Items.Count == 0)
     {
         <h3>В корзине пока нет товаров</h3>
     }

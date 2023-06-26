@@ -2,7 +2,7 @@
 
 namespace OnlineShopWebApplication
 {
-    public class CartsStorage : ICartsStorage
+    public class CartsInMemoryStorage : ICartsStorage
     {
         private List<Cart> carts = new List<Cart>();
 
@@ -54,18 +54,17 @@ namespace OnlineShopWebApplication
         public void Remove(Product product, string userId)
         {
             var existingCart = TryGetByUserId(userId);
-            var existingCartItem = existingCart.Items.FirstOrDefault(item => item.Product.Id == product.Id);
-            if (existingCartItem.Amount >= 1)
+            var existingCartItem = existingCart?.Items?.FirstOrDefault(item => item.Product.Id == product.Id);
+            if (existingCartItem == null)
             {
-                existingCartItem.Amount--;
+                return;
             }
-            if (existingCartItem.Amount < 1)
+
+            existingCartItem.Amount--;
+
+            if (existingCartItem.Amount == 0)
             {
                 existingCart.Items.Remove(existingCartItem);
-                if (existingCart.Items.Count < 1)
-                {
-                    carts.Remove(existingCart);
-                }
             }
         }
 
