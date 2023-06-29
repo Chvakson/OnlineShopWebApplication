@@ -11,10 +11,14 @@
                 <h4 class="product-name" onclick="window.location.href='@Url.Action("Index", "Product", new { id = product.Id })'" style="cursor: pointer;">@product.Name</h4>
                 <img class="card-img-top" src="@Url.Content(product.ImgPath)" />
                 <h5>Цена: @product.Cost руб.</h5>
-                <a class="btn btn-dark" role="button" href="/favorite/add?productId=@product.Id">Добавить в избранное</a>
+                <form asp-controller="Favorite" asp-action="Add" method="post">
+                    <input type="hidden" name="productId" value="@product.Id" />
+                    <button class="btn btn-dark" type="submit">Добавить в избранное</button>
+                </form>
                 <a class="btn btn-dark" role="button" href="/cart/add?productId=@product.Id">Добавить в корзину</a>
             </div>
         </div>
         <br />
     }
 </div>
+

@@ -5,12 +5,19 @@ namespace OnlineShopWebApplication.Controllers
 {
     public class FavoriteController : Controller
     {
-        private readonly IProductsStorage productsStorage;
         private readonly IFavoriteStorage favoriteStorage;
+        private readonly IProductsStorage productsStorage;
+
+        public FavoriteController(IFavoriteStorage favoriteStorage, IProductsStorage productsStorage)
+        {
+            this.favoriteStorage = favoriteStorage;
+            this.productsStorage = productsStorage;
+        }
 
         public IActionResult Index()
         {
-            return View();
+            var products = favoriteStorage.GetAll();
+            return View(products);
         }
 
         public void Add(int productId)

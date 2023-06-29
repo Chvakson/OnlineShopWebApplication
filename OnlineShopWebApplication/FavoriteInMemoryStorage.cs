@@ -1,18 +1,24 @@
-﻿using OnlineShopWebApplication.Models;
+﻿using Microsoft.AspNetCore.Mvc;
+using OnlineShopWebApplication.Models;
 
 namespace OnlineShopWebApplication
 {
     public class FavoriteInMemoryStorage : IFavoriteStorage
     {
-        public List<Product> Favorites = new List<Product>();
+        //public string UserId;
+        public List<Product> Products = new List<Product>();
 
-        public void Add(Product product) 
+        public List<Product> GetAll()
         {
-            if(Favorites.Contains(product))
+            return Products;
+        }
+        public void Add(Product product)
+        {
+            if (Products.Contains(product))
             {
                 return;
             }
-            Favorites.Add(product);
+            Products.Add(product);
         }
     }
 }
