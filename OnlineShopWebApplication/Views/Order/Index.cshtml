@@ -1,5 +1,5 @@
 ﻿
-<form>
+<form method="post">
     <div class="col-3">
         <label for="exampleInputEmail1" class="form-label">Email</label>
         <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Введите Email">
@@ -11,7 +11,8 @@
             <label class="form-check-label" for="exampleCheck1">Check me out</label>
         </div>*@
 
-    <a role="button" class="btn btn-dark" onclick="Accept()">Подтвердить</a>
+    <button type="submit" class="btn btn-dark" asp-controller="Order" asp-action="Buy" onclick="Accept()">Подтвердить</button>
+
 
     <script>
         function Accept() {
