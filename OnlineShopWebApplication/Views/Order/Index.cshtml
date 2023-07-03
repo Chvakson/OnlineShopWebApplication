@@ -3,16 +3,15 @@
     <div class="col-3">
         <div class="mb-3">
             <label for="phone" class="form-label">Номер телефона</label>
-            <p><input type="tel" pattern="\+7\-[0-9]{3}\-[0-9]{3}\-[0-9]{2}\-[0-9]{2}" placeholder="+7(000)000-00-00"></p>
+            <p><input type="tel" name="phone" pattern="\+7\-[0-9]{3}\-[0-9]{3}\-[0-9]{2}\-[0-9]{2}" placeholder="+7(000)000-00-00"></p>
         </div>
 
-
         <label for="exampleFormControlInput1" class="form-label">Email</label>
-        <input type="email" class="form-control" id="email" placeholder="name@example.com">
+        <input type="email" class="form-control" name="email" id="email" placeholder="name@example.com">
 
 
-        <label for="exampleInputEmail1" class="form-label">Email</label>
-        <input type="email" name="email" class="form-control" id="repit-email" placeholder="Введите Email (только ручной ввод)" style="margin-bottom: 15px">
+        <label for="exampleInputEmail1" class="form-label">Повторите Email (только ручной ввод)</label>
+        <input type="email" name="email" class="form-control" id="repit-email" placeholder="name@example.com" style="margin-bottom: 15px">
     </div>
 
     <button type="submit" class="btn btn-dark" onclick="Accept()">Подтвердить</button>
