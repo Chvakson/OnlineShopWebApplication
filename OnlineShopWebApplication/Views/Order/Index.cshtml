@@ -10,14 +10,15 @@
         <input type="email" class="form-control" name="email" id="email" placeholder="name@example.com" style="margin-bottom: 15px" required>
 
         <label class="form-label">Повторите Email (только ручной ввод)</label>
-        <input type="email" class="form-control" id="repit-email" placeholder="name@example.com" style="margin-bottom: 15px" required>
+        <input type="email" class="form-control" id="repeat-email" placeholder="name@example.com" style="margin-bottom: 15px" required>
     </div>
 
-    <button type="submit" class="btn btn-dark" onclick="Accept()">Подтвердить</button>
+    <button type="submit" class="btn btn-dark" onclick="Accept()" asp-controller="Order" asp-action="Buy">Подтвердить</button>
 </form>
 
+
 <script>
-        function Accept() {
+    function Accept(event) {
             event.preventDefault();
             Swal.fire({
                 icon: 'success',
@@ -26,11 +27,13 @@
                 timer: 1000
             })
             setTimeout(function () {
-                window.location.href="@Url.Action("Buy", "Order")";
+                window.location.href='@Url.Action("Buy", "Order")';
             }, 1000);
     }
 
-    document.getElementById("repit-email").addEventListener("paste", function (e) {
+    document.getElementById("repeat-email").addEventListener("paste", function (e) {
         e.preventDefault();
     });
 </script>
+
+

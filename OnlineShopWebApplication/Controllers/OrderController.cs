@@ -18,7 +18,7 @@ namespace OnlineShopWebApplication.Controllers
         }
 
         [HttpPost]
-        public IActionResult Buy(Order order)
+        public IActionResult Buy(string phone, string email)
         {
             var existingCart = cartsStorage.TryGetByUserId(Constants.UserId);
             ordersStorage.Add(existingCart);
