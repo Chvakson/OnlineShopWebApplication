@@ -1,4 +1,7 @@
+using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApplication;
+using OnlineShopWebApplication.Controllers;
+using OnlineShopWebApplication.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 

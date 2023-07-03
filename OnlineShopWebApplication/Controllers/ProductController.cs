@@ -14,7 +14,6 @@ namespace OnlineShopWebApplication.Controllers
             productStorage = productsStorage;
         }
 
-
         public IActionResult Index(int? id)
         {
             var pruduct = productStorage.TryGetById(id);

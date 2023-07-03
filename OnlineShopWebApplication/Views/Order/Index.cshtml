@@ -2,22 +2,21 @@
 <form method="post">
     <div class="col-3">
         <div class="mb-3">
-            <label for="phone" class="form-label">Номер телефона</label>
-            <p><input type="tel" name="phone" pattern="\+7\-[0-9]{3}\-[0-9]{3}\-[0-9]{2}\-[0-9]{2}" placeholder="+7(000)000-00-00"></p>
+            <label class="form-label">Номер телефона</label>
+            <p><input type="tel" name="phone" placeholder="+7(000)000-00-00" required></p>
         </div>
 
-        <label for="exampleFormControlInput1" class="form-label">Email</label>
-        <input type="email" class="form-control" name="email" id="email" placeholder="name@example.com">
+        <label class="form-label">Email</label>
+        <input type="email" class="form-control" name="email" id="email" placeholder="name@example.com" style="margin-bottom: 15px" required>
 
-
-        <label for="exampleInputEmail1" class="form-label">Повторите Email (только ручной ввод)</label>
-        <input type="email" name="email" class="form-control" id="repit-email" placeholder="name@example.com" style="margin-bottom: 15px">
+        <label class="form-label">Повторите Email (только ручной ввод)</label>
+        <input type="email" class="form-control" id="repit-email" placeholder="name@example.com" style="margin-bottom: 15px" required>
     </div>
 
     <button type="submit" class="btn btn-dark" onclick="Accept()">Подтвердить</button>
+</form>
 
-
-    <script>
+<script>
         function Accept() {
             event.preventDefault();
             Swal.fire({
@@ -29,11 +28,8 @@
             setTimeout(function () {
                 window.location.href="@Url.Action("Buy", "Order")";
             }, 1000);
-        }
-    </script>
-</form>
+    }
 
-<script>
     document.getElementById("repit-email").addEventListener("paste", function (e) {
         e.preventDefault();
     });
