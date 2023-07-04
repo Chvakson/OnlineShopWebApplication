@@ -3,58 +3,43 @@
 <h2>Список товаров</h2>
 
 <div class="row">
-        @foreach (var product in Model)
-        {
-            <div class="col card shadow">
-                <div class="card-body">
-                     @*третий параметр в Url.Action должен быть парой ключ/значение.*@
-    <h4 class="product-name" onclick="window.location.href='@Url.Action("Index", "Product", new { id = product.Id })'" style="cursor: pointer;">@product.Name</h4>
-                    <img class="card-img-top" src="@Url.Content(product.ImgPath)" />
-                    <h5>Цена: @product.Cost руб.</h5>
-                    <form asp-controller="Favorite" asp-action="Add" method="post">
-                        <input type="hidden" name="productId" value="@product.Id" />
-                        <button class="btn btn-dark" type="submit">Добавить в избранное</button>
-                    </form>
-                    <a class="btn btn-dark" role="button" href="/cart/add?productId=@product.Id">Добавить в корзину</a>
-                </div>
-            </div>
-            <br />
-        }
-    </div>
-
-@*<div class="row">
     @foreach (var product in Model)
     {
         <div class="col card shadow">
             <div class="card-body">
-                <h4 class="product-name" onclick="window.location.href='@Url.Action(" Index", "Product" , new { id=product.Id })'" style="cursor: pointer;">@product.Name</h4>
+                <h4 class="product-name" onclick="window.location.href='@Url.Action("Index", "Product", new { id = product.Id })'" style="cursor: pointer;">@product.Name</h4>
                 <img class="card-img-top" src="@Url.Content(product.ImgPath)" />
                 <h5>Цена: @product.Cost руб.</h5>
-                <div class="add-to-favorite">
+                <form>
                     <input type="hidden" name="productId" value="@product.Id" />
-                    <button class="btn btn-dark" type="button">Добавить в избранное</button>
-                </div>
+                    <button class="btn btn-dark add-to-favorite-btn" type="button" data-product-id="@product.Id">Добавить в избранное</button>
+                </form>
                 <a class="btn btn-dark" role="button" href="/cart/add?productId=@product.Id">Добавить в корзину</a>
             </div>
         </div>
         <br />
     }
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    (document).ready(function () {
-        $('.add-to-favorite button').click(function () {
+    $(document).ready(function () {
+        $('.add-to-favorite-btn').click(function () {
             var button = $(this);
-            var productId = button.closest('.add-to-favorite').find('input[name="productId"]').val();
+            var productId = button.data('product-id');
 
             $.ajax({
-                url: '/favorite/add',
+                url: '@Url.Action("Add", "Favorite")',
                 type: 'POST',
                 data: { productId: productId },
                 success: function () {
                     button.addClass('added-to-favorite');
                     button.attr('disabled', true);
+                },
+                error: function () {
+                    alert('Ошибка при добавлении товара в избранное');
                 }
             });
         });
     });
-</script>*@
+</script>

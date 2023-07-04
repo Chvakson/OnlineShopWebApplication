@@ -20,11 +20,12 @@ namespace OnlineShopWebApplication.Controllers
             return View(products);
         }
 
+        [HttpPost]
         public IActionResult Add(int productId)
         {
             var product = productsStorage.TryGetById(productId);
             favoriteStorage.Add(product);
-            return RedirectToAction("Index", "Favorite");
+            return Ok();
         }
     }
 }
