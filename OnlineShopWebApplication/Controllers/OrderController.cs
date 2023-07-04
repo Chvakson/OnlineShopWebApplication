@@ -18,12 +18,12 @@ namespace OnlineShopWebApplication.Controllers
         }
 
         [HttpPost]
-        public IActionResult Buy(string phone, string email)
+        public void Buy(Order order)
         {
             var existingCart = cartsStorage.TryGetByUserId(Constants.UserId);
             ordersStorage.Add(existingCart);
             cartsStorage.Clear(Constants.UserId);
-            return RedirectToAction("Index", "Cart");
+            //return View();
         }
     }
 }

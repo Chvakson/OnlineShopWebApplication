@@ -1,39 +1,49 @@
-﻿
-<form method="post">
-    <div class="col-3">
-        <div class="mb-3">
-            <label class="form-label">Номер телефона</label>
-            <p><input type="tel" name="phone" placeholder="+7(000)000-00-00" required></p>
-        </div>
-
-        <label class="form-label">Email</label>
-        <input type="email" class="form-control" name="email" id="email" placeholder="name@example.com" style="margin-bottom: 15px" required>
-
-        <label class="form-label">Повторите Email (только ручной ввод)</label>
-        <input type="email" class="form-control" id="repeat-email" placeholder="name@example.com" style="margin-bottom: 15px" required>
+﻿<form id="myForm">
+    <div class="mb-3">
+        <label class="form-label">Номер телефона</label>
+        <p><input type="tel" name="phone" placeholder="+7(000)000-00-00" required></p>
     </div>
 
-    <button type="submit" class="btn btn-dark" onclick="Accept()" asp-controller="Order" asp-action="Buy">Подтвердить</button>
+    <label class="form-label">Email</label>
+    <input type="email" class="form-control" name="email" id="email" placeholder="name@example.com" style="margin-bottom: 15px" required>
+
+    <label class="form-label">Повторите Email (только ручной ввод)</label>
+    <input type="email" class="form-control" id="repeat-email" placeholder="name@example.com" style="margin-bottom: 15px" required>
+
+    <button type="submit" class="btn btn-dark">Подтвердить</button>
 </form>
 
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    function Accept(event) {
-            event.preventDefault();
-            Swal.fire({
-                icon: 'success',
-                title: 'Ваш заказ успешно оформлен!',
-                showConfirmButton: false,
-                timer: 1000
-            })
-            setTimeout(function () {
-                window.location.href='@Url.Action("Buy", "Order")';
-            }, 1000);
-    }
+    // отменяем функцию вставки текста в форму
+    document.getElementById("repeat-email").
+        addEventListener("paste", function (e) { e.preventDefault(); });
 
-    document.getElementById("repeat-email").addEventListener("paste", function (e) {
-        e.preventDefault();
+  // передаем с помощью ajax POST запрос
+  $(document).ready(function() {
+    $('#myForm').submit(function(e) {
+      e.preventDefault();
+      $.ajax({
+        type: 'POST',
+        url: '@Url.Action("Buy", "Order")',
+          data: $('#myForm').serialize(),
+        // выводим модальное окно с успешной операцией
+        success: function() {
+          Swal.fire({
+            icon: 'success',
+            title: 'Ваш заказ успешно оформлен!',
+            showConfirmButton: false,
+            timer: 1000
+          })
+          // переходим на страницу корзины
+              setTimeout(function() {
+            window.location.href = '@Url.Action("Index", "Cart")';
+          }, 1200);
+        },
+        error: function() {
+          alert('Ошибка при отправке формы');
+        }
+      });
     });
+  });
 </script>
-
-
