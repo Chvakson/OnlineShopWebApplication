@@ -15,7 +15,6 @@ namespace OnlineShopWebApplication.Controllers
         public IActionResult Index()
         {
             var products = productStorage.GetAll();
-
             return View(products);
         }
     }

@@ -3,11 +3,11 @@ using System.ComponentModel;
 
 namespace OnlineShopWebApplication.Views.Shared.Components.CartViewComponents
 {
-    public class Cart : ViewComponent
+    public class CartViewComponent : ViewComponent
     {
         private readonly ICartsStorage cartsStorage;
 
-        public Cart(ICartsStorage cartsStorage)
+        public CartViewComponent(ICartsStorage cartsStorage)
         {
             this.cartsStorage = cartsStorage;
         }

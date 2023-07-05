@@ -5,15 +5,12 @@
                     aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
             <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                 <ul class="container navbar-nav flex-grow-1 justify-content-between">
-
                     @* Значок домашней страницы *@
                     <li class="nav-item">
                         <a class="nav-link text-dark material-icons" asp-area="" asp-controller="Home" asp-action="Index">home</a>
                     </li>
-                    
                     <li class="nav-item d-sm-inline-flex">
                         @* Значок избранного *@
                         <a class="nav-link text-dark material-icons" id="icon-favorite" asp-area="" asp-controller="Favorite" asp-action="Index">
@@ -22,9 +19,8 @@
                             </span>
                             @* Значок корзины с количеством товаров*@
                         </a>
-                        @await Html.PartialAsync("~/Views/Shared/ViewComponents/CartViewComponents/Cart.cshtml");
+                        <a class="nav-link text-dark material-icons" asp-area="" asp-controller="Cart" asp-action="Index">shopping_cart @await Component.InvokeAsync("Cart")</a>
                     </li>
-
                 </ul>
             </div>
         </div>
