@@ -18,7 +18,16 @@ html {
 }
 
 body {
-    margin-bottom: 60px;
+    position: relative;
+    min-height: 100vh;
+    padding-bottom: 50px; /* высота футера */
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    height: 50px; /* высота футера */
+    width: 100%;
 }
 
 td.plus-minus a {

@@ -7,9 +7,16 @@ namespace OnlineShopWebApplication
     {
         private readonly List<Cart> orders = new List<Cart>();
 
+        private readonly List<UserData> usersData = new List<UserData>();
+
         public void Add(Cart cart)
         {
             orders.Add(cart);
+        }
+
+        public void Add(UserData userData)
+        {
+            usersData.Add(userData);
         }
     }
 }

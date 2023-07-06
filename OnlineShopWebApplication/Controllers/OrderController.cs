@@ -18,10 +18,11 @@ namespace OnlineShopWebApplication.Controllers
         }
 
         [HttpPost]
-        public void Buy(Order order)
+        public void Buy(UserData userData)
         {
             var existingCart = cartsStorage.TryGetByUserId(Constants.UserId);
             ordersStorage.Add(existingCart);
+            ordersStorage.Add(userData);
             cartsStorage.Clear(Constants.UserId);
             //return View();
         }

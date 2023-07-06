@@ -1,6 +1,6 @@
 ﻿namespace OnlineShopWebApplication.Models
 {
-    public class Order
+    public class UserData
     {
         public string? Phone { get; set; }
         public string? Email { get; set;}
