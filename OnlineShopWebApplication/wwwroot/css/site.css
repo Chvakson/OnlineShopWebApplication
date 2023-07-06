@@ -42,3 +42,9 @@ td.plus-minus span {
     vertical-align: middle;
     user-select: none;
 }
+
+#singin {
+    border: none;
+    background: none;
+    outline: none;
+}
