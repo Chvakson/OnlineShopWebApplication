@@ -19,10 +19,12 @@
                             </span>
                             @* Значок корзины с количеством товаров*@
                         </a>
-                        <a class="nav-link text-dark material-icons" asp-area="" asp-controller="Cart" asp-action="Index">
+                        <a class="nav-link text-dark d-sm-inline-flex justify-content-between" asp-area="" asp-controller="Cart" asp-action="Index">
                             <span class="material-icons">
                                 shopping_cart
-                            </span> @await Component.InvokeAsync("Cart")
+                            </span>
+                            <p>@await Component.InvokeAsync("Cart")</p>
+                            
                         </a>
                         @* Значок авторизации пользователя*@
                         <a class="nav-link text-dark material-icons" asp-area="" asp-controller="User" asp-action="Index">
