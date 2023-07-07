@@ -11,11 +11,6 @@ namespace OnlineShopWebApplication
             return users.FirstOrDefault(user => user.Login.Email == login.Email && user.Login.Password == login.Password);
         }
 
-        public List<User> GetAll()
-        {
-            return users;
-        }
-
         public void Add(User user)
         {
             users.Add(user);
