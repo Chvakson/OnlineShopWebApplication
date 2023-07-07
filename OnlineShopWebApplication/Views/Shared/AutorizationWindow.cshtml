@@ -2,24 +2,53 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="exampleModalLabel">Авторизация</h4>
+                <h4 class="modal-title align-content-center" id="exampleModalLabel">Вход</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form>
+                <form id="signInForm">
                     <div class="mb-3">
-                        <label for="recipient-name" class="col-form-label">Введите почту:</label>
-                        <input type="text" class="form-control" id="recipient-name">
+                        <input type="email" class="form-control" name="email" placeholder="Логин" required>
                     </div>
                     <div class="mb-3">
-                        <label for="message-text" class="col-form-label">Введите пароль:</label>
-                        <input type="text" class="form-control" id="recipient-name">
+                        <input type="password" class="form-control" name="password" placeholder="Пароль" required>
                     </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label">
+                            Запомнить меня?
+                        </label>
+                    </div>
+                    <div class="modal-footer justify-content-center">
+                        <button type="submit" class="btn btn-dark" id="enter">Войти</button>
+                    </div>
+                    <p class="modal-title align-content-center">Регистрация нового пользователя</p>
                 </form>
-            </div>
-            <div class="modal-footer justify-content-center">
-                <button type="button" class="btn btn-dark">Подтвердить</button>
             </div>
         </div>
     </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+      $('#signInForm').submit(function (e) {
+      e.preventDefault();
+      $.ajax({
+        type: 'POST',
+        url: '@Url.Action("Index", "User")',
+          data: $('#signInForm').serialize(),
+      success: function() {
+        // Закрыть модальное окно
+          $('#exampleModal').modal('hide');
+          // Отобразить сообщение об успехе
+          alert('Вы успешно вошли в систему!');
+      },
+      error: function() {
+        alert('Ошибка при отправке формы');
+      }
+    });
+  });
+});
+</script>
+

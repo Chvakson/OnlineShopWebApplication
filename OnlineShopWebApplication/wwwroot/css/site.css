@@ -43,8 +43,52 @@ td.plus-minus span {
     user-select: none;
 }
 
+
+/*Модальное окно*/
 #singin {
     border: none;
     background: none;
     outline: none;
 }
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    padding-bottom: 0px
+}
+
+    .modal-header h4 {
+        margin: 0 auto; /* Центрирование заголовка */
+        margin-left: 205px;
+        margin-top: 20px;
+    }
+
+    .modal-header button {
+        margin-left: auto; /* Выравнивание кнопки справа */
+    }
+
+    input[type="checkbox"]:checked {
+        background-color: black;
+        outline: none;
+    }
+
+.form-check {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.form-check-label {
+    margin-left: 10px;
+}
+
+.modal-body p {
+    text-align: center;
+}
+
+.modal-dialog div {
+    border: none;
+}
+
+/**/

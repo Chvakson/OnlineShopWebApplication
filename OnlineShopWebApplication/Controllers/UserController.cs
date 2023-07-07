@@ -1,12 +1,22 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OnlineShopWebApplication.Models;
 
 namespace OnlineShopWebApplication.Controllers
 {
     public class UserController : Controller
     {
-        public IActionResult Index()
+        private readonly IUsersStorage usersStorage;
+        public UserController(IUsersStorage usersStorage)
         {
-            return View("Index");
+            this.usersStorage = usersStorage;
+        }
+
+        [HttpPost]
+        public IActionResult Index(User userData)
+        {
+            var user = usersStorage.TryGetByUserId(userData.UserId);
+            usersStorage.Add(user);
+            return Ok();
         }
     }
 }
