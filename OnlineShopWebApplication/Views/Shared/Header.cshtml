@@ -7,8 +7,14 @@
                 </button>*@
             <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                 <ul class="container navbar-nav flex-grow-1 justify-content-between">
-                    @* Значок домашней страницы *@
-                    <li class="nav-item">
+                    @* Значок панели администратора *@
+                    <li class="nav-item d-sm-inline-flex">
+                        <a class="nav-link text-dark material-icons" asp-area="" asp-controller="Admin" asp-action="Index">
+                            <span class="material-icons">
+                                admin_panel_settings
+                            </span>
+                        </a>
+                        @* Значок домашней страницы *@
                         <a class="nav-link text-dark material-icons" asp-area="" asp-controller="Home" asp-action="Index">home</a>
                     </li>
                     <li class="nav-item d-sm-inline-flex">
@@ -27,7 +33,7 @@
 
                         </a>
                         @* Значок авторизации пользователя*@
-                        <button type="button" class="nav-link text-dark d-sm-inline-flex justify-content-between" id="singin" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <button type="button" class="nav-link text-dark d-sm-inline-flex justify-content-between" id="singin" data-bs-toggle="modal" data-bs-target="#loginModalWindow">
                             <span class="material-icons">
                                 account_circle
                             </span>
