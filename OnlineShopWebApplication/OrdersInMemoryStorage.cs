@@ -5,18 +5,11 @@ namespace OnlineShopWebApplication
 {
     public class OrdersInMemoryStorage : IOrdersStorage
     {
-        private readonly List<Cart> orders = new List<Cart>();
+        private readonly List<Order> orders = new List<Order>();
 
-        private readonly List<User> usersData = new List<User>();
-
-        public void Add(Cart cart)
+        public void Add(Order order)
         {
-            orders.Add(cart);
-        }
-
-        public void Add(User userData)
-        {
-            usersData.Add(userData);
+            orders.Add(order);
         }
     }
 }

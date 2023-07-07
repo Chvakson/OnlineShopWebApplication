@@ -4,7 +4,6 @@ namespace OnlineShopWebApplication
 {
     public interface IOrdersStorage
     {
-        public void Add(Cart cart);
-        public void Add(User userData);
+        public void Add(Order order);
     }
 }
