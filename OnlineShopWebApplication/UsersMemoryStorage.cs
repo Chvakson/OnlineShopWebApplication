@@ -6,9 +6,14 @@ namespace OnlineShopWebApplication
     {
         public List<User> users = new List<User>();
 
-        public User TryGetByUserId(Guid userId)
+        public User TryGetByLogin(Login login)
         {
-            return users.FirstOrDefault(data => data.UserId == userId);
+            return users.FirstOrDefault(user => user.Login.Email == login.Email && user.Login.Password == login.Password);
+        }
+
+        public List<User> GetAll()
+        {
+            return users;
         }
 
         public void Add(User user)

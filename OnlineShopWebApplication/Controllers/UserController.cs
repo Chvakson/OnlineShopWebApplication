@@ -12,9 +12,24 @@ namespace OnlineShopWebApplication.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(User userData)
+        public IActionResult Login(Login login)
         {
-            var user = usersStorage.TryGetByUserId(userData.UserId);
+            var user = usersStorage.TryGetByLogin(login);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return Ok();
+        }
+
+        [HttpPost]
+        public IActionResult Register(Login login)
+        {
+            var user = new User
+            {
+                UserId = new Guid(),
+                Login = login
+            };
             usersStorage.Add(user);
             return Ok();
         }
