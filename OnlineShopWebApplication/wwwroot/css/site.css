@@ -20,13 +20,13 @@ html {
 body {
     position: relative;
     min-height: 100vh;
-    padding-bottom: 50px; /* высота футера */
+    padding-bottom: 50px;
 }
 
 footer {
     position: absolute;
     bottom: 0;
-    height: 50px; /* высота футера */
+    height: 50px;
     width: 100%;
 }
 
@@ -54,7 +54,7 @@ td.plus-minus span {
 .modal-header {
     display: flex;
     align-items: center;
-    padding-bottom: 0px ;
+    padding-bottom: 0px;
     padding-top: 0px
 }
 
@@ -67,11 +67,6 @@ td.plus-minus span {
     .modal-header button {
         margin-bottom: 15px; /* Выравнивание кнопки справа */
     }
-
-input[type="checkbox"]:checked {
-    background-color: black;
-    outline: none;
-}
 
 .form-check {
     display: flex;
@@ -99,6 +94,7 @@ input[type="checkbox"]:checked {
     .nav-link:hover {
         color: black;
     }
+
     .nav-link.active, .nav-link.active:focus {
         color: black;
         font-weight: bold;
@@ -114,7 +110,7 @@ input[type="checkbox"]:checked {
     width: 174px;
 }
 
-.form .mb-3{
+.form .mb-3 {
     margin-bottom: 5px;
 }
 
@@ -133,9 +129,15 @@ input[type="url"]:focus,
 input[type="search"]:focus,
 input[type="tel"]:focus,
 input[type="color"]:focus,
+input[type="checkbox"]:focus,
 .uneditable-input:focus {
     border-color: black;
     box-shadow: none;
     outline: 0 none;
+}
+
+input[type="checkbox"]:checked {
+    background-color: black;
+    outline: none;
 }
 /**/

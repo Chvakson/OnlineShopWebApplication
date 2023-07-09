@@ -5,16 +5,30 @@ namespace OnlineShopWebApplication.Controllers
 {
     public class AdminController : Controller
     {
-        private readonly Admin admin;
-
-        public AdminController(Admin admin) 
-        { 
-            this.admin = admin;
-        }
 
         public IActionResult Index()
         {
-            return View(admin);
+            return View();
+        }
+
+        public IActionResult Orders()
+        {
+            return View();
+        }
+
+        public IActionResult Users()
+        {
+            return View();
+        }
+
+        public IActionResult Products()
+        {
+            return View();
+        }
+
+        public IActionResult Roles()
+        {
+            return View();
         }
     }
 }
