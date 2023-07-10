@@ -61,7 +61,7 @@ namespace OnlineShopWebApplication.Controllers
                     existingProduct.Name = product.Name;
                     existingProduct.Cost = product.Cost;
                     existingProduct.Description = product.Description;
-                    existingProduct.Description = product.ImgPath;
+                    existingProduct.ImgPath = product.ImgPath;
                 }
                 return Ok();
             }
