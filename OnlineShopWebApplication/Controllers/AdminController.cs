@@ -5,6 +5,12 @@ namespace OnlineShopWebApplication.Controllers
 {
     public class AdminController : Controller
     {
+        private readonly IProductsStorage productsStorage;
+
+        public AdminController(IProductsStorage productsStorage)
+        {
+            this.productsStorage = productsStorage;
+        }
 
         public IActionResult Index()
         {
@@ -21,14 +27,52 @@ namespace OnlineShopWebApplication.Controllers
             return View();
         }
 
-        public IActionResult Products()
+        public IActionResult Roles()
         {
             return View();
         }
 
-        public IActionResult Roles()
+        public IActionResult Products()
         {
-            return View();
+            var products = productsStorage.GetAll();
+            return View(products);
+        }
+
+        public IActionResult RemoveProduct(int productId) 
+        {
+            productsStorage.RemoveById(productId);
+            return RedirectToAction("Products", "Admin"); 
+        }
+
+        public IActionResult EditProduct(int productId)
+        {
+            var product = productsStorage.TryGetById(productId);
+            return View("ProductEditor", product);
+        }
+
+        [HttpPost]
+        public IActionResult SaveProduct(Product product)
+        {
+            if (ModelState.IsValid)
+            {
+                var existingProduct = productsStorage.GetAll().FirstOrDefault(p => p.Id == product.Id);
+                if (existingProduct != null)
+                {
+                    existingProduct.Name = product.Name;
+                    existingProduct.Cost = product.Cost;
+                    existingProduct.Description = product.Description;
+                    existingProduct.Description = product.ImgPath;
+                }
+                return Ok();
+            }
+            var newProduct = new Product(product.Name, product.Cost, product.Description, product.ImgPath);
+            productsStorage.Add(newProduct);
+            return Ok();
+        }
+
+        public IActionResult AddNewProduct()
+        {
+            return View("AddNewProduct");
         }
     }
 }

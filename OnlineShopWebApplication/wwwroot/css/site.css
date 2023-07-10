@@ -141,3 +141,7 @@ input[type="checkbox"]:checked {
     outline: none;
 }
 /**/
+
+.form-control {
+    word-wrap: break-word;
+}

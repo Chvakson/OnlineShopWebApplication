@@ -5,7 +5,7 @@
 <div class="row">
     @foreach (var product in Model)
     {
-        <div class="col card shadow">
+        <div class="col-3 card shadow">
             <div class="card-body">
                 <h4 class="product-name" onclick="window.location.href='@Url.Action("Index", "Product", new { id = product.Id })'" style="cursor: pointer;">@product.Name</h4>
                 <img class="card-img-top" src="@Url.Content(product.ImgPath)" />

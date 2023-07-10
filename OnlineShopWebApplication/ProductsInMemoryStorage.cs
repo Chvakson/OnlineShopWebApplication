@@ -21,5 +21,15 @@ namespace OnlineShopWebApplication
         {
             return Products.FirstOrDefault(product => product.Id == id);
         }
+
+        public void RemoveById(int id)
+        {
+            Products.Remove(Products[id]);
+        }
+
+        public void Add(Product product)
+        {
+            Products.Add(product);
+        }
     }
 }

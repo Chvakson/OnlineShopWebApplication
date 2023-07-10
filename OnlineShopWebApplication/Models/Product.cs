@@ -17,5 +17,9 @@
             Description = description;
             ImgPath = imgPath;
         }
+
+        public Product()
+        {
+        }
     }
 }

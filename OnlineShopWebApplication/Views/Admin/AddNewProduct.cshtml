@@ -1,0 +1,41 @@
+﻿@model Product
+
+<form id="myForm">
+    <div class="mb-3">
+        <label class="form-label">Название</label>
+        <input type="text" class="form-control" name="name" required>
+    </div>
+
+    <label class="form-label">Цена</label>
+    <input type="number" class="form-control" name="cost" style="margin-bottom: 15px" required>
+
+    <label class="form-label">Описание товара</label>
+    <input type="text" class="form-control" name="description" style="margin-bottom: 15px" required>
+
+    <label class="form-label">Изображение</label>
+    <input type="text" class="form-control" name="imgPath" style="margin-bottom: 15px" required>
+
+    <input type="hidden" name="id">
+
+    <button type="submit" class="btn btn-dark">Сохранить</button>
+</form>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+  $('#myForm').submit(function(e) {
+    e.preventDefault();
+    $.ajax({
+      type: 'POST',
+      url: '@Url.Action("SaveProduct", "Admin")',
+      data: $('#myForm').serialize(),
+      success: function() {
+        window.location.href = '@Url.Action("Products", "Admin")';
+      },
+      error: function() {
+        alert('Ошибка при отправке формы');
+      }
+    });
+  });
+});
+</script>
