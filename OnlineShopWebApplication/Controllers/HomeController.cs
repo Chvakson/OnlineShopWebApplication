@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OnlineShopWebApplication.Models;
-using System.Diagnostics;
 
 namespace OnlineShopWebApplication.Controllers
 {
@@ -12,9 +10,25 @@ namespace OnlineShopWebApplication.Controllers
         {
             this.productStorage = productStorage;
         }
+
+        [HttpGet]
         public IActionResult Index()
         {
             var products = productStorage.GetAll();
+            return View(products);
+        }
+
+        [HttpPost]
+        public IActionResult Index(string? query)
+        {
+            var products = productStorage.GetAll();
+
+            if (!string.IsNullOrWhiteSpace(query))
+            {
+                products = products.Where(p => p.Name != null && p.Name.ToLower().Contains(query.ToLower())).ToList();
+            }
+
+
             return View(products);
         }
     }

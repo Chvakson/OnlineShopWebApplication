@@ -1,11 +1,24 @@
 ﻿@model List<Product>
+@*<h2>Список товаров</h2>*@
 
-<h2>Список товаров</h2>
+<div class="d-flex justify-content-center">
+    <form action="/" method="post">
+        <div class="mb-3  d-md-inline-flex" style="width: 600px">
+            <input type="text" class="form-control" name="query" placeholder="Поиск...">
+            <button class="btn btn-dark d-flex align-items-center justify-content-center" type="submit">
+                <span class="material-icons">
+                    search
+                </span>
+            </button>
+        </div>
+    </form>
+</div>
+
 
 <div class="row">
     @foreach (var product in Model)
     {
-        <div class="col-3 card shadow">
+        <div class="col-4 card shadow">
             <div class="card-body">
                 <h4 class="product-name" onclick="window.location.href='@Url.Action("Index", "Product", new { id = product.Id })'" style="cursor: pointer;">@product.Name</h4>
                 <img class="card-img-top" src="@Url.Content(product.ImgPath)" />
@@ -20,6 +33,9 @@
         <br />
     }
 </div>
+
+
+
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
