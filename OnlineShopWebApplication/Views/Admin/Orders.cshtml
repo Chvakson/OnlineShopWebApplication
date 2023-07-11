@@ -1,8 +1,37 @@
-﻿<div class="row">
+﻿@model List<Order>
+
+<div class="row">
     @await Html.PartialAsync("AdminLeftPanelMenu")
 
     <div class="col-9">
         <h3>Список заказов</h3>
+        <div class="row">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="col-1" scope="col">№</th>
+                        <th class="col-2" scope="col">Сумма</th>
+                        <th class="col-2" scope="col">Статус</th>
+                        <th class="col-4" scope="col">Пользователь(логин)</th>
+                        <th class="col-2" scope="col">Дата</th>
+                        <th class="col-2" scope="col">Время</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < Model.Count; i++)
+                    {
+                        <tr>
+                            <td class="col-1">@(i+1)</td>
+                            <td class="col-2">@Model[i].Cost руб.</td>
+                            <td class="col-2">Создан</td>
+                            <td class="col-4">@Model[i].user.Login.Email</td>
+                            <td class="col-2">@Model[i].Date.Date</td>
+                            <td class="col-2">@Model[i].Date.TimeOfDay</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 

@@ -146,3 +146,17 @@ input[type="checkbox"]:checked {
     word-wrap: break-word;
 }
 
+
+.card a {
+    color: #333;
+    text-decoration: none;
+}
+
+    .card a.menu-category {
+        margin-left: 8px;
+    }
+
+    .card a.row {
+        padding-left: 8px;
+        padding-top: 5px;
+    }

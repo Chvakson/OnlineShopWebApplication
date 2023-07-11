@@ -23,6 +23,7 @@ namespace OnlineShopWebApplication.Controllers
             var existingCart = cartsStorage.TryGetByUserId(Constants.UserId);
             var order = new Order
             {
+                Date = new DateTime(),
                 Id = new Guid(),
                 user = user,
                 items = existingCart.Items

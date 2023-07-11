@@ -1,7 +1,7 @@
 ﻿<form id="myForm">
     <div class="mb-3">
         <label class="form-label">Номер телефона</label>
-        <p><input type="tel" name="phone" pattern="\+7\(\d{3}\)\d{3}\-\d{2}\-\d{2}" placeholder="+7(000)000-00-00" required></p>
+        <p><input type="tel" name="phone" id="phone" pattern="\+7\(\d{3}\)\d{3}\-\d{2}\-\d{2}" placeholder="+7(000)000-00-00" maxlength="16"></p>
     </div>
 
     <label class="form-label">Email</label>
@@ -19,6 +19,12 @@
     document.getElementById("repeat-email").
         addEventListener("paste", function (e) { e.preventDefault(); });
 
+    const phoneInput = document.getElementById('phone');
+    phoneInput.addEventListener('input', (event) => {
+        const phoneNumber = event.target.value.replace(/\D/g, '');
+        const phoneNumberFormatted = phoneNumber.replace(/^(\d{3})(\d{3})(\d{2})(\d{2})$/, '+7($1)$2-$3-$4');
+        event.target.value = phoneNumberFormatted;
+    });
 
   // передаем с помощью ajax POST запрос
   $(document).ready(function() {

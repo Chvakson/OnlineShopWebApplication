@@ -3,8 +3,8 @@
 <div class="row">
     @await Html.PartialAsync("AdminLeftPanelMenu")
 
-    <div class="col-9">
-        <h3 class="row">Список продуктов</h3>
+    <div class="card col-9" >
+        <h3 class="row"style="padding-left:8px">Список продуктов</h3>
         <a class="row" href="@Url.Action("AddNewProduct", "Admin")">Добавить новый продукт</a>
         <div class="row">
             <table class="table">
@@ -33,6 +33,5 @@
         </div>
     </div>
 </div>
-
 
 

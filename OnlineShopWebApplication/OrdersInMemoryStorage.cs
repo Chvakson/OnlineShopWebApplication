@@ -11,5 +11,10 @@ namespace OnlineShopWebApplication
         {
             orders.Add(order);
         }
+
+        public List<Order> GetAll()
+        {
+            return orders;
+        }
     }
 }
