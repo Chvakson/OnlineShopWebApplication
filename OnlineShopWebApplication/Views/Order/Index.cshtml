@@ -1,7 +1,7 @@
 ﻿<form id="myForm">
     <div class="mb-3">
         <label class="form-label">Номер телефона</label>
-        <p><input type="tel" name="phone" placeholder="+7(000)000-00-00" required></p>
+        <p><input type="tel" name="phone" pattern="\+7\(\d{3}\)\d{3}\-\d{2}\-\d{2}" placeholder="+7(000)000-00-00" required></p>
     </div>
 
     <label class="form-label">Email</label>
@@ -18,6 +18,7 @@
     // отменяем функцию вставки текста в форму
     document.getElementById("repeat-email").
         addEventListener("paste", function (e) { e.preventDefault(); });
+
 
   // передаем с помощью ajax POST запрос
   $(document).ready(function() {

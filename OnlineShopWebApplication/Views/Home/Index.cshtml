@@ -5,11 +5,13 @@
     <form action="/" method="post">
         <div class="mb-3  d-md-inline-flex" style="width: 600px">
             <input type="text" class="form-control" name="query" placeholder="Поиск...">
-            <button class="btn btn-dark d-flex align-items-center justify-content-center" type="submit">
-                <span class="material-icons">
-                    search
-                </span>
-            </button>
+            <div>
+                <button class="btn btn-dark d-flex align-items-center justify-content-center" type="submit">
+                    <span class="material-icons">
+                        search
+                    </span>
+                </button>
+            </div>
         </div>
     </form>
 </div>
@@ -20,7 +22,7 @@
     {
         <div class="col-4 card shadow">
             <div class="card-body">
-                <h4 class="product-name" onclick="window.location.href='@Url.Action("Index", "Product", new { id = product.Id })'" style="cursor: pointer;">@product.Name</h4>
+                <h4 class="product-name" onclick="window.location.href='@Url.Action("Index", "Product", new { id = product.Id })'" style="cursor: pointer;">@product.Name</h4> 
                 <img class="card-img-top" src="@Url.Content(product.ImgPath)" />
                 <h5>Цена: @product.Cost руб.</h5>
                 <form>
