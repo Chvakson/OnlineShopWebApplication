@@ -3,7 +3,7 @@
     public class Order
     {
         public Guid Id { get; set; }
-        public User user { get; set; }
+        public User User { get; set; }
         public List<CartItem> items { get; set; }
         public DateTime Date { get; set; }
         public Enum Statuses { get; set; }

@@ -12,7 +12,7 @@
                         <th class="col-1" scope="col">№</th>
                         <th class="col-2" scope="col">Сумма</th>
                         <th class="col-2" scope="col">Статус</th>
-                        <th class="col-4" scope="col">Пользователь(логин)</th>
+                        <th class="col-4" scope="col">Пользователь (логин)</th>
                         <th class="col-2" scope="col">Дата</th>
                         <th class="col-2" scope="col">Время</th>
                     </tr>
@@ -24,9 +24,9 @@
                             <td class="col-1">@(i+1)</td>
                             <td class="col-2">@Model[i].Cost руб.</td>
                             <td class="col-2">Создан</td>
-                            <td class="col-4">@Model[i].user.Login.Email</td>
-                            <td class="col-2">@Model[i].Date.Date</td>
-                            <td class="col-2">@Model[i].Date.TimeOfDay</td>
+                            <td class="col-4">@Model[i].User.Login.Email</td>
+                            <td class="col-2">@Model[i].Date.ToShortDateString()</td>
+                            <td class="col-2">@Model[i].Date.ToString("HH:mm")</td>
                         </tr>
                     }
                 </tbody>
