@@ -3,9 +3,9 @@
 <div class="row">
     @await Html.PartialAsync("AdminLeftPanelMenu")
 
-    <div class="card col-9" >
+    <div class="card admin col-9">
         <h3 class="row"style="padding-left:8px">Список продуктов</h3>
-        <a class="row" href="@Url.Action("AddNewProduct", "Admin")">Добавить новый продукт</a>
+        <a class="row" href="@Url.Action("NewProduct", "AdminPanel")">Добавить новый продукт</a>
         <div class="row">
             <table class="table">
                 <thead>
@@ -24,8 +24,8 @@
                             <td class="col-1">@(i+1)</td>
                             <td class="col-4">@Model[i].Name</td>
                             <td class="col-2">@Model[i].Cost руб.</td>
-                            <td class="col-3"><a href="/admin/editProduct?productId=@Model[i].Id">Редактировать</a></td>
-                            <td class="col-2"><a href="@Url.Action("RemoveProduct", "Admin")">Удалить</a></td>
+                            <td class="col-3"><a href="/adminPanel/editProduct?productId=@Model[i].Id">Редактировать</a></td>
+                            <td class="col-2"><a href="@Url.Action("RemoveProduct", "AdminPanel")">Удалить</a></td>
                         </tr>
                     }
                 </tbody>

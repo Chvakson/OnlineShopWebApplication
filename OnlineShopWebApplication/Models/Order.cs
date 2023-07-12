@@ -6,7 +6,12 @@
         public User User { get; set; }
         public List<CartItem> items { get; set; }
         public DateTime Date { get; set; }
-        public Enum Statuses { get; set; }
+        public enum Statuses
+        {
+            Создан = 1,
+            Доставлен = 2
+
+        }
 
         public decimal Cost
         {

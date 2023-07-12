@@ -1,0 +1,47 @@
+﻿@model Order
+
+<div class="row">
+    @await Html.PartialAsync("AdminLeftPanelMenu")
+
+    <div class="card col-9">
+        <div class="row">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="col" scope="col">Заказ № 1</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <ul class="order-titles">
+                                <li>Дата и время оформления:</li>
+                                <li>Получатель:</li>
+                                <li>Телефон:</li>
+                                <li>Email:</li>
+                                <li>Комментарий:</li>
+                                <li>Сумма заказа:</li>
+                                <li>Статус заказа:</li>
+                            </ul>
+                        </td>
+                        
+                        <td>
+                            <ul class="order-info">
+                                <li>@Model.Date.ToShortDateString() в @Model.Date.ToString("HH:mm")</li>
+                                <li>Имя</li>
+                                <li>@Model.User.Phone</li>
+                                <li>@Model.User.Login.Email</li>
+                                <li>Пока не знаю</li>
+                                <li>@Model.Cost</li>
+                                <li>Создан</li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+

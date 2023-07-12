@@ -140,7 +140,7 @@ input[type="checkbox"]:checked {
     background-color: black;
     outline: none;
 }
-/**/
+/*Панель администратора*/
 
 .form-control {
     word-wrap: break-word;
@@ -148,8 +148,8 @@ input[type="checkbox"]:checked {
 
 
 .card a {
-    color: #333;
     text-decoration: none;
+    color: #333;
 }
 
     .card a.menu-category {
@@ -159,4 +159,18 @@ input[type="checkbox"]:checked {
     .card a.row {
         padding-left: 8px;
         padding-top: 5px;
+    }
+
+    .card a.product {
+        color: white;
+    }
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+    ul.order-titles {
+        color: grey;
     }

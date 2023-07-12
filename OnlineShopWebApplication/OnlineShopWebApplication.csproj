@@ -6,4 +6,10 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+
+	<ItemGroup>
+		<Filter Include="Temp Files">
+			<Extensions>tmp</Extensions>
+		</Filter>
+	</ItemGroup>
 </Project>

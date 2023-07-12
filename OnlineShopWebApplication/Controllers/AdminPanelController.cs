@@ -3,12 +3,12 @@ using OnlineShopWebApplication.Models;
 
 namespace OnlineShopWebApplication.Controllers
 {
-    public class AdminController : Controller
+    public class AdminPanelController : Controller
     {
         private readonly IProductsStorage productsStorage;
         private readonly IOrdersStorage ordersStorage;
 
-        public AdminController(IProductsStorage productsStorage, IOrdersStorage ordersStorage)
+        public AdminPanelController(IProductsStorage productsStorage, IOrdersStorage ordersStorage)
         {
             this.productsStorage = productsStorage;
             this.ordersStorage = ordersStorage;
@@ -23,6 +23,12 @@ namespace OnlineShopWebApplication.Controllers
         {
             var orders = ordersStorage.GetAll();
             return View(orders);
+        }
+
+        public IActionResult Order(Guid orderId)
+        {
+            var order = ordersStorage.TryGetByOrderId(orderId);
+            return View(order);
         }
 
         public IActionResult Users()
@@ -44,7 +50,7 @@ namespace OnlineShopWebApplication.Controllers
         public IActionResult RemoveProduct(int productId) 
         {
             productsStorage.RemoveById(productId);
-            return RedirectToAction("Products", "Admin"); 
+            return RedirectToAction("Products", "AdminPanel"); 
         }
 
         public IActionResult EditProduct(int productId)
@@ -75,7 +81,7 @@ namespace OnlineShopWebApplication.Controllers
 
         public IActionResult AddNewProduct()
         {
-            return View("AddNewProduct");
+            return View("NewProduct");
         }
     }
 }

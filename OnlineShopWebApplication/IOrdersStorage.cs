@@ -6,6 +6,7 @@ namespace OnlineShopWebApplication
     {
         public void Add(Order order);
         public List<Order> GetAll();
+        public Order TryGetByOrderId(Guid orderId);
 
     }
 }

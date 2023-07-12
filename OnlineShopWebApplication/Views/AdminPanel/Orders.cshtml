@@ -3,7 +3,7 @@
 <div class="row">
     @await Html.PartialAsync("AdminLeftPanelMenu")
 
-    <div class="col-9">
+    <div class="card admin col-9 ">
         <h3>Список заказов</h3>
         <div class="row">
             <table class="table">
@@ -20,7 +20,7 @@
                 <tbody>
                     @for (int i = 0; i < Model.Count; i++)
                     {
-                        <tr>
+                        <tr onclick="window.location.href='@Url.Action("Order", "AdminPanel", new { orderId = @Model[i].Id})'" style="cursor: pointer;">
                             <td class="col-1">@(i+1)</td>
                             <td class="col-2">@Model[i].Cost руб.</td>
                             <td class="col-2">Создан</td>

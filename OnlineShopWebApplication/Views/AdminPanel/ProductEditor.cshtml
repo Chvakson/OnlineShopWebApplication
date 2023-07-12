@@ -28,10 +28,10 @@ $(document).ready(function() {
     e.preventDefault();
     $.ajax({
       type: 'POST',
-      url: '@Url.Action("SaveProduct", "Admin")',
+      url: '@Url.Action("SaveProduct", "AdminPanel")',
       data: $('#myForm').serialize(),
       success: function() {
-        window.location.href = '@Url.Action("Products", "Admin")';
+        window.location.href = '@Url.Action("Products", "AdminPanel")';
       },
       error: function() {
         alert('Ошибка при отправке формы');
