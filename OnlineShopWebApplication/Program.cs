@@ -17,6 +17,8 @@ builder.Services.AddSingleton<IFavoriteStorage, FavoriteInMemoryStorage>();
 
 builder.Services.AddSingleton<IUsersStorage, UsersMemoryStorage>();
 
+builder.Services.AddSingleton<IRolesStorage, RolesInMemoryStorage>();
+
 var app = builder.Build();
 
 app.UseStaticFiles();

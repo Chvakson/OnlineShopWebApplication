@@ -12,4 +12,9 @@
 			<Extensions>tmp</Extensions>
 		</Filter>
 	</ItemGroup>
+
+
+	<ItemGroup>
+	  <PackageReference Include="Microsoft.Web.Services3" Version="3.0.0" />
+	</ItemGroup>
 </Project>

@@ -26,7 +26,9 @@ namespace OnlineShopWebApplication.Controllers
                 Date = DateTime.Now,
                 Id = new Guid(),
                 User = user,
-                items = existingCart.Items
+                items = existingCart.Items,
+                Status = OrderStatus.Created
+                
             };
             ordersStorage.Add(order);
             cartsStorage.Clear(Constants.UserId);

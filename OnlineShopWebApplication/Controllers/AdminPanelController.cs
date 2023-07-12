@@ -7,11 +7,13 @@ namespace OnlineShopWebApplication.Controllers
     {
         private readonly IProductsStorage productsStorage;
         private readonly IOrdersStorage ordersStorage;
+        private readonly IRolesStorage rolesStorage;
 
-        public AdminPanelController(IProductsStorage productsStorage, IOrdersStorage ordersStorage)
+        public AdminPanelController(IProductsStorage productsStorage, IOrdersStorage ordersStorage, IRolesStorage rolesStorage)
         {
             this.productsStorage = productsStorage;
             this.ordersStorage = ordersStorage;
+            this.rolesStorage = rolesStorage;
         }
 
         public IActionResult Index()
@@ -25,9 +27,9 @@ namespace OnlineShopWebApplication.Controllers
             return View(orders);
         }
 
-        public IActionResult Order(Guid orderId)
+        public IActionResult Order(Guid id)
         {
-            var order = ordersStorage.TryGetByOrderId(orderId);
+            var order = ordersStorage.TryGetByOrderId(id);
             return View(order);
         }
 
@@ -38,8 +40,37 @@ namespace OnlineShopWebApplication.Controllers
 
         public IActionResult Roles()
         {
-            return View();
+            var roles = rolesStorage.GetAll();
+            return View(roles);
         }
+
+        public IActionResult RemoveRole(string name)
+        {
+            rolesStorage.Remove(name);
+            return RedirectToAction("Roles", "AdminPanel");
+        }
+
+        public IActionResult AddRole()
+        {
+            return View("NewRole");
+        }
+
+        [HttpPost]
+        public IActionResult AddRole(Role role)
+        {
+            if (rolesStorage.TryGetById(role.Name) != null) 
+            {
+                ModelState.AddModelError("", "Такая модель уже существует");
+                return RedirectToAction("Roles", "AdminPanel");
+            }
+            if(ModelState.IsValid)
+            {
+                var roles = rolesStorage.GetAll();
+                roles.Add(role);
+            }
+            return RedirectToAction("Roles", "AdminPanel");
+        }
+
 
         public IActionResult Products()
         {

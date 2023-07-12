@@ -27,11 +27,8 @@ $(document).ready(function() {
     e.preventDefault();
     $.ajax({
       type: 'POST',
-      url: '@Url.Action("SaveProduct", "AdminPanel")',
+      url: '@Url.Action("AddProduct", "AdminPanel")',
       data: $('#myForm').serialize(),
-      success: function() {
-        window.location.href = '@Url.Action("Products", "AdminPanel")';
-      },
       error: function() {
         alert('Ошибка при отправке формы');
       }

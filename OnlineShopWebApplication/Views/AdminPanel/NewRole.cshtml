@@ -1,0 +1,29 @@
+﻿@model Role
+
+<form id="myForm">
+    <div class="mb-3">
+        <label class="form-label">Название роли</label>
+        <input type="text" class="form-control" name="name" required>
+    </div>
+
+    <button type="submit" class="btn btn-dark">Создать</button>
+</form>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+  $('#myForm').submit(function(e) {
+    e.preventDefault();
+    $.ajax({
+      type: 'POST',
+      url: '@Url.Action("AddRole", "AdminPanel")',
+      data: $('#myForm').serialize(),
+      success: function() {
+        window.location.href = '@Url.Action("Roles", "AdminPanel")';
+      },
+      error: function() {
+        alert('Ошибка при отправке формы');
+      }
+    });
+  });
+});
+</script>

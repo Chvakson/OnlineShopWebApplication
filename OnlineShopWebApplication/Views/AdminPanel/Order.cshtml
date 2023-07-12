@@ -24,7 +24,7 @@
                                 <li>Статус заказа:</li>
                             </ul>
                         </td>
-                        
+
                         <td>
                             <ul class="order-info">
                                 <li>@Model.Date.ToShortDateString() в @Model.Date.ToString("HH:mm")</li>
@@ -33,7 +33,10 @@
                                 <li>@Model.User.Login.Email</li>
                                 <li>Пока не знаю</li>
                                 <li>@Model.Cost</li>
-                                <li>Создан</li>
+                                <li>
+                                    <select asp-for="@Model.Status" asp-items="@Html.GetEnumSelectList<OrderStatus>()">
+                                    </select>
+                                </li>
                             </ul>
                         </td>
                     </tr>

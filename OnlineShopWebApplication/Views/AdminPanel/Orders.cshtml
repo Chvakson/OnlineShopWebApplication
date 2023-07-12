@@ -23,7 +23,7 @@
                         <tr onclick="window.location.href='@Url.Action("Order", "AdminPanel", new { orderId = @Model[i].Id})'" style="cursor: pointer;">
                             <td class="col-1">@(i+1)</td>
                             <td class="col-2">@Model[i].Cost руб.</td>
-                            <td class="col-2">Создан</td>
+                            <td class="col-2">@EnumHelper.GetDisplayName(@Model[i].Status)</td>
                             <td class="col-4">@Model[i].User.Login.Email</td>
                             <td class="col-2">@Model[i].Date.ToShortDateString()</td>
                             <td class="col-2">@Model[i].Date.ToString("HH:mm")</td>

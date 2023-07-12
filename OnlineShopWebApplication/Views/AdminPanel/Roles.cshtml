@@ -1,9 +1,36 @@
-﻿<div class="row">
+﻿@model List<Role>
+
+<div class="row">
     @await Html.PartialAsync("AdminLeftPanelMenu")
 
-    <div class="col-9">
+    <div class="card admin col-9 ">
         <h3>Список ролей</h3>
+        <a onclick="window.location.href="@Url.Action("AddRole", "AdminPanel")" style="cursor: pointer;">Добавить новую роль</a>
+        <div class="row">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="col-1" scope="col">№</th>
+                        <th class="col-2" scope="col">Название</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < Model.Count; i++)
+                    {
+                        <tr>
+                            <td class="col-1">@(i+1)</td>
+                            <td class="col-2">@Model[i].Name.</td>
+                            <td onclick="window.location.href='@Url.Action("RemoveRole", "AdminPanel", new { name = @Model[i].Name})'" style="cursor: pointer;">Удалить</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
+</div>
+
+
 </div>
 
 

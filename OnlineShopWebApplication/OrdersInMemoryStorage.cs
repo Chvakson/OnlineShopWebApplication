@@ -17,9 +17,9 @@ namespace OnlineShopWebApplication
             return orders;
         }
 
-        public Order TryGetByOrderId(Guid orderId)
+        public Order TryGetByOrderId(Guid id)
         {
-            return orders.FirstOrDefault(order => order.Id == orderId);
+            return orders.FirstOrDefault(order => order.Id == id);
         }
     }
 }
