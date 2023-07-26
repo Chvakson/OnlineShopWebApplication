@@ -24,6 +24,7 @@ namespace OnlineShopWebApplication.Controllers
         public IActionResult Add(int productId)
         {
             var product = productsStorage.TryGetById(productId);
+            product.IsFavorite = true;
             favoriteStorage.Add(product);
             return Ok();
         }
