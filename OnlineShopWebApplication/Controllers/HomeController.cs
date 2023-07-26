@@ -5,13 +5,14 @@ namespace OnlineShopWebApplication.Controllers
     public class HomeController : Controller
     {
         private readonly IProductsStorage productStorage;
+        private readonly IFavoriteStorage favoriteStorage;
 
-        public HomeController(IProductsStorage productStorage)
+        public HomeController(IProductsStorage productStorage, IFavoriteStorage favoriteStorage)
         {
             this.productStorage = productStorage;
+            this.favoriteStorage = favoriteStorage;
         }
 
-        [HttpGet]
         public IActionResult Index()
         {
             var products = productStorage.GetAll();
