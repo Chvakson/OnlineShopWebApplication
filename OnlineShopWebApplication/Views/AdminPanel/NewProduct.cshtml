@@ -19,7 +19,6 @@
 
     <button type="submit" class="btn btn-dark">Сохранить</button>
 </form>
-dd
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 $(document).ready(function() {
@@ -27,8 +26,11 @@ $(document).ready(function() {
     e.preventDefault();
     $.ajax({
       type: 'POST',
-      url: '@Url.Action("AddProduct", "AdminPanel")',
-      data: $('#myForm').serialize(),
+      url: '@Url.Action("SaveProduct", "AdminPanel")',
+        data: $('#myForm').serialize(),
+       success: function() {
+        window.location.href = '@Url.Action("Products", "AdminPanel")';
+      },
       error: function() {
         alert('Ошибка при отправке формы');
       }
