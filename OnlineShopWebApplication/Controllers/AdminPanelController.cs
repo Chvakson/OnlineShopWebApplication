@@ -61,7 +61,6 @@ namespace OnlineShopWebApplication.Controllers
             if (rolesStorage.TryGetById(role.Name) != null) 
             {
                 ModelState.AddModelError("", "Такая модель уже существует");
-                return RedirectToAction("Roles", "AdminPanel");
             }
             if(ModelState.IsValid)
             {
