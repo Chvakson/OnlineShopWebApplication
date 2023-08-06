@@ -23,7 +23,9 @@
             <div class="card-body">
                 <h4 class="product-name" onclick="window.location.href='@Url.Action("Index", "Product", new { id = product.Id })'" style="cursor: pointer;">@product.Name</h4>
                 <img class="card-img-top" src="@Url.Content(product.ImgPath)" />
-                <h5>Цена: @product.Cost руб.</h5>
+                <h5>
+                    Цена: @product.Cost ₽
+                </h5>
                 <form>
                     <input type="hidden" name="productId" value="@product.Id" />
                     <button class="btn btn-dark add-to-favorite-btn" type="button" data-product-id="@product.Id" @(product.IsFavorite ? "disabled" : "")>@(product.IsFavorite ? "Добавлено в избранное" : "Добавить в избранное")</button>
