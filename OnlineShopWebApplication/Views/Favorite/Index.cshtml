@@ -17,7 +17,9 @@
                 @* третий параметр в Url.Action должен быть парой ключ/значение. *@
                 <h4 class="product-name" onclick="window.location.href='@Url.Action("Index", "Product", new { id = product.Id })'" style="cursor: pointer;">@product.Name</h4>
                 <img class="card-img-top" src="@Url.Content(product.ImgPath)" />
-                <h5>Цена: @product.Cost руб.</h5>
+                <h5>
+                    Цена: @product.Cost ₽
+                </h5>
                 <button class="btn btn-dark" href="/cart/add?productId=@product.Id">Добавить в корзину</button>
             </div>
         </div>
