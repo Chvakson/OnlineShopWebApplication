@@ -2,6 +2,15 @@ html {
     font-size: 14px;
 }
 
+.card-img-top {
+    width: 382px;
+    height: 350px;
+}
+
+.product-name{
+    min-height:57px
+}
+
 @media (min-width: 768px) {
     html {
         font-size: 16px;
