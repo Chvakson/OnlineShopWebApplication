@@ -19,7 +19,7 @@
     {
         <div class="col-4 card">
             <div class="card-body">
-                <h4 class="product-name" onclick="window.location.href='@Url.Action("Index", "Product", new { id = product.Id })'" style="cursor: pointer;">@product.Name</h4>
+                <h4 class="product-name" onclick="window.location.href='@Url.Action("Index", "Product", new { id = product.Id })'">@product.Name</h4>
                 <img class="card-img-top" src="@Url.Content(product.ImgPath)" />
                 <h5>
                     Цена: @product.Cost ₽
@@ -35,25 +35,30 @@
     }
 </div>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    $(document).ready(function () {
-        $('.add-to-favorite-btn').click(function () {
-            var button = $(this);
-            var productId = button.data('product-id');
-
-            $.ajax({
-                url: '@Url.Action("Add", "Favorite")',
-                type: 'POST',
-                data: { productId: productId },
-                success: function () {
-                    button.addClass('added-to-favorite');
-                    button.attr('disabled', true);
+    var addToFavoriteButtons = document.querySelectorAll('.add-to-favorite-btn');
+    addToFavoriteButtons.forEach(function (button) {
+        button.addEventListener('click', function () {
+            var productId = button.dataset.productId;
+            fetch(`/api/favorite/add/${productId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
                 },
-                error: function () {
-                    alert('Ошибка при добавлении товара в избранное');
-                }
-            });
+                body: JSON.stringify({ productId: productId })
+            })
+                .then(function (response) {
+                    if (response.ok) {
+                        button.classList.add('added-to-favorite');
+                        button.disabled = true;
+                    } else {
+                        throw new Error('Ошибка при добавлении товара в избранное');
+                    }
+                })
+                .catch(function (error) {
+                    alert(error.message);
+                });
         });
     });
+
 </script>

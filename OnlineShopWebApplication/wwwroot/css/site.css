@@ -7,8 +7,9 @@ html {
     height: 350px;
 }
 
-.product-name{
-    min-height:57px
+.product-name {
+    min-height: 57px;
+    cursor: pointer;
 }
 
 @media (min-width: 768px) {
@@ -37,6 +38,11 @@ footer {
     bottom: 0;
     height: 50px;
     width: 100%;
+}
+
+.btn.btn-dark.product
+{
+    margin-top: 5px
 }
 
 td.plus-minus a {

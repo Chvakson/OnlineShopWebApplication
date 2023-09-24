@@ -20,7 +20,7 @@ namespace OnlineShopWebApplication.Controllers
             return View(products);
         }
 
-        [HttpPost]
+        [HttpPost("/api/favorite/add/{productId}")]
         public IActionResult Add(int productId)
         {
             var product = productsStorage.TryGetById(productId);
