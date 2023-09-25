@@ -24,10 +24,8 @@
                 <h5>
                     Цена: @product.Cost ₽
                 </h5>
-                <form>
-                    <input type="hidden" name="productId" value="@product.Id" />
-                    <button class="btn btn-dark add-to-favorite-btn" type="button" data-product-id="@product.Id" @(product.IsFavorite ? "disabled" : "")>@(product.IsFavorite ? "Добавлено в избранное" : "Добавить в избранное")</button>
-                </form>
+                <input type="hidden" name="productId" value="@product.Id" />
+                <button class="btn btn-dark add-to-favorite-btn" type="button" data-product-id="@product.Id">Добавить в избранное</button>
                 <a class="btn btn-dark product" role="button" href="/cart/add?productId=@product.Id">Добавить в корзину</a>
             </div>
         </div>
@@ -51,6 +49,7 @@
                     if (response.ok) {
                         button.classList.add('added-to-favorite');
                         button.disabled = true;
+                        button.textContent = "Добавлено в избранное"
                     } else {
                         throw new Error('Ошибка при добавлении товара в избранное');
                     }
