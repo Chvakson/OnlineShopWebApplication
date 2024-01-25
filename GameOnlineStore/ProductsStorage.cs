@@ -2,7 +2,7 @@
 
 namespace GameOnlineStore
 {
-    public class ProductStorage
+    public class ProductsStorage : IProductsStorage
     {
         public List<Product> Products = new List<Product>
         {
@@ -20,6 +20,11 @@ namespace GameOnlineStore
 
         public List<Product> GetAll() {
             return Products;
+        }
+
+        public Product GetByProductId(int? productId)
+        {
+            return Products.FirstOrDefault(product => product.Id == productId);
         }
     }
 }

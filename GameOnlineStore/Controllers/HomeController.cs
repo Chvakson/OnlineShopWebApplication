@@ -6,12 +6,11 @@ namespace GameOnlineStore.Controllers
 {
     public class HomeController : Controller
     {
-        private ProductStorage productsStorage = new ProductStorage();
-        private readonly ILogger<HomeController> _logger;
+        private readonly IProductsStorage productsStorage;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IProductsStorage productsStorage)
         {
-            _logger = logger;
+            this.productsStorage = productsStorage;
         }
 
         public IActionResult Index()

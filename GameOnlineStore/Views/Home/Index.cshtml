@@ -6,7 +6,7 @@
     @foreach (var item in Model)
     {
         <div class="card border-secondary mb-3" style="max-width: 18rem;">
-            <div class="card-header">@item.Name</div>
+            <a class="card-header" href="#">@item.Name</a>
             <div class="card-body text-secondary">
                 <img src="..." class="card-img-top" alt="...">
                 <p class="card-text">Цена: @item.Cost р.</p>
