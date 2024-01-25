@@ -8,6 +8,7 @@
         public DateTime Date { get; set; }
         public OrderStatus Status { get; set; }
 
+
         public decimal Cost
         {
             get
