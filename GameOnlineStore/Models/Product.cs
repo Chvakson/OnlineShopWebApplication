@@ -1,0 +1,19 @@
+﻿namespace GameOnlineStore.Models
+{
+    public class Product
+    {
+        private static int instanceCounter = 1;
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public int Cost { get; set; }
+        public string Description { get; set; }
+
+        public Product(string name, int cost, string description)
+        {
+            Id = instanceCounter++;
+            Name = name;
+            Cost = cost;
+            Description = description;
+        }
+    }
+}

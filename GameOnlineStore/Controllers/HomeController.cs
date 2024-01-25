@@ -6,6 +6,7 @@ namespace GameOnlineStore.Controllers
 {
     public class HomeController : Controller
     {
+        private ProductStorage productsStorage = new ProductStorage();
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(ILogger<HomeController> logger)
@@ -15,7 +16,8 @@ namespace GameOnlineStore.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var products = productsStorage.GetAll(); 
+            return View(products);
         }
 
         public IActionResult Privacy()
