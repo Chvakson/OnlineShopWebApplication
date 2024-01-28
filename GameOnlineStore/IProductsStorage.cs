@@ -5,6 +5,6 @@ namespace GameOnlineStore
     public interface IProductsStorage
     {
         public List<Product> GetAll();
-        public Product GetByProductId(int? productId);
+        public Product TryGetById(int? productId);
     }
 }

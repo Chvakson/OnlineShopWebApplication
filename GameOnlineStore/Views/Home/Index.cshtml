@@ -3,13 +3,13 @@
 
 
 <div class="row">
-    @foreach (var item in Model)
+    @foreach (var product in Model)
     {
         <div class="card border-secondary mb-3" style="max-width: 18rem;">
-            <a class="card-header" href="#">@item.Name</a>
+            <h4 class="product-name" onclick="window.location.href='@Url.Action("Index", "Product", new { productId = product.Id })'">@product.Name</h4>
             <div class="card-body text-secondary">
                 <img src="..." class="card-img-top" alt="...">
-                <p class="card-text">Цена: @item.Cost р.</p>
+                <p class="card-text">Цена: @product.Cost р.</p>
             </div>
             <div class="=row">
                 <button>Добавить в корзину</button>

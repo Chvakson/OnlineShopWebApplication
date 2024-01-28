@@ -22,7 +22,7 @@ namespace GameOnlineStore
             return Products;
         }
 
-        public Product GetByProductId(int? productId)
+        public Product TryGetById(int? productId)
         {
             return Products.FirstOrDefault(product => product.Id == productId);
         }
