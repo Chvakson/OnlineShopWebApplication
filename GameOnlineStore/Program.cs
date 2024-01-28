@@ -3,7 +3,7 @@ using GameOnlineStore;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
-builder.Services.AddSingleton<IProductsStorage, ProductsStorage>();
+builder.Services.AddSingleton<IProductsStorage, ProductsInMemoryStorage>();
 // Add services to the container.
 
 

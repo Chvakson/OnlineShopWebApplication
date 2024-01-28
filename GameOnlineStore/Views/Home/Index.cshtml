@@ -5,14 +5,14 @@
 <div class="row">
     @foreach (var product in Model)
     {
-        <div class="card border-secondary mb-3" style="max-width: 18rem;">
-            <h4 class="product-name" onclick="window.location.href='@Url.Action("Index", "Product", new { productId = product.Id })'">@product.Name</h4>
+        <div class="card col-4 border-secondary">
+            <h4 class="card-header" onclick="window.location.href='@Url.Action("Index", "Product", new { productId = product.Id })'" style="cursor: pointer">@product.Name</h4>
             <div class="card-body text-secondary">
-                <img src="..." class="card-img-top" alt="...">
+                <img src="@Url.Content(product.ImgPath)" class="card-img-top" alt="...">
                 <p class="card-text">Цена: @product.Cost р.</p>
             </div>
             <div class="=row">
-                <button>Добавить в корзину</button>
+                <button class="btn-dark">Добавить в корзину</button>
             </div>
         </div>
     }
