@@ -1,31 +1,40 @@
-﻿
+﻿@model Cart
 
-<table class="table">
-    <thead>
-        <tr>
-            <th scope="col">№</th>
-            <th scope="col">Название</th>
-            <th scope="col">Количество</th>
-            <th scope="col">Стоимость</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>mdo</td>
-        </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>fat</td>
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-            <td colspan="2">Larry the Bird</td>
-            <td>twitter</td>
-        </tr>
-    </tbody>
-</table>
+
+@{
+    if (Model == null || Model.Items.Count == 0)
+    {
+        <h2>В корзине пока нет товаров</h2>
+    }
+
+    else
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">№</th>
+                    <th scope="col">Название</th>
+                    <th scope="col">Цена</th>
+                    <th scope="col">Количество</th>
+                    <th scope="col">Стоимость</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.Items.Count; i++)
+                {
+                    <tr>
+                        <th scope="row">@(i + 1)</th>
+                        <td>@Model.Items[i].Product.Name</td>
+                        <td>@Model.Items[i].Product.Cost ₽</td>
+                        <td>
+                            <img src="../img/icons/remove_circle_outline_black_24dp.svg" style="cursor:pointer" onclick="window.location.href='/cart/remove?productId=@Model.Items[i].Product.Id'" alt="Alternate Text" />
+                            @Model.Items[i].Amount
+                            <img src="../img/icons/add_circle_outline_black_24dp.svg" style="cursor:pointer" onclick="window.location.href='/cart/add?productId=@Model.Items[i].Product.Id'" alt="Alternate Text" />
+                        </td>
+                        <td>@Model.Items[i].Cost ₽</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+}

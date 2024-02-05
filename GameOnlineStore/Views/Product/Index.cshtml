@@ -8,7 +8,10 @@
             <div class="card-body text-secondary">
                 <img src="@Url.Content(Model.ImgPath)" class="card-img-top" alt="...">
                 <p class="card-text">Цена: @Model.Cost р.</p>
-                <button class="btn btn-dark">Добавить в корзину</button> 
+                <div style="display:flex">
+                    <button class="btn btn-dark" style="margin-right:10px">Добавить в корзину</button>
+                    <button class="btn btn-dark">Продожить покупки</button>
+                </div>
             </div>
         </div>
     </div>
