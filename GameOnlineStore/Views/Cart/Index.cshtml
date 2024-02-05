@@ -34,7 +34,18 @@
                         <td>@Model.Items[i].Cost ₽</td>
                     </tr>
                 }
+                <tr>
+                    <th scope="row"></th>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><h4>Итоговая сумма: @Model.Cost ₽</h4></td>
+                </tr>
             </tbody>
         </table>
+        <div class="row justify-content-md-center">
+            <button class="col-2 btn btn-dark">Оформить заказ</button>
+            <button class="col-2 btn btn-dark">Продолжить покупки</button>
+        </div>
     }
 }
