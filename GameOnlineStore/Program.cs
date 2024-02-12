@@ -7,6 +7,7 @@ builder.Services.AddSingleton<IProductsStorage, ProductsInMemoryStorage>();
 builder.Services.AddSingleton<ICartsStorage, CartsInMemoryStorage>();
 builder.Services.AddSingleton<IUsersStorage, UsersInMemoryStorage>();
 builder.Services.AddSingleton<IOrdersStorage, OrdersInMemoryStorage>();
+builder.Services.AddSingleton<IFavoriteStorage, FavoriteInMemoryStorage>();
 // Add services to the container.
 
 

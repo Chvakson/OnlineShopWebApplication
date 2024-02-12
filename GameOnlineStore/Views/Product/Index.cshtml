@@ -1,7 +1,6 @@
 ﻿@model Product
 
 <div class="row">
-
     <div class="col-6">
         <div class="card border-secondary">
             <h5 class="card-header">@Model.Name</h5>
@@ -9,6 +8,7 @@
                 <img src="@Url.Content(Model.ImgPath)" class="card-img-top" alt="...">
                 <p class="card-text">Цена: @Model.Cost р.</p>
                 <button class="btn btn-dark" onclick="window.location.href='@Url.Action("Add", "Cart", new { productId = Model.Id })'">Добавить в корзину</button>
+                <button class="btn btn-dark" onclick="window.location.href='@Url.Action("Add", "Favorite", new { productId = Model.Id })'">Добавить в избранное</button>
                 <button class="btn btn-dark" onclick="window.location.href='@Url.Action("Index", "Home")'">Продожить покупки</button>
             </div>
         </div>
