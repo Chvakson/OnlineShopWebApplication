@@ -1,4 +1,5 @@
 ﻿using GameOnlineStore.Models;
+using OnlineShopWebApplication;
 
 namespace GameOnlineStore
 {
@@ -12,14 +13,33 @@ namespace GameOnlineStore
             return favoriteProducts.FirstOrDefault(favorite => favorite.UserId == userId);
         }
 
-        public void Add(Product product, string userId)
+        public void Add(Product product)
         {
-            var favorite = TryGetByUserId(userId);
-            var existingFavoriteProduct = favorite.FavoriteProducts.FirstOrDefault(favoriteProduct => favoriteProduct.Id == product.Id);
-            if (existingFavoriteProduct == null)
+            var favorite = TryGetByUserId(Constants.UserId);
+            if (favorite == null)
             {
+                favorite = new Favorite { UserId = Constants.UserId, FavoriteProducts = new List<Product>() };
                 favorite.FavoriteProducts.Add(product);
+                favoriteProducts.Add(favorite);
             }
+            else
+            {
+                var existingFavoriteProduct = favorite.FavoriteProducts.FirstOrDefault(favoriteProduct => favoriteProduct.Id == product.Id);
+                if (existingFavoriteProduct == null)
+                {
+                    favorite.FavoriteProducts.Add(product);
+                }
+            }
+        }
+
+        public void Remove(Product product)
+        {
+            var favorite = TryGetByUserId(Constants.UserId);
+            if (favorite == null)
+            {
+                return;
+            }
+            favorite.FavoriteProducts.Remove(product);
         }
     }
 }

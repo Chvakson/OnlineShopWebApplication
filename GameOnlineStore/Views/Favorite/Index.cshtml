@@ -1,15 +1,28 @@
 ﻿@model Favorite
 
-<div class="row">
-    @foreach (var product in Model.FavoriteProducts)
+<h2>Избранное</h2>
+
+@{
+    if (Model == null || Model.FavoriteProducts.Count == 0)
     {
-        <div class="card col-4 border-secondary">
-            <h4 class="card-header" onclick="window.location.href='@Url.Action("Index", "Product", new { productId = product.Id })'" style="cursor: pointer">@product.Name</h4>
-            <div class="card-body text-secondary">
-                <img src="@Url.Content(product.ImgPath)" class="card-img-top" alt="...">
-                <p class="card-text">Цена: @product.Cost р.</p>
-                <button class="btn btn-dark" onclick="window.location.href='@Url.Action("Add", "Cart", new { productId = product.Id })'">Добавить в корзину</button>
-            </div>
+        <h4>В избранном пока нет товаров</h4>
+    }
+
+    else
+    {
+        <div class="row">
+            @foreach (var product in Model.FavoriteProducts)
+            {
+                <div class="card col-4 border-secondary">
+                    <h4 class="card-header" onclick="window.location.href='@Url.Action("Index", "Product", new { productId = product.Id })'" style="cursor: pointer">@product.Name</h4>
+                    <div class="card-body text-secondary">
+                        <img src="@Url.Content(product.ImgPath)" class="card-img-top" alt="...">
+                        <p class="card-text">Цена: @product.Cost р.</p>
+                        <button class="btn btn-dark" onclick="window.location.href='@Url.Action("Add", "Cart", new { productId = product.Id })'">Добавить в корзину</button>
+                        <button class="btn btn-dark" onclick="window.location.href='@Url.Action("Remove", "Favorite", new { productId = product.Id })'">Убрать из избранного</button>
+                    </div>
+                </div>
+            }
         </div>
     }
-</div>
+}

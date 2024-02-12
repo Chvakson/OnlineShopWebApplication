@@ -23,8 +23,15 @@ namespace GameOnlineStore.Controllers
         public IActionResult Add(int productId)
         {
             var product = productsStorage.TryGetById(productId);
-            favoriteStorage.Add(product, Constants.UserId);
-            return View();
+            favoriteStorage.Add(product);
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Remove(int productId)
+        {
+            var product = productsStorage.TryGetById(productId);
+            favoriteStorage.Remove(product);
+            return RedirectToAction("Index");
         }
     }
 }
