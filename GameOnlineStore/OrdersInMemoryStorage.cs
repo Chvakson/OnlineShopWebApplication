@@ -1,4 +1,5 @@
 ﻿using GameOnlineStore.Models;
+using OnlineShopWebApplication;
 
 namespace GameOnlineStore
 {
@@ -11,12 +12,12 @@ namespace GameOnlineStore
             return orders.Where(order => order.UserId == userId).ToList();
         }
 
-        public void Add(Cart cart, string userId)
+        public void Add(Cart cart)
         {
             var order = new Order
             {
                 Id = Guid.NewGuid(),
-                UserId = userId,
+                UserId = Constants.UserId,
                 Cart = cart
 
             };

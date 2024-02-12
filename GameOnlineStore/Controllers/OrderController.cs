@@ -6,23 +6,24 @@ namespace GameOnlineStore.Controllers
 {
     public class OrderController : Controller
     {
-        public IOrdersStorage ordersStorage { get; set; }
+        private readonly IOrdersStorage ordersStorage;
         private readonly ICartsStorage cartsStorage;
         public OrderController(IOrdersStorage ordersStorage, ICartsStorage cartsStorage)
         {
             this.ordersStorage = ordersStorage;
             this.cartsStorage = cartsStorage;
         }
-        public IActionResult Index(Cart cart)
+        public IActionResult Index()
         {
-            var orders = ordersStorage.TryGetByUserId(Constants.UserId);
-            return View(orders);
+            return View();
         }
 
-        public IActionResult Add(Cart cart)
+        public IActionResult Buy()
         {
-            ordersStorage.Add(cart, Constants.UserId);
-            return RedirectToAction("Clear", "Cart");
+            var existingCart = cartsStorage.TryGetByUserId(Constants.UserId);
+            ordersStorage.Add(existingCart);
+            cartsStorage.Clear(Constants.UserId);
+            return View("Buy");
         }
     }
 }
