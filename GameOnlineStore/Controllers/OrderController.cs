@@ -23,7 +23,7 @@ namespace GameOnlineStore.Controllers
             var existingCart = cartsStorage.TryGetByUserId(Constants.UserId);
             ordersStorage.Add(existingCart);
             cartsStorage.Clear(Constants.UserId);
-            return View("Buy");
+            return View();
         }
     }
 }

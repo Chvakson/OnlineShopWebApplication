@@ -1,7 +1,8 @@
 ﻿
 <h3>Адрес доставки</h3>
+
 <form>
-    <div class="mb-3">
+    <div class="mb-3 col-12">
         <input type="text" class="form-control" placeholder="Город, улица, номер дома">
     </div>
 
@@ -19,25 +20,27 @@
             <input type="text" class="form-control" placeholder="Домофон">
         </div>
     </div>
+
     <div class="mb-3 col-4">
-        <textarea class="form-control" id="exampleInputPassword1" placeholder="Комментарий курьеру"></textarea>
+        <textarea class="form-control" placeholder="Комментарий курьеру"></textarea>
     </div>
 </form>
 
 <h3>Покупатель</h3>
+
 <form>
     <div class="mb-3 col-5">
-        <input type="tel" class="form-control" id="exampleInputPassword1" placeholder="Телефон">
+        <input type="tel" class="form-control" placeholder="Телефон">
     </div>
     <div class="mb-3 col-5">
         <input type="text" class="form-control" placeholder="Фамилия">
     </div>
     <div class="mb-3 col-5">
-        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Имя">
+        <input type="text" class="form-control" placeholder="Имя">
     </div>
     <div class="mb-3 col-5">
         <input type="email" class="form-control" placeholder="email">
     </div>
-
-    <button type="submit" class="btn btn-dark" onclick="window.location.href='@Url.Action("Buy", "Order")'">Подтвердить</button>
 </form>
+
+<button type="submit" class="btn btn-dark" onclick="window.location.href='@Url.Action("Buy", "Order")'">Подтвердить</button>

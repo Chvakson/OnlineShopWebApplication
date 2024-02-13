@@ -6,9 +6,9 @@ namespace GameOnlineStore.Controllers
     public class FavoriteController : Controller
     {
         private readonly IProductsStorage productsStorage;
-        private readonly IFavoriteStorage favoriteStorage;
+        private readonly IProductsCollection favoriteStorage;
 
-        public FavoriteController(IProductsStorage productsStorage, IFavoriteStorage favoriteStorage)
+        public FavoriteController(IProductsStorage productsStorage, IProductsCollection favoriteStorage)
         {
             this.productsStorage = productsStorage;
             this.favoriteStorage = favoriteStorage;

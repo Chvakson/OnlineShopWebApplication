@@ -1,8 +1,8 @@
 ﻿namespace GameOnlineStore.Models
 {
-    public class Favorite
+    public class ProductsCollection
     {
         public string UserId { get; set; }
-        public List<Product> FavoriteProducts { get; set; }
+        public List<Product> Products { get; set; }
     }
 }
