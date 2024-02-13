@@ -1,9 +1,9 @@
-﻿@model Favorite
+﻿@model ProductsCollection
 
 <h2>Избранное</h2>
 
 @{
-    if (Model == null || Model.FavoriteProducts.Count == 0)
+    if (Model == null || Model.Products.Count == 0)
     {
         <h4>В избранном пока нет товаров</h4>
     }
@@ -11,7 +11,7 @@
     else
     {
         <div class="row">
-            @foreach (var product in Model.FavoriteProducts)
+            @foreach (var product in Model.Products)
             {
                 <div class="card col-4 border-secondary">
                     <h4 class="card-header" onclick="window.location.href='@Url.Action("Index", "Product", new { productId = product.Id })'" style="cursor: pointer">@product.Name</h4>
