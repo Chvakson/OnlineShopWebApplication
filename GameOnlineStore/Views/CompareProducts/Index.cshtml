@@ -1,0 +1,50 @@
+﻿@model ProductsCollection
+
+<h2>Сравнение товаров</h2>
+
+@{
+    if (Model == null || Model.Products.Count == 0)
+    {
+        <h4>Нет товаров для сравнения</h4>
+    }
+
+    else
+    {
+        <div>
+            <div  id="scrollable-content">
+                @foreach (var product in Model.Products)
+                {
+                    <div class="card col-4 border-secondary">
+                        <h4 class="card-header" onclick="window.location.href='@Url.Action("Index", "Product", new { productId = product.Id })'" style="cursor: pointer">@product.Name</h4>
+                        <div class="card-body text-secondary">
+                            <img src="@Url.Content(product.ImgPath)" class="card-img-top" alt="...">
+                            <p class="card-text">Цена: @product.Cost р.</p>
+                            <button class="btn btn-dark" onclick="window.location.href='@Url.Action("Add", "Cart", new { productId = product.Id })'">Добавить в корзину</button>
+                            <button class="btn btn-dark" onclick="window.location.href='@Url.Action("Remove", "CompareProducts", new { productId = product.Id })'">Убрать из сравнения</button>
+                        </div>
+                    </div>
+                }
+            </div>
+            <h5>Сравнение характеристик</h5>
+            <div  id="scrollable-content">
+                @foreach (var product in Model.Products)
+                {
+                    <div class="col-4">
+                        <div>
+                            Жанр
+                        </div>
+                        <div>
+                            Год издания
+                        </div>
+                        <div>
+                            Студия-разработчик
+                        </div>
+                        <div>
+                            Технические требования
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+}

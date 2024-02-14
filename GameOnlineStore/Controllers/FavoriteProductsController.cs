@@ -3,34 +3,34 @@ using OnlineShopWebApplication;
 
 namespace GameOnlineStore.Controllers
 {
-    public class FavoriteController : Controller
+    public class FavoriteProductsController : Controller
     {
         private readonly IProductsStorage productsStorage;
-        private readonly IProductsCollection favoriteStorage;
+        private readonly IProductsCollection favoriteProductsStorage;
 
-        public FavoriteController(IProductsStorage productsStorage, IProductsCollection favoriteStorage)
+        public FavoriteProductsController(IProductsStorage productsStorage, IProductsCollection favoriteStorage)
         {
             this.productsStorage = productsStorage;
-            this.favoriteStorage = favoriteStorage;
+            this.favoriteProductsStorage = favoriteStorage;
         }
 
         public IActionResult Index()
         {
-            var favorite = favoriteStorage.TryGetByUserId(Constants.UserId);
+            var favorite = favoriteProductsStorage.TryGetByUserId(Constants.UserId);
             return View(favorite);
         }
 
         public IActionResult Add(int productId)
         {
             var product = productsStorage.TryGetById(productId);
-            favoriteStorage.Add(product);
+            favoriteProductsStorage.Add(product);
             return RedirectToAction("Index");
         }
 
         public IActionResult Remove(int productId)
         {
             var product = productsStorage.TryGetById(productId);
-            favoriteStorage.Remove(product);
+            favoriteProductsStorage.Remove(product);
             return RedirectToAction("Index");
         }
     }
