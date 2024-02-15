@@ -8,10 +8,10 @@ namespace GameOnlineStore.Controllers
         private readonly IProductsStorage productsStorage;
         private readonly IProductsCollection compareProductsStorage;
 
-        public CompareProductsController(IProductsStorage productsStorage, IProductsCollection favoriteStorage)
+        public CompareProductsController(IProductsStorage productsStorage, IProductsCollection compareProductsStorage)
         {
             this.productsStorage = productsStorage;
-            this.compareProductsStorage = favoriteStorage;
+            this.compareProductsStorage = compareProductsStorage;
         }
 
         public IActionResult Index()

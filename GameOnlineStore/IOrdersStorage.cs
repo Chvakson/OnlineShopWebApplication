@@ -5,6 +5,6 @@ namespace GameOnlineStore
     public interface IOrdersStorage
     {
         public List<Order> TryGetByUserId(string userId);
-        public void Add(Cart cart);
+        public void Add(Cart cart, UserAddress userAddress, UserContacts userContacts, string? comment);
     }
 }

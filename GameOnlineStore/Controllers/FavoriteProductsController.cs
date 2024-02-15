@@ -8,10 +8,10 @@ namespace GameOnlineStore.Controllers
         private readonly IProductsStorage productsStorage;
         private readonly IProductsCollection favoriteProductsStorage;
 
-        public FavoriteProductsController(IProductsStorage productsStorage, IProductsCollection favoriteStorage)
+        public FavoriteProductsController(IProductsStorage productsStorage, IProductsCollection favoriteProductsStorage)
         {
             this.productsStorage = productsStorage;
-            this.favoriteProductsStorage = favoriteStorage;
+            this.favoriteProductsStorage = favoriteProductsStorage;
         }
 
         public IActionResult Index()

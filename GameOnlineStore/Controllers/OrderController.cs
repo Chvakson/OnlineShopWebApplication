@@ -18,10 +18,11 @@ namespace GameOnlineStore.Controllers
             return View();
         }
 
-        public IActionResult Buy()
+        [HttpPost]
+        public IActionResult Buy(UserAddress userAddress, UserContacts userContacts, string? comment)
         {
             var existingCart = cartsStorage.TryGetByUserId(Constants.UserId);
-            ordersStorage.Add(existingCart);
+            ordersStorage.Add(existingCart, userAddress, userContacts, comment);
             cartsStorage.Clear(Constants.UserId);
             return View();
         }

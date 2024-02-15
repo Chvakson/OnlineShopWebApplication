@@ -10,36 +10,36 @@ namespace GameOnlineStore
 
         public ProductsCollection TryGetByUserId(string userId)
         {
-            return CompareProducts.FirstOrDefault(favorite => favorite.UserId == userId);
+            return CompareProducts.FirstOrDefault(compare => compare.UserId == userId);
         }
 
         public void Add(Product product)
         {
-            var favorite = TryGetByUserId(Constants.UserId);
-            if (favorite == null)
+            var compare = TryGetByUserId(Constants.UserId);
+            if (compare == null)
             {
-                favorite = new ProductsCollection { UserId = Constants.UserId, Products = new List<Product>() };
-                favorite.Products.Add(product);
-                CompareProducts.Add(favorite);
+                compare = new ProductsCollection { UserId = Constants.UserId, Products = new List<Product>() };
+                compare.Products.Add(product);
+                CompareProducts.Add(compare);
             }
             else
             {
-                var existingFavoriteProduct = favorite.Products.FirstOrDefault(favoriteProduct => favoriteProduct.Id == product.Id);
-                if (existingFavoriteProduct == null)
+                var existingCompareProduct = compare.Products.FirstOrDefault(compareProduct => compareProduct.Id == product.Id);
+                if (existingCompareProduct == null)
                 {
-                    favorite.Products.Add(product);
+                    compare.Products.Add(product);
                 }
             }
         }
 
         public void Remove(Product product)
         {
-            var favorite = TryGetByUserId(Constants.UserId);
-            if (favorite == null)
+            var compare = TryGetByUserId(Constants.UserId);
+            if (compare == null)
             {
                 return;
             }
-            favorite.Products.Remove(product);
+            compare.Products.Remove(product);
         }
     }
 }

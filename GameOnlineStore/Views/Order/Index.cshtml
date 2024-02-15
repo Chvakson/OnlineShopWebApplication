@@ -1,46 +1,52 @@
 ﻿
 <h3>Адрес доставки</h3>
 
-<form>
-    <div class="mb-3 col-12">
-        <input type="text" class="form-control" placeholder="Город, улица, номер дома">
+<form method="post">
+    <div class="mb-3 col-4">
+        <input type="text" class="form-control" placeholder="Город" name="city">
+    </div>
+
+    <div class="mb-3 col-4">
+        <input type="text" class="form-control" placeholder="Улица" name="street">
+    </div>
+
+    <div class="mb-3 col-4">
+        <input type="text" class="form-control" placeholder="Номер дома" name="homeNo">
     </div>
 
     <div class="mb-3 row">
         <div class="col-1">
-            <input type="text" class="form-control" placeholder="Подъезд">
+            <input type="text" class="form-control" placeholder="Подъезд" name="entrance">
         </div>
         <div class="col-1">
-            <input type="text" class="form-control" placeholder="Этаж">
+            <input type="text" class="form-control" placeholder="Этаж" name="floorNo">
         </div>
         <div class="col-1">
-            <input type="text" class="form-control" placeholder="Квартира">
-        </div>
-        <div class="col-1">
-            <input type="text" class="form-control" placeholder="Домофон">
+            <input type="text" class="form-control" placeholder="Квартира" name="flatNo">
         </div>
     </div>
 
     <div class="mb-3 col-4">
-        <textarea class="form-control" placeholder="Комментарий курьеру"></textarea>
+        <textarea class="form-control" placeholder="Комментарий курьеру" name="comment"></textarea>
     </div>
+
+
+    <h3>Покупатель</h3>
+
+
+    <div class="mb-3 col-5">
+        <input type="tel" class="form-control" placeholder="Телефон" name="phone">
+    </div>
+    <div class="mb-3 col-5">
+        <input type="text" class="form-control" placeholder="Фамилия" name="lastName">
+    </div>
+    <div class="mb-3 col-5">
+        <input type="text" class="form-control" placeholder="Имя" name="firstName">
+    </div>
+    <div class="mb-3 col-5">
+        <input type="email" class="form-control" placeholder="email" name="email">
+    </div>
+
+    <button type="submit" class="btn btn-dark" asp-controller="Order" asp-action="Buy">Подтвердить</button>
 </form>
 
-<h3>Покупатель</h3>
-
-<form>
-    <div class="mb-3 col-5">
-        <input type="tel" class="form-control" placeholder="Телефон">
-    </div>
-    <div class="mb-3 col-5">
-        <input type="text" class="form-control" placeholder="Фамилия">
-    </div>
-    <div class="mb-3 col-5">
-        <input type="text" class="form-control" placeholder="Имя">
-    </div>
-    <div class="mb-3 col-5">
-        <input type="email" class="form-control" placeholder="email">
-    </div>
-</form>
-
-<button type="submit" class="btn btn-dark" onclick="window.location.href='@Url.Action("Buy", "Order")'">Подтвердить</button>

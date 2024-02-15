@@ -1,5 +1,6 @@
 using GameOnlineStore.Models;
 using Microsoft.AspNetCore.Mvc;
+using OnlineShopWebApplication;
 using System.Diagnostics;
 
 namespace GameOnlineStore.Controllers
@@ -7,10 +8,13 @@ namespace GameOnlineStore.Controllers
     public class HomeController : Controller
     {
         private readonly IProductsStorage productsStorage;
+        private readonly ICartsStorage cartsStorage;
 
-        public HomeController(IProductsStorage productsStorage)
+
+        public HomeController(IProductsStorage productsStorage, ICartsStorage cartsStorage)
         {
             this.productsStorage = productsStorage;
+            this.cartsStorage = cartsStorage;
         }
 
         public IActionResult Index()
