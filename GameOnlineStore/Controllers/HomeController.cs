@@ -8,13 +8,11 @@ namespace GameOnlineStore.Controllers
     public class HomeController : Controller
     {
         private readonly IProductsStorage productsStorage;
-        private readonly ICartsStorage cartsStorage;
 
 
-        public HomeController(IProductsStorage productsStorage, ICartsStorage cartsStorage)
+        public HomeController(IProductsStorage productsStorage)
         {
             this.productsStorage = productsStorage;
-            this.cartsStorage = cartsStorage;
         }
 
         public IActionResult Index()

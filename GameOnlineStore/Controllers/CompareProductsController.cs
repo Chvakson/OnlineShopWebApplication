@@ -6,9 +6,9 @@ namespace GameOnlineStore.Controllers
     public class CompareProductsController : Controller
     {
         private readonly IProductsStorage productsStorage;
-        private readonly IProductsCollection compareProductsStorage;
+        private readonly ICompareProducts compareProductsStorage;
 
-        public CompareProductsController(IProductsStorage productsStorage, IProductsCollection compareProductsStorage)
+        public CompareProductsController(IProductsStorage productsStorage, ICompareProducts compareProductsStorage)
         {
             this.productsStorage = productsStorage;
             this.compareProductsStorage = compareProductsStorage;

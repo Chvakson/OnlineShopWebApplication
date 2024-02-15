@@ -2,7 +2,7 @@
 
 namespace GameOnlineStore
 {
-    public interface IProductsCollection
+    public interface ICompareProducts
     {
         public ProductsCollection TryGetByUserId(string userId);
         public void Add(Product product);

@@ -3,7 +3,7 @@ using OnlineShopWebApplication;
 
 namespace GameOnlineStore
 {
-    public class CompareProductsInMemoryStorage : IProductsCollection
+    public class CompareProductsInMemoryStorage : ICompareProducts
     {
         //public string UserId;
         public List<ProductsCollection> CompareProducts = new List<ProductsCollection>();

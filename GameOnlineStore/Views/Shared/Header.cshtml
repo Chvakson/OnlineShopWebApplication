@@ -9,6 +9,16 @@
             <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
                     <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Index">
+                            <img src="~/img/icons/admin_panel_settings_black_24dp.svg" />
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="singin" data-bs-toggle="modal" data-bs-target="#loginModalWindow" class="nav-link text-dark">
+                            <img src="~/img/icons/account_circle_black_24dp.svg"/> 
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-controller="Cart" asp-action="Index">@await Component.InvokeAsync("Cart")</a>
                     </li>
                     <li class="nav-item">
@@ -21,4 +31,5 @@
             </div>
         </div>
     </nav>
+    @await Html.PartialAsync("AutorizationWindow")
 </header>

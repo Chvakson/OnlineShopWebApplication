@@ -12,6 +12,11 @@ namespace GameOnlineStore
             return orders.Where(order => order.UserId == userId).ToList();
         }
 
+        public List<Order> GetAll()
+        {
+            return orders;
+        }
+
         public void Add(Cart cart, UserAddress userAddress, UserContacts userContacts, string? comment)
         {
             var order = new Order

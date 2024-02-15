@@ -3,7 +3,7 @@ using OnlineShopWebApplication;
 
 namespace GameOnlineStore
 {
-    public class FavoriteProductsInMemoryStorage : IProductsCollection
+    public class FavoriteProductsInMemoryStorage : IFavoriteProducts
     {
         //public string UserId;
         public List<ProductsCollection> FavoriteProducts = new List<ProductsCollection>();
