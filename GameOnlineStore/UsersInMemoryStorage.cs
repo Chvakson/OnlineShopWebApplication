@@ -6,6 +6,11 @@ namespace GameOnlineStore
     {
         public List<User> Users = new List<User>();
 
+        public List<User> GetAll()
+        {
+            return Users;
+        }
+
         public User GetUserById(Guid id)
         {
             return Users.FirstOrDefault(user => user.Id == id);
