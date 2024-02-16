@@ -14,10 +14,23 @@ namespace GameOnlineStore.Controllers
         {
             this.productsStorage = productsStorage;
         }
-
         public IActionResult Index()
         {
-            var products = productsStorage.GetAll(); 
+            var products = productsStorage.GetAll();
+            return View(products);
+        }
+
+        [HttpPost]
+        public IActionResult Index(string? query)
+        {
+            var products = productsStorage.GetAll();
+
+            if (!string.IsNullOrWhiteSpace(query))
+            {
+                products = products.Where(p => p.Name != null && p.Name.ToLower().Contains(query.ToLower())).ToList();
+            }
+
+
             return View(products);
         }
 

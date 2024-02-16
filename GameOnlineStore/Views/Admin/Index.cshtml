@@ -1,14 +1,6 @@
-﻿<div class="col-3">
-    <div class="card admin">
-        <a class="menu-category" asp-controller="Admin" asp-action="Orders">Заказы</a>
-    </div>
-    <div class="card">
-        <a class="menu-category" asp-controller="Admin" asp-action="Users">Пользователи</a>
-    </div>
-    <div class="card">
-        <a class="menu-category" asp-controller="Admin" asp-action="Roles">Роли</a>
-    </div>
-    <div class="card">
-        <a class="menu-category" asp-controller="Admin" asp-action="Products">Продукты</a>
+﻿<div class="row">
+    @await Html.PartialAsync("AdminLeftPanel")
+    <div class="col-9">
+        <h2>Панель администратора</h2>
     </div>
 </div>

@@ -1,6 +1,18 @@
 ﻿
 @model List<Product>
 
+<div class="d-flex justify-content-center">
+    <form action="/" method="post">
+        <div class="mb-3  d-md-inline-flex" style="width: 600px">
+            <input type="text" class="form-control" name="query" placeholder="Поиск...">
+            <button class="btn btn-dark d-flex align-items-center justify-content-center" type="submit">
+                <span class="material-icons">
+                    search
+                </span>
+            </button>
+        </div>
+    </form>
+</div>
 
 <div class="row">
     @foreach (var product in Model)
@@ -12,7 +24,7 @@
                 <p class="card-text">Цена: @product.Cost р.</p>
                 <button class="btn btn-dark" onclick="window.location.href='@Url.Action("Add", "Cart", new { productId = product.Id })'">Добавить в корзину</button>
                 <button class="btn btn-dark" onclick="window.location.href='@Url.Action("Add", "FavoriteProducts", new { productId = product.Id })'">Добавить в избранное</button>
-                <button class="btn btn-dark" onclick="window.location.href='@Url.Action("Add", "CompareProducts", new { productId = product.Id })'">Добавить в сравнение</button>
+                <button style="margin-top:5px" class="btn btn-dark" onclick="window.location.href='@Url.Action("Add", "CompareProducts", new { productId = product.Id })'">Добавить в сравнение</button>
                 @* <div class="form-check">
                     <input class="form-check-input bg-dark" type="checkbox" value="" id="compare_checkbox">
                     <label class="form-check-label" for="compare_checkbox">

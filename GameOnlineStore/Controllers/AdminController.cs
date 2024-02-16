@@ -40,5 +40,19 @@ namespace GameOnlineStore.Controllers
             var products = productsStorage.GetAll();
             return View(products);
         }
+
+        public IActionResult EditProduct(int productId)
+        {
+            var product = productsStorage.TryGetById(productId);
+            return View(product);
+        }
+
+        public IActionResult RemoveProduct(int productId)
+        {
+            var product = productsStorage.TryGetById(productId);
+            var products = productsStorage.GetAll();
+            products.Remove(product);
+            return RedirectToAction("Products");
+        }
     }
 }
