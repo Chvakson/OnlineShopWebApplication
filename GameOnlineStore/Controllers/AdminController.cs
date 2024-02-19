@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using GameOnlineStore.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace GameOnlineStore.Controllers
 {
@@ -16,6 +17,19 @@ namespace GameOnlineStore.Controllers
 
         public IActionResult Index()
         {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Index(int productId, Product product)
+        {
+            var editingProduct = productsStorage.TryGetById(productId);
+            if (editingProduct != null)
+            {
+                editingProduct.Name = product.Name;
+                editingProduct.Cost = product.Cost;
+                editingProduct.Description = product.Description;
+            }
             return View();
         }
 
@@ -39,6 +53,22 @@ namespace GameOnlineStore.Controllers
         {
             var products = productsStorage.GetAll();
             return View(products);
+        }
+
+        public IActionResult CreateNewProduct()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddNewProduct(Product product)
+        {
+            if (product != null)
+            {
+                var products = productsStorage.GetAll();
+                products.Add(product);
+            }
+            return RedirectToAction("Products");
         }
 
         public IActionResult EditProduct(int productId)

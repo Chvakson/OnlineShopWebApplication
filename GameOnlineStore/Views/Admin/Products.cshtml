@@ -4,7 +4,7 @@
     @await Html.PartialAsync("AdminLeftPanel")
     <div class="col-9">
         <h2>Список продуктов</h2>
-        <a href="#">Добавить новый продукт</a>
+        <a asp-area="" asp-controller="Admin" asp-action="CreateNewProduct">Добавить новый продукт</a>
         <table class="table">
             <thead>
                 <tr >
