@@ -4,33 +4,30 @@ namespace GameOnlineStore
 {
     public class UsersInMemoryStorage : IUsersStorage
     {
-        public List<User> Users = new List<User>();
+        public List<Login> UsersLogins = new List<Login>();
 
-        public List<User> GetAll()
+        public List<Login> GetAll()
         {
-            return Users;
+            return UsersLogins;
         }
 
-        public User GetUserById(Guid id)
+        //public Login GetUserById(Guid id)
+        //{
+        //    return UsersLogins.FirstOrDefault(user => user.Id == id);
+        //}
+
+        public Login Login(Login loginInfo)
         {
-            return Users.FirstOrDefault(user => user.Id == id);
+            return UsersLogins.FirstOrDefault(existingUser => existingUser.UserName == loginInfo.UserName && existingUser.Password == loginInfo.Password);
         }
 
-        public User Login (User user)
+        public void Register(Register registerInfo)
         {
-            return Users.FirstOrDefault(existingUser => existingUser.Login == user.Login && existingUser.Password == user.Password);
-        }
-
-        public void Register(User user)
-        {
-            Users.Add(
-                new User
-                {
-                    Id = new Guid(),
-                    Login = user.Login,
-                    Password = user.Password
-                }
-                );
+            UsersLogins.Add(new Login
+            {
+                UserName = registerInfo.UserName,
+                Password = registerInfo.Password
+            });
         }
     }
 }

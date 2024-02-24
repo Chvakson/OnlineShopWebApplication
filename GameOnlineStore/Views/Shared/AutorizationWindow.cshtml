@@ -18,6 +18,7 @@
                         <button class="nav-link w-100 text-center" id="registerTab" data-bs-toggle="tab" data-bs-target="#register" type="button" role="tab" aria-controls="register" aria-selected="false">Регистрация</button>
                     </li>
                 </ul>
+                @* Вход *@
                 <div class="tab-content" id="loginTabContent">
                     <div class="tab-pane fade show active" id="signIn" role="tabpanel" aria-labelledby="signInTab">
                         <form id="signInForm" method="post">
@@ -38,16 +39,17 @@
                             </div>
                         </form>
                     </div>
+                    @* Регистрация *@
                     <div class="tab-pane fade" id="register" role="tabpanel" aria-labelledby="registerTab">
                         <form id="registerForm" method="post">
                             <div class="mb-3">
                                 <input type="text" class="form-control" name="login" placeholder="Логин" required>
                             </div>
                             <div class="mb-3">
-                                <input type="password" class="form-control" id="password1" placeholder="Пароль" required>
+                                <input type="password" class="form-control" id="password" placeholder="Пароль" required>
                             </div>
                             <div class="mb-3">
-                                <input type="password" class="form-control" id="password2" name="password" placeholder="Повторите пароль" required>
+                                <input type="password" class="form-control" id="confirmPassword" name="password" placeholder="Повторите пароль" required>
                             </div>
                             <div class="modal-footer justify-content-center">
                                 <button type="submit" class="btn btn-dark" id="enter" asp-controller="User" asp-action="Register">Зарегистрироваться</button>

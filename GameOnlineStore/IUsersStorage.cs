@@ -4,9 +4,9 @@ namespace GameOnlineStore
 {
     public interface IUsersStorage
     {
-        public List<User> GetAll();
-        public User GetUserById(Guid id);
-        public User Login(User user);
-        public void Register(User user);
+        public List<Login> GetAll();
+        //public Login GetUserById(Guid id);
+        public Login Login(Login loginInfo);
+        public void Register(Register registerInfo);
     }
 }

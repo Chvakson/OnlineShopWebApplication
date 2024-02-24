@@ -7,9 +7,9 @@ namespace GameOnlineStore
     {
         public List<Order> orders = new List<Order>();
 
-        public List<Order> TryGetByUserId(string userId)
+        public List<Order> TryGetById(Guid id)
         {
-            return orders.Where(order => order.UserId == userId).ToList();
+            return orders.Where(order => order.Id == id).ToList();
         }
 
         public List<Order> GetAll()
@@ -17,17 +17,8 @@ namespace GameOnlineStore
             return orders;
         }
 
-        public void Add(Cart cart, UserAddress userAddress, UserContacts userContacts, string? comment)
+        public void Add(Order order)
         {
-            var order = new Order
-            {
-                Id = Guid.NewGuid(),
-                UserId = Constants.UserId,
-                Cart = cart,
-                UserAddress = userAddress,
-                UserContacts = userContacts,
-                Comment = comment
-            };
             orders.Add(order);
         }
     }

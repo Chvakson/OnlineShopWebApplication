@@ -4,18 +4,18 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace OnlineShopWebApplication.Controllers
 {
-    public class UserController : Controller
+    public class AccountController : Controller
     {
         private readonly IUsersStorage usersStorage;
-        public UserController(IUsersStorage usersStorage)
+        public AccountController(IUsersStorage usersStorage)
         {
             this.usersStorage = usersStorage;
         }
 
         [HttpPost]
-        public IActionResult Login(User user)
+        public IActionResult Login(Login loginInfo)
         {
-            var existingUser = usersStorage.Login(user);
+            var existingUser = usersStorage.Login(loginInfo);
             if (existingUser == null)
             {
                 return NotFound();
@@ -25,9 +25,11 @@ namespace OnlineShopWebApplication.Controllers
         }
 
         [HttpPost]
-        public IActionResult Register(User user)
+        public IActionResult Register(Register registerInfo)
         {
-            usersStorage.Register(user);
+            if(registerInfo.Password == registerInfo.ConfirmPassword) {
+                usersStorage.Register(registerInfo);
+            }
             return RedirectToAction("Index", "Home");
             //return Ok();
         }

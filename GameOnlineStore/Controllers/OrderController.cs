@@ -19,10 +19,16 @@ namespace GameOnlineStore.Controllers
         }
 
         [HttpPost]
-        public IActionResult Buy(UserAddress userAddress, UserContacts userContacts, string? comment)
+        public IActionResult Buy(UserAddress userAddress, UserDeliveryInfo userDeliveryInfo)
         {
+            userDeliveryInfo.UserAddress = userAddress;
             var existingCart = cartsStorage.TryGetByUserId(Constants.UserId);
-            ordersStorage.Add(existingCart, userAddress, userContacts, comment);
+            var order = new Order
+            {
+                UserDeliveryInfo = userDeliveryInfo,
+                Items = existingCart.Items
+            };
+            ordersStorage.Add(order);
             cartsStorage.Clear(Constants.UserId);
             return View();
         }
