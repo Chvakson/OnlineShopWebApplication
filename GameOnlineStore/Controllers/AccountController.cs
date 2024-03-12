@@ -13,22 +13,20 @@ namespace OnlineShopWebApplication.Controllers
         }
 
         [HttpPost]
-        public IActionResult Login(Login loginInfo)
+        public IActionResult SignIn([FromBody] LoginCredential loginCredential)
         {
-            var existingUser = usersStorage.Login(loginInfo);
-            if (existingUser == null)
-            {
-                return NotFound();
-            }
-            return RedirectToAction("Index", "Home");
-            //return Ok();
+            if (loginCredential.Login.Length < 5 || loginCredential.Login.Length > 50)
+                return BadRequest("Логин должен содержать от 5 до 50 символов");
+
+            return Ok();
         }
 
         [HttpPost]
-        public IActionResult Register(Register registerInfo)
+        public IActionResult Register(RegisterDetails registerDetails)
         {
-            if(registerInfo.Password == registerInfo.ConfirmPassword) {
-                usersStorage.Register(registerInfo);
+            if (registerDetails.Password == registerDetails.ConfirmPassword)
+            {
+                usersStorage.Register(registerDetails);
             }
             return RedirectToAction("Index", "Home");
             //return Ok();

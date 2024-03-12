@@ -4,9 +4,9 @@ namespace GameOnlineStore
 {
     public class UsersInMemoryStorage : IUsersStorage
     {
-        public List<Login> UsersLogins = new List<Login>();
+        public List<LoginCredential> UsersLogins = new List<LoginCredential>();
 
-        public List<Login> GetAll()
+        public List<LoginCredential> GetAll()
         {
             return UsersLogins;
         }
@@ -16,16 +16,16 @@ namespace GameOnlineStore
         //    return UsersLogins.FirstOrDefault(user => user.Id == id);
         //}
 
-        public Login Login(Login loginInfo)
+        public LoginCredential Login(LoginCredential loginInfo)
         {
-            return UsersLogins.FirstOrDefault(existingUser => existingUser.UserName == loginInfo.UserName && existingUser.Password == loginInfo.Password);
+            return UsersLogins.FirstOrDefault(existingUser => existingUser.Login == loginInfo.Login && existingUser.Password == loginInfo.Password);
         }
 
-        public void Register(Register registerInfo)
+        public void Register(RegisterDetails registerInfo)
         {
-            UsersLogins.Add(new Login
+            UsersLogins.Add(new LoginCredential
             {
-                UserName = registerInfo.UserName,
+                Login = registerInfo.Login,
                 Password = registerInfo.Password
             });
         }

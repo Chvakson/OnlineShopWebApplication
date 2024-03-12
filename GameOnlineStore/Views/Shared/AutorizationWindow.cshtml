@@ -21,9 +21,9 @@
                 @* Вход *@
                 <div class="tab-content" id="loginTabContent">
                     <div class="tab-pane fade show active" id="signIn" role="tabpanel" aria-labelledby="signInTab">
-                        <form id="signInForm" method="post">
+                        <form id="signInForm">
                             <div class="mb-3">
-                                <input type="text" class="form-control" name="login" placeholder="Логин" required>
+                                <input type="email" class="form-control" name="login" placeholder="Логин" required>
                             </div>
                             <div class="mb-3">
                                 <input type="password" class="form-control" name="password" placeholder="Пароль" required>
@@ -35,7 +35,7 @@
                                 </label>
                             </div>
                             <div class="modal-footer justify-content-center">
-                                <button type="submit" class="btn btn-dark" id="enter" asp-controller="User" asp-action="Login">Войти</button>
+                                <button type="submit" class="btn btn-dark" id="enter">Войти</button>
                             </div>
                         </form>
                     </div>
@@ -52,7 +52,7 @@
                                 <input type="password" class="form-control" id="confirmPassword" name="password" placeholder="Повторите пароль" required>
                             </div>
                             <div class="modal-footer justify-content-center">
-                                <button type="submit" class="btn btn-dark" id="enter" asp-controller="User" asp-action="Register">Зарегистрироваться</button>
+                                <button type="button" class="btn btn-dark" id="enter">Зарегистрироваться</button>
                             </div>
                         </form>
                     </div>
@@ -61,6 +61,58 @@
         </div>
     </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#signInForm').submit(function (e) {
+            e.preventDefault();
+            var loginData = {
+                login: $('input[name="login"]').val(),
+                password: $('input[name="password"]').val(),
+                rememberMe: $('input[name="rememberMe"]').is(":checked")
+            };
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("SignIn", "Account")',
+                contentType: 'application/json',
+                data: JSON.stringify(loginData),
+                success: function (response) {
+                    // Закрыть модальное окно
+                    $('#loginModalWindow').modal('hide');
+                    // Отобразить сообщение об успехе
+                    alert('Вы успешно вошли в систему!');
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                }
+            });
+        });
+        $('#registerForm').submit(function (e) {
+            e.preventDefault();
+            var password1 = $('#password1').val();
+            var password2 = $('#password2').val();
+            if (password1 === password2) {
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("Register", "User")',
+                    data: $('#registerForm').serialize(),
+                    success: function () {
+                        // Закрыть модальное окно
+                        $('#loginModalWindow').modal('hide');
+                        // Отобразить сообщение об успехе
+                        alert('Вы успешно зарегистрировались!');
+                    },
+                    error: function () {
+                        alert('Ошибка при отправке формы');
+                    }
+                });
+            } else {
+                alert('Пароли не совпадают');
+            }
+        });
+    });
+</script>
 
 
 

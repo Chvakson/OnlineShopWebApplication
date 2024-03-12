@@ -1,8 +1,8 @@
 ﻿namespace GameOnlineStore.Models
 {
-    public class Register
+    public class RegisterDetails
     {
-        public string UserName { get; set; }
+        public string Login { get; set; }
         public string Password { get; set; }
         public string ConfirmPassword { get; set; }
     }
