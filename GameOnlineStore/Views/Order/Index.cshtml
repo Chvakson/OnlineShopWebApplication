@@ -1,7 +1,105 @@
-﻿
-<h3>Адрес доставки</h3>
+﻿@model UserDeliveryInfo
 
-<form method="post">
+<form id="userOrderInfoForm" method="post">
+
+    <h4>Адрес доставки</h4>
+
+    <div class="col mb-3" style="display: flex; flex-direction: column;">
+        <label>Город</label>
+        <div class="col-4">
+            <input asp-for="UserAddress.City">
+        </div>
+        <span asp-validation-for="UserAddress.City"></span>
+    </div>
+
+
+    <div class="col mb-3" style="display: flex; flex-direction: column;">
+        <label>Улица</label>
+        <div class="col-4">
+            <input asp-for="UserAddress.Street">
+        </div>
+        <span asp-validation-for="UserAddress.Street"></span>
+    </div>
+
+    <div class="col mb-3" style="display: flex; flex-direction: column;">
+        <label>Номер дома</label>
+        <div class="col-4">
+            <input asp-for="UserAddress.HomeNo">
+        </div>
+        <span asp-validation-for="UserAddress.HomeNo"></span>
+    </div>
+
+    <div class="col mb-3" style="display: flex; flex-direction: column;">
+        <label>Подъезд</label>
+        <div class="col-1">
+            <input asp-for="UserAddress.Entrance">
+        </div>
+        <span asp-validation-for="UserAddress.Entrance"></span>
+    </div>
+
+    <div class="col mb-3" style="display: flex; flex-direction: column;">
+        <label>Этаж</label>
+        <div class="col-1">
+            <input asp-for="UserAddress.FloorNo">
+        </div>
+        <span asp-validation-for="UserAddress.FloorNo"></span>
+    </div>
+
+    <div class="col mb-3" style="display: flex; flex-direction: column;">
+        <label>Квартира</label>
+        <div class="col-1">
+            <input asp-for="UserAddress.FlatNo">
+        </div>
+        <span asp-validation-for="UserAddress.FlatNo"></span>
+    </div>
+
+    <h4>Покупатель</h4>
+
+    <div class="col mb-3" style="display: flex; flex-direction: column;">
+        <label>Телефон</label>
+        <div class="col-4">
+            <input asp-for="Phone">
+        </div>
+        <span asp-validation-for="Phone"></span>
+    </div>
+
+    <div class="col mb-3" style="display: flex; flex-direction: column;">
+        <label>Фамилия</label>
+        <div class="col-4">
+            <input asp-for="LastName">
+        </div>
+        <span asp-validation-for="LastName"></span>
+    </div>
+
+    <div class="col mb-3" style="display: flex; flex-direction: column;">
+        <label>Имя</label>
+        <div class="col-4">
+            <input asp-for="FirstName">
+        </div>
+        <span asp-validation-for="FirstName"></span>
+    </div>
+
+    <div class="col mb-3" style="display: flex; flex-direction: column;">
+        <label>Email</label>
+        <div class="col-4">
+            <input asp-for="Email">
+        </div>
+        <span asp-validation-for="Email"></span>
+    </div>
+
+    <div class="col mb-3" style="display: flex; flex-direction: column;">
+        <label>Комментарий к заказу</label>
+        <textarea class="col-5" asp-for="Comment"></textarea>
+        <span asp-validation-for="Comment"></span>
+    </div>
+
+    <button type="submit" class="btn btn-dark" asp-controller="Order" asp-action="Buy">Подтвердить</button>
+</form>
+
+
+
+
+@* <form id="userOrderInfoForm" method="post">
     <div class="mb-3 col-4">
         <input type="text" class="form-control" placeholder="Город" name="city">
     </div>
@@ -26,13 +124,7 @@
         </div>
     </div>
 
-    <div class="mb-3 col-4">
-        <textarea class="form-control" placeholder="Комментарий курьеру" name="comment"></textarea>
-    </div>
-
-
     <h3>Покупатель</h3>
-
 
     <div class="mb-3 col-5">
         <input type="tel" class="form-control" placeholder="Телефон" name="phone">
@@ -47,6 +139,46 @@
         <input type="email" class="form-control" placeholder="email" name="email">
     </div>
 
-    <button type="submit" class="btn btn-dark" asp-controller="Order" asp-action="Buy">Подтвердить</button>
+    <div class="mb-3 col-4">
+        <textarea class="form-control" placeholder="Комментарий курьеру" name="comment"></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-dark">Подтвердить</button>
 </form>
 
+<script>
+    $(document).ready(function () {
+        $('#userOrderInfoForm').submit(function (e) {
+            e.preventDefault();
+            let userAddress = {
+                city: $('input[name="city"]').val(),
+                street: $('input[name="street"]').val(),
+                homeNo: $('input[name="homeNo"]').val(),
+                entrance: $('input[name="entrance"]').val(),
+                floorNo: $('input[name="floorNo"]').val(),
+                flatNo: $('input[name="flatNo"]').val()
+            };
+            let userDeliveryInfo = {
+                firstName: $('input[name="firstName"]').val(),
+                lastName: $('input[name="lastName"]').val(),
+                email: $('input[name="email"]').val(),
+                phone: $('input[name="phone"]').val(),
+                userAddress: userAddress,
+                comment: $('textarea[name="comment"]').val()
+            };
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("Buy", "Order")',
+                contentType: 'application/json',
+                data: JSON.stringify(userDeliveryInfo),
+                success: function (response) {
+                    // Отобразить сообщение об успехе
+                    alert('Ваш заказ успешно оформлен');
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                }
+            });
+        });
+    });
+</script> *@

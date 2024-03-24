@@ -21,7 +21,7 @@
                 @* Вход *@
                 <div class="tab-content" id="loginTabContent">
                     <div class="tab-pane fade show active" id="signIn" role="tabpanel" aria-labelledby="signInTab">
-                        <form id="signInForm">
+                        <form id="signInForm" method="post">
                             <div class="mb-3">
                                 <input type="email" class="form-control" name="login" placeholder="Логин" required>
                             </div>
@@ -43,16 +43,16 @@
                     <div class="tab-pane fade" id="register" role="tabpanel" aria-labelledby="registerTab">
                         <form id="registerForm" method="post">
                             <div class="mb-3">
-                                <input type="text" class="form-control" name="login" placeholder="Логин" required>
+                                <input type="text" class="form-control" name="newLogin" placeholder="Логин" required>
                             </div>
                             <div class="mb-3">
-                                <input type="password" class="form-control" id="password" placeholder="Пароль" required>
+                                <input type="password" class="form-control" name="newPassword" placeholder="Пароль" required>
                             </div>
                             <div class="mb-3">
-                                <input type="password" class="form-control" id="confirmPassword" name="password" placeholder="Повторите пароль" required>
+                                <input type="password" class="form-control" name="confirmPassword" placeholder="Повторите пароль" required>
                             </div>
                             <div class="modal-footer justify-content-center">
-                                <button type="button" class="btn btn-dark" id="enter">Зарегистрироваться</button>
+                                <button type="submit" class="btn btn-dark" id="enter">Зарегистрироваться</button>
                             </div>
                         </form>
                     </div>
@@ -66,7 +66,7 @@
     $(document).ready(function () {
         $('#signInForm').submit(function (e) {
             e.preventDefault();
-            var loginData = {
+            let loginCredential = {
                 login: $('input[name="login"]').val(),
                 password: $('input[name="password"]').val(),
                 rememberMe: $('input[name="rememberMe"]').is(":checked")
@@ -75,7 +75,7 @@
                 type: 'POST',
                 url: '@Url.Action("SignIn", "Account")',
                 contentType: 'application/json',
-                data: JSON.stringify(loginData),
+                data: JSON.stringify(loginCredential),
                 success: function (response) {
                     // Закрыть модальное окно
                     $('#loginModalWindow').modal('hide');
@@ -89,26 +89,26 @@
         });
         $('#registerForm').submit(function (e) {
             e.preventDefault();
-            var password1 = $('#password1').val();
-            var password2 = $('#password2').val();
-            if (password1 === password2) {
-                $.ajax({
-                    type: 'POST',
-                    url: '@Url.Action("Register", "User")',
-                    data: $('#registerForm').serialize(),
-                    success: function () {
-                        // Закрыть модальное окно
-                        $('#loginModalWindow').modal('hide');
-                        // Отобразить сообщение об успехе
-                        alert('Вы успешно зарегистрировались!');
-                    },
-                    error: function () {
-                        alert('Ошибка при отправке формы');
-                    }
-                });
-            } else {
-                alert('Пароли не совпадают');
-            }
+            let registerDetails = {
+                newLogin: $('input[name="newLogin"]').val(),
+                newPassword: $('input[name="newPassword"]').val(),
+                confirmPassword: $('input[name="confirmPassword"]').val()
+            };
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("Register", "Account")',
+                contentType: 'application/json',
+                data: JSON.stringify(registerDetails),
+                success: function (response) {
+                    // Закрыть модальное окно
+                    $('#loginModalWindow').modal('hide');
+                    // Отобразить сообщение об успехе
+                    alert('Вы успешно зарегистрировались!');
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                }
+            });
         });
     });
 </script>

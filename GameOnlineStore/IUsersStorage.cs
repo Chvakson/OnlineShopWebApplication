@@ -7,6 +7,6 @@ namespace GameOnlineStore
         public List<LoginCredential> GetAll();
         //public Login GetUserById(Guid id);
         public LoginCredential Login(LoginCredential loginInfo);
-        public void Register(RegisterDetails registerInfo);
+        public void RegisterNewUser(RegisterDetails registerInfo);
     }
 }

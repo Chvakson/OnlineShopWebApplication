@@ -2,8 +2,8 @@
 {
     public class RegisterDetails
     {
-        public string Login { get; set; }
-        public string Password { get; set; }
+        public string NewLogin { get; set; }
+        public string NewPassword { get; set; }
         public string ConfirmPassword { get; set; }
     }
 }

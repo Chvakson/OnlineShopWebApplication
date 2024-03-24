@@ -22,14 +22,17 @@ namespace OnlineShopWebApplication.Controllers
         }
 
         [HttpPost]
-        public IActionResult Register(RegisterDetails registerDetails)
+        public IActionResult Register([FromBody] RegisterDetails registerDetails)
         {
-            if (registerDetails.Password == registerDetails.ConfirmPassword)
-            {
-                usersStorage.Register(registerDetails);
-            }
-            return RedirectToAction("Index", "Home");
-            //return Ok();
+            if (registerDetails.NewLogin.Length < 5 || registerDetails.NewLogin.Length > 50)
+                return BadRequest("Логин должен содержать от 5 до 50 символов");
+
+            if (registerDetails.NewPassword != registerDetails.ConfirmPassword)
+                return BadRequest("Пароли не совпадают");
+
+            usersStorage.RegisterNewUser(registerDetails);
+
+            return Ok();
         }
     }
 }

@@ -21,12 +21,12 @@ namespace GameOnlineStore
             return UsersLogins.FirstOrDefault(existingUser => existingUser.Login == loginInfo.Login && existingUser.Password == loginInfo.Password);
         }
 
-        public void Register(RegisterDetails registerInfo)
+        public void RegisterNewUser(RegisterDetails registerInfo)
         {
             UsersLogins.Add(new LoginCredential
             {
-                Login = registerInfo.Login,
-                Password = registerInfo.Password
+                Login = registerInfo.NewLogin,
+                Password = registerInfo.NewPassword
             });
         }
     }

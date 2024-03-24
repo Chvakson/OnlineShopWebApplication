@@ -19,17 +19,20 @@ namespace GameOnlineStore.Controllers
         }
 
         [HttpPost]
-        public IActionResult Buy(UserAddress userAddress, UserDeliveryInfo userDeliveryInfo)
+        public IActionResult Buy(UserDeliveryInfo userDeliveryInfo)
         {
-            userDeliveryInfo.UserAddress = userAddress;
-            var existingCart = cartsStorage.TryGetByUserId(Constants.UserId);
-            var order = new Order
+            if(ModelState.IsValid)
             {
-                UserDeliveryInfo = userDeliveryInfo,
-                Items = existingCart.Items
-            };
-            ordersStorage.Add(order);
-            cartsStorage.Clear(Constants.UserId);
+                var existingCart = cartsStorage.TryGetByUserId(Constants.UserId);
+                var order = new Order
+                {
+                    UserDeliveryInfo = userDeliveryInfo,
+                    Items = existingCart.Items
+                };
+                ordersStorage.Add(order);
+                cartsStorage.Clear(Constants.UserId);
+                return View();
+            }
             return View();
         }
     }
