@@ -96,6 +96,7 @@
     <button type="submit" class="btn btn-dark" asp-controller="Order" asp-action="Buy">Подтвердить</button>
 </form>
 
+@* Маска для ввода номера телефона *@
 <script>
     $(document).ready(function () {
         $("#phone").mask("+7(999)999-99-99");
@@ -104,8 +105,9 @@
 
 
 
+@* // Вариант отправки формы через js
 
-@* <form id="userOrderInfoForm" method="post">
+    <form id="userOrderInfoForm" method="post">
     <div class="mb-3 col-4">
         <input type="text" class="form-control" placeholder="Город" name="city">
     </div>

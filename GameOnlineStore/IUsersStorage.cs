@@ -6,7 +6,7 @@ namespace GameOnlineStore
     {
         public List<LoginCredential> GetAll();
         //public Login GetUserById(Guid id);
-        public LoginCredential Login(LoginCredential loginInfo);
+        public bool IsUserCredentialsValid(LoginCredential loginInfo);
         public void RegisterNewUser(RegisterDetails registerInfo);
     }
 }

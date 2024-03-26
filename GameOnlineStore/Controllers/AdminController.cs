@@ -30,7 +30,7 @@ namespace GameOnlineStore.Controllers
                 editingProduct.Cost = product.Cost;
                 editingProduct.Description = product.Description;
             }
-            return View();
+            return RedirectToAction("Products");
         }
 
         public IActionResult Users()

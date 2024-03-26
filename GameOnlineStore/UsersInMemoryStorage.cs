@@ -16,9 +16,14 @@ namespace GameOnlineStore
         //    return UsersLogins.FirstOrDefault(user => user.Id == id);
         //}
 
-        public LoginCredential Login(LoginCredential loginInfo)
+        public bool IsUserCredentialsValid(LoginCredential loginInfo)
         {
-            return UsersLogins.FirstOrDefault(existingUser => existingUser.Login == loginInfo.Login && existingUser.Password == loginInfo.Password);
+            var existingUser = UsersLogins.FirstOrDefault(existingUser => existingUser.Login == loginInfo.Login && existingUser.Password == loginInfo.Password);
+            if (existingUser == null)
+            {
+                return false;
+            }
+            return true;
         }
 
         public void RegisterNewUser(RegisterDetails registerInfo)
