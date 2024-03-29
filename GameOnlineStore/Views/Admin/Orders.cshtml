@@ -8,11 +8,10 @@
                 <tr>
                     <th class="col-1" scope="col">№</th>
                     <th class="col-2" scope="col">Сумма</th>
-                    <th class="col-1" scope="col">Статус</th>
+                    <th class="col-2" scope="col">Статус</th>
                     <th class="col-4" scope="col">Пользователь (логин)</th>
                     <th class="col-2" scope="col">Дата</th>
-                    <th class="col-2" scope="col">Время</th>
-
+                    <th class="col-1" scope="col">Время</th>
                 </tr>
             </thead>
             <tbody>
@@ -21,11 +20,11 @@
                     var totalCost = Model[i].Items.Sum(q => q.Cost);
                     <tr>
                         <th scope="row">@(i + 1)</th>
-                        <td>totalCost ₽</td>
+                        <td>@totalCost ₽</td>
                         <td>Создан</td>
                         <td>user@mail.ru</td>
-                        <td>@Model[i].OrderTime.Date</td>
-                        <td>@Model[i].OrderTime.TimeOfDay.Hours : @Model[i].OrderTime.TimeOfDay.Minutes</td>
+                        <td>@Model[i].OrderTime.Date.Day.@Model[i].OrderTime.Date.Month.@Model[i].OrderTime.Date.Year</td>
+                        <td>@Model[i].OrderTime.TimeOfDay.Hours:@Model[i].OrderTime.TimeOfDay.Minutes</td>
                     </tr>
                 }
             </tbody>
