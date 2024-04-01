@@ -7,9 +7,9 @@ namespace GameOnlineStore
     {
         public List<Order> orders = new List<Order>();
 
-        public List<Order> TryGetById(Guid id)
+        public Order? TryGetById(Guid id)
         {
-            return orders.Where(order => order.Id == id).ToList();
+            return orders.FirstOrDefault(order => order.Id == id);
         }
 
         public List<Order> GetAll()

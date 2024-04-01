@@ -21,7 +21,7 @@ namespace GameOnlineStore.Controllers
         [HttpPost]
         public IActionResult Buy(UserDeliveryInfo userDeliveryInfo)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 var existingCart = cartsStorage.TryGetByUserId(Constants.UserId);
                 var order = new Order
@@ -34,6 +34,14 @@ namespace GameOnlineStore.Controllers
                 return View();
             }
             return View();
+        }
+
+        public IActionResult GetById(Guid id)
+        {
+            var existingOrder = ordersStorage.TryGetById(id);
+
+            return View("Order", existingOrder);
+
         }
     }
 }
