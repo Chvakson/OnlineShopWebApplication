@@ -23,9 +23,8 @@ namespace GameOnlineStore.Models
         }
 
 
-        public Product(string name, int cost, string description, string? imgPath)
+        public Product(string name, int cost, string description, string? imgPath) : this()
         {
-            Id = instanceCounter++;
             Name = name;
             Cost = cost;
             Description = description;
@@ -34,7 +33,7 @@ namespace GameOnlineStore.Models
 
         public Product()
         {
-
+            Id = instanceCounter++;
         }
     }
 }

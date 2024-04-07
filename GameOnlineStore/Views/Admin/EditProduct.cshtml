@@ -9,6 +9,8 @@
         <span asp-validation-for="Name"></span>
     </div>
 
+    <input type="hidden" name="Id" value="@Model.Id">
+
     <div class="col mb-3" style="display: flex; flex-direction: column;">
         <label>Цена</label>
         <input class="col-2" type="number" class="form-control" asp-for="Cost" value="@Model.Cost">
@@ -27,6 +29,7 @@
         <span asp-validation-for="ImgPath"></span>
     </div>
 
-    <button type="submit" class="btn btn-dark" asp-area="" asp-controller="Admin" asp-action="UpdateProduct" asp-route-productId="@Model.Id">Сохранить</button>
+    <button type="submit" class="btn btn-dark" asp-area="" asp-controller="Admin" asp-action="UpdateProduct">Сохранить</button>
 </form>
 
+@* asp-route-productId="@Model.Id" *@

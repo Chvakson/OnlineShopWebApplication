@@ -49,11 +49,11 @@ namespace GameOnlineStore.Controllers
         [HttpPost]
         public IActionResult AddNewProduct(Product product)
         {
-            if (product != null)
+            if (!ModelState.IsValid)
             {
-                var products = productsStorage.GetAll();
-                products.Add(product);
-            }
+                return RedirectToAction("CreateNewProduct", product);
+            };
+            productsStorage.Add(product);
             return RedirectToAction("Products");
         }
 
@@ -64,23 +64,19 @@ namespace GameOnlineStore.Controllers
         }
 
         [HttpPost]
-        public IActionResult UpdateProduct(int productId, Product product)
+        public IActionResult UpdateProduct(Product product)
         {
-            var editingProduct = productsStorage.TryGetById(productId);
-            if (editingProduct != null)
+            if (!ModelState.IsValid)
             {
-                editingProduct.Name = product.Name;
-                editingProduct.Cost = product.Cost;
-                editingProduct.Description = product.Description;
-            }
+                return RedirectToAction("EditProduct", product);
+            };
+            productsStorage.Update(product);
             return RedirectToAction("Products");
         }
 
         public IActionResult RemoveProduct(int productId)
         {
-            var product = productsStorage.TryGetById(productId);
-            var products = productsStorage.GetAll();
-            products.Remove(product);
+            productsStorage.Remove(productId);
             return RedirectToAction("Products");
         }
 
