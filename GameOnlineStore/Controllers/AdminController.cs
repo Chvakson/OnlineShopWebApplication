@@ -27,18 +27,6 @@ namespace GameOnlineStore.Controllers
             return View();
         }
 
-        public IActionResult Roles()
-        {
-            var roles = rolesStorage.GetAll();
-            return View(roles);
-        }
-
-        public IActionResult AddNewRole()
-        {
-            rolesStorage.Add();
-            return RedirectToAction("Roles");
-        }
-
         public IActionResult Orders()
         {
             var orders = ordersStorage.GetAll();
@@ -98,5 +86,19 @@ namespace GameOnlineStore.Controllers
 
         #endregion
 
+        #region Roles
+
+        public IActionResult Roles()
+        {
+            var roles = rolesStorage.GetAll();
+            return View(roles);
+        }
+
+        public IActionResult AddNewRole()
+        {
+            rolesStorage.Add();
+            return RedirectToAction("Roles");
+        }
+        #endregion
     }
 }
