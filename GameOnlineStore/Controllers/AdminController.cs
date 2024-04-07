@@ -8,29 +8,18 @@ namespace GameOnlineStore.Controllers
     {
         private readonly IProductsStorage productsStorage;
         private readonly IOrdersStorage ordersStorage;
+        private readonly IRolesStorage rolesStorage;
 
-        public AdminController(IProductsStorage productsStorage, IOrdersStorage ordersStorage)
+        public AdminController(IProductsStorage productsStorage, IOrdersStorage ordersStorage, IRolesStorage rolesStorage)
         {
             this.productsStorage = productsStorage;
             this.ordersStorage = ordersStorage;
+            this.rolesStorage = rolesStorage;
         }
 
         public IActionResult Index()
         {
             return View();
-        }
-
-        [HttpPost]
-        public IActionResult Index(int productId, Product product)
-        {
-            var editingProduct = productsStorage.TryGetById(productId);
-            if (editingProduct != null)
-            {
-                editingProduct.Name = product.Name;
-                editingProduct.Cost = product.Cost;
-                editingProduct.Description = product.Description;
-            }
-            return RedirectToAction("Products");
         }
 
         public IActionResult Users()
@@ -40,7 +29,14 @@ namespace GameOnlineStore.Controllers
 
         public IActionResult Roles()
         {
-            return View();
+            var roles = rolesStorage.GetAll();
+            return View(roles);
+        }
+
+        public IActionResult AddNewRole()
+        {
+            rolesStorage.Add();
+            return RedirectToAction("Roles");
         }
 
         public IActionResult Orders()
@@ -48,6 +44,8 @@ namespace GameOnlineStore.Controllers
             var orders = ordersStorage.GetAll();
             return View(orders);
         }
+
+        #region Products
 
         public IActionResult Products()
         {
@@ -77,6 +75,19 @@ namespace GameOnlineStore.Controllers
             return View(product);
         }
 
+        [HttpPost]
+        public IActionResult UpdateProduct(int productId, Product product)
+        {
+            var editingProduct = productsStorage.TryGetById(productId);
+            if (editingProduct != null)
+            {
+                editingProduct.Name = product.Name;
+                editingProduct.Cost = product.Cost;
+                editingProduct.Description = product.Description;
+            }
+            return RedirectToAction("Products");
+        }
+
         public IActionResult RemoveProduct(int productId)
         {
             var product = productsStorage.TryGetById(productId);
@@ -84,5 +95,8 @@ namespace GameOnlineStore.Controllers
             products.Remove(product);
             return RedirectToAction("Products");
         }
+
+        #endregion
+
     }
 }

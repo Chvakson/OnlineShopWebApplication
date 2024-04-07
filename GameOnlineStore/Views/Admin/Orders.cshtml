@@ -17,14 +17,19 @@
             <tbody>
                 @for (int i = 0; i < Model.Count; i++)
                 {
-                    var day = "";
-                    var month = "";
-                    var year = $"{Model[i].OrderTime.Date.Year}"; ;
-                    if (Model[i].OrderTime.Date.Day < 10)
-                        day = $"0{Model[i].OrderTime.Date.Day}";
+                    string GetValidDateTimeValue(int DateTimeValue)
+                    {
+                        if (DateTimeValue < 10)
+                            return $"0{DateTimeValue}";
+                        return $"{DateTimeValue}";
+                    }
 
-                    if (Model[i].OrderTime.Date.Month < 10)
-                        month = $"0{Model[i].OrderTime.Date.Month}";
+                    var day = GetValidDateTimeValue(Model[i].OrderTime.Date.Day);
+                    var month = GetValidDateTimeValue(Model[i].OrderTime.Date.Month);
+                    var year = $"{Model[i].OrderTime.Date.Year}";
+
+                    var hours = GetValidDateTimeValue(Model[i].OrderTime.TimeOfDay.Hours);
+                    var minutes = GetValidDateTimeValue(Model[i].OrderTime.TimeOfDay.Minutes);
 
                     var totalCost = Model[i].Items.Sum(q => q.Cost);
                     <tr onclick="redirectToController('@Model[i].Id')">
@@ -33,7 +38,7 @@
                         <td>Создан</td>
                         <td>user@mail.ru</td>
                         <td>@day.@month.@year</td>
-                        <td>@Model[i].OrderTime.TimeOfDay.Hours:@Model[i].OrderTime.TimeOfDay.Minutes</td>
+                        <td>@hours:@minutes</td>
                     </tr>
                 }
             </tbody>

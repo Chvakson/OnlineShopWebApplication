@@ -2,18 +2,20 @@
 <div class="row">
     @await Html.PartialAsync("AdminLeftPanel")
     @{
-        var day = $"{@Model.OrderTime.Date.Day}";
-        var month = $"{@Model.OrderTime.Date.Month}";
+        string GetValidDateTimeValue(int DateTimeValue)
+        {
+            if (DateTimeValue < 10)
+                return $"0{DateTimeValue}";
+            return $"{DateTimeValue}";
+        }
+
+        var day = GetValidDateTimeValue(@Model.OrderTime.Date.Day);
+        var month = GetValidDateTimeValue(@Model.OrderTime.Date.Month);
         var year = $"{@Model.OrderTime.Date.Year}";
 
-        var hours = $"{@Model.OrderTime.TimeOfDay.Hours}";
-        var minutes = $"{@Model.OrderTime.TimeOfDay.Minutes}";
+        var hours = GetValidDateTimeValue(@Model.OrderTime.TimeOfDay.Hours);
+        var minutes = GetValidDateTimeValue(@Model.OrderTime.TimeOfDay.Minutes);
 
-        if (@Model.OrderTime.Date.Day < 10)
-            day = $"0{@Model.OrderTime.Date.Day}";
-
-        if (@Model.OrderTime.Date.Month < 10)
-            month = $"0{@Model.OrderTime.Date.Month}";
 
         var dateTime = $"{day}.{month}.{year} в {hours}:{minutes}";
 
@@ -52,7 +54,7 @@
         </div>
         <div class="row">
             <p class="col">Статус заказа:</p>
-            <div class="col" class="btn-group">
+            <div class="col">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                     Создан
                 </button>

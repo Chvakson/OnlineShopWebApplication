@@ -1,12 +1,6 @@
 ﻿@model int
 
-@if(Model == 0)
-{
-    <img src="../img/icons/shopping_cart_black_24dp.svg" />
-}
-else
-{
-    <img src="../img/icons/shopping_cart_black_24dp.svg" />@Model
-}
+@if (Model != 0)
+    @Model
 
 

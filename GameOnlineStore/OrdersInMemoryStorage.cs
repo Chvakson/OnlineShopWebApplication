@@ -5,21 +5,21 @@ namespace GameOnlineStore
 {
     public class OrdersInMemoryStorage : IOrdersStorage
     {
-        public List<Order> orders = new List<Order>();
+        public List<Order> Orders = new List<Order>();
 
         public Order? TryGetById(Guid id)
         {
-            return orders.FirstOrDefault(order => order.Id == id);
+            return Orders.FirstOrDefault(order => order.Id == id);
         }
 
         public List<Order> GetAll()
         {
-            return orders;
+            return Orders;
         }
 
         public void Add(Order order)
         {
-            orders.Add(order);
+            Orders.Add(order);
         }
     }
 }

@@ -15,11 +15,11 @@
                     </li>
                     <li class="nav-item">
                         <a id="singin" data-bs-toggle="modal" asp-area="" data-bs-target="#loginModalWindow" class="nav-link text-dark">
-                            <img src="~/img/icons/account_circle_black_24dp.svg"/> 
+                            <img src="~/img/icons/account_circle_black_24dp.svg" />
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Cart" asp-action="Index">@await Component.InvokeAsync("Cart")</a>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Cart" asp-action="Index"><img src="~/img/icons/shopping_cart_black_24dp.svg"/>@await Component.InvokeAsync("Cart")</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-controller="FavoriteProducts" asp-action="Index"><img src="~/img/icons/favorite_border_black_24dp.svg" /></a>

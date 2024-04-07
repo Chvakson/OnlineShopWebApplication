@@ -17,7 +17,6 @@ namespace GameOnlineStore.Views.Shared.Components.CartViewComponent
             var cart = cartsStorage.TryGetByUserId(Constants.UserId);
             var productCounts = cart?.Amount ?? 0;
             return View("Cart", productCounts);
-
         }
     }
 }
