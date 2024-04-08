@@ -21,5 +21,14 @@ namespace GameOnlineStore
         {
             Orders.Add(order);
         }
+
+        public void UpdateStatus(Guid id, OrderStatus newStatus)
+        {
+            var existingOrder = TryGetById(id);
+            if (existingOrder != null)
+            {
+                existingOrder.Status = newStatus;
+            }
+        }
     }
 }

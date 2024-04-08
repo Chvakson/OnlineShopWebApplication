@@ -5,14 +5,24 @@ namespace GameOnlineStore.Models
     public class Order
     {
         public Guid Id { get; set; }
-        public DateTime OrderTime;
+        public DateTime OrderDateTime;
         public List<CartItem> Items { get; set; }
         public UserDeliveryInfo UserDeliveryInfo { get; set; }
+        public OrderStatus Status { get; set; }
 
         public Order()
         {
             Id = Guid.NewGuid();
-            OrderTime = DateTime.Now;
+            Status = OrderStatus.Created;
+            OrderDateTime = DateTime.Now;
+        }
+
+        public decimal Cost
+        {
+            get
+            {
+                return Items?.Sum(item => item.Cost) ?? 0;
+            }
         }
     }
 }

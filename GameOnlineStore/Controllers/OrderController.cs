@@ -35,13 +35,5 @@ namespace GameOnlineStore.Controllers
             }
             return View();
         }
-
-        public IActionResult GetById(Guid id)
-        {
-            var existingOrder = ordersStorage.TryGetById(id);
-
-            return View("Order", existingOrder);
-
-        }
     }
 }

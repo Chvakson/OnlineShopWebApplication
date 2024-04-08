@@ -3,6 +3,9 @@
 <h4>Создание нового продукта</h4>
 
 <form method="post">
+
+    <div class="text-danger font-weight-bold" asp-validation-summary="All"></div>
+
     <div class="col mb-3" style="display: flex; flex-direction: column;">
         <label>Название продукта</label>
         <input class="col-4" asp-for="Name">

@@ -1,0 +1,46 @@
+﻿@model Order
+<div class="row">
+    @await Html.PartialAsync("AdminLeftPanel")
+
+    <div class="col-9">
+        <form method="post">
+            <h3>Заказ №</h3>
+            <br />
+            <div class="row">
+                <p class="col-4">Дата и время оформления:</p>
+                <p class="col-5">@Model.OrderDateTime.ToString("d") в @Model.OrderDateTime.ToString("t")</p>
+            </div>
+            <div class="row">
+                <p class="col-4">Адрес доставки:</p>
+                <p class="col-5">@Model.UserDeliveryInfo.UserAddress.City, @Model.UserDeliveryInfo.UserAddress.Street, @Model.UserDeliveryInfo.UserAddress.HomeNo</p>
+            </div>
+            <div class="row">
+                <p class="col-4">Получатель:</p>
+                <p class="col-5">user@mail.ru</p>
+            </div>
+            <div class="row">
+                <p class="col-4">Телефон:</p>
+                <p class="col-5">@Model.UserDeliveryInfo.Phone</p>
+            </div>
+            <div class="row">
+                <p class="col-4">Email:</p>
+                <p class="col-5">@Model.UserDeliveryInfo.Email</p>
+            </div>
+            <div class="row">
+                <p class="col-4">Комментарий:</p>
+                <p class="col-5">@Model.UserDeliveryInfo.Comment</p>
+            </div>
+            <div class="row">
+                <p class="col-4">Сумма заказа:</p>
+                <p class="col-5">@Model.Cost ₽</p>
+            </div>
+            <div class="row">
+                <p class="col-4">Статус заказа:</p>
+                <div class="col-5">
+                    <select asp-for="@Model.Status" asp-items="@Html.GetEnumSelectList<OrderStatus>()" class="form-control"></select>
+                </div>
+            </div>
+            <button class="btn btn-dark" type="submit" asp-controller="Admin" asp-action="UpdateOrderStatus" asp-route-id="@Model.Id">Сохранить</button>
+        </form>
+    </div>
+</div>

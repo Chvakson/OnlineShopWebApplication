@@ -6,6 +6,8 @@
         <table class="table">
             <thead>
                 <tr>
+                    <th>№</th>
+                    <th>Название</th>
                     <th></th>
                 </tr>
             </thead>
@@ -13,12 +15,13 @@
                 @for (int i = 0; i < Model.Count; i++)
                 {
                     <tr>
+                        <td>@(i+1)</td>
                         <td>@Model[i].Name</td>
-@*                         <a class="btn btn-dark" onclick="window.location.href='@Url.Action("RemoveRole", "Admin")'">Удалить</a>
- *@                    </tr>
+                        <td><a class="btn btn-dark" onclick="window.location.href='@Url.Action("RemoveRole", "Admin", new { name = Model[i].Name })'">Удалить</a></td>
+                    </tr>
                 }
             </tbody>
         </table>
-        <a class="btn btn-dark" onclick="window.location.href='@Url.Action("AddNewRole", "Admin")'">Добавить роль</a>
+        <a class="btn btn-dark" onclick="window.location.href='@Url.Action("CreateNewRole", "Admin")'">Создать</a>
     </div>
 </div>

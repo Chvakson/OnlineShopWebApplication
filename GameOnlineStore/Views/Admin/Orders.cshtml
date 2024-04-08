@@ -17,28 +17,13 @@
             <tbody>
                 @for (int i = 0; i < Model.Count; i++)
                 {
-                    string GetValidDateTimeValue(int DateTimeValue)
-                    {
-                        if (DateTimeValue < 10)
-                            return $"0{DateTimeValue}";
-                        return $"{DateTimeValue}";
-                    }
-
-                    var day = GetValidDateTimeValue(Model[i].OrderTime.Date.Day);
-                    var month = GetValidDateTimeValue(Model[i].OrderTime.Date.Month);
-                    var year = $"{Model[i].OrderTime.Date.Year}";
-
-                    var hours = GetValidDateTimeValue(Model[i].OrderTime.TimeOfDay.Hours);
-                    var minutes = GetValidDateTimeValue(Model[i].OrderTime.TimeOfDay.Minutes);
-
-                    var totalCost = Model[i].Items.Sum(q => q.Cost);
                     <tr onclick="redirectToController('@Model[i].Id')">
                         <th scope="row">@(i + 1)</th>
-                        <td>@totalCost ₽</td>
-                        <td>Создан</td>
+                        <td>@Model[i].Cost ₽</td>
+                        <td>@EnumHelper.GetDisplayName(Model[i].Status)</td>
                         <td>user@mail.ru</td>
-                        <td>@day.@month.@year</td>
-                        <td>@hours:@minutes</td>
+                        <td>@Model[i].OrderDateTime.ToString("d")</td>
+                        <td>@Model[i].OrderDateTime.ToString("t")</td>
                     </tr>
                 }
             </tbody>
@@ -48,7 +33,7 @@
 
 <script>
     function redirectToController(id) {
-        window.location.href = '/Order/GetById/' + id;
+        window.location.href = '/admin/OrderDetails/' + id;
     }
 </script>
 

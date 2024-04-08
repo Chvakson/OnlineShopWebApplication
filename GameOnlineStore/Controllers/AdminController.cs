@@ -27,11 +27,27 @@ namespace GameOnlineStore.Controllers
             return View();
         }
 
+        #region Orders
         public IActionResult Orders()
         {
             var orders = ordersStorage.GetAll();
             return View(orders);
         }
+
+        public IActionResult OrderDetails(Guid id)
+        {
+            var existingOrder = ordersStorage.TryGetById(id);
+
+            return View("OrderDetails", existingOrder);
+        }
+
+        public IActionResult UpdateOrderStatus(Guid id, OrderStatus status)
+        {
+            ordersStorage.UpdateStatus(id, status);
+
+            return RedirectToAction("Orders");
+        }
+        #endregion
 
         #region Products
 
@@ -90,9 +106,30 @@ namespace GameOnlineStore.Controllers
             return View(roles);
         }
 
-        public IActionResult AddNewRole()
+        public IActionResult CreateNewRole()
         {
-            rolesStorage.Add();
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddNewRole(Role role)
+        {
+            if (rolesStorage.TryGetByName(role.Name) != null)
+            {
+                ModelState.AddModelError("", "Такая роль уже существует");
+            }
+            if (ModelState.IsValid)
+            {
+                rolesStorage.Add(role);
+                return RedirectToAction("Roles");
+            }
+
+            return View("CreateNewRole", role);
+        }
+
+        public IActionResult RemoveRole(string name)
+        {
+            rolesStorage.Remove(name);
             return RedirectToAction("Roles");
         }
         #endregion
