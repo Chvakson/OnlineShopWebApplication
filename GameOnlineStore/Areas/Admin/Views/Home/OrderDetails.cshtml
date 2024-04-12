@@ -40,7 +40,7 @@
                     <select asp-for="@Model.Status" asp-items="@Html.GetEnumSelectList<OrderStatus>()" class="form-control"></select>
                 </div>
             </div>
-            <button class="btn btn-dark" type="submit" asp-controller="Admin" asp-action="UpdateOrderStatus" asp-route-id="@Model.Id">Сохранить</button>
+            <button class="btn btn-dark" type="submit" asp-area="Admin" asp-controller="Home" asp-action="UpdateOrderStatus" asp-route-id="@Model.Id">Сохранить</button>
         </form>
     </div>
 </div>

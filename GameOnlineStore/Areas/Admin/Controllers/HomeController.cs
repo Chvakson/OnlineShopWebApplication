@@ -1,16 +1,17 @@
 ﻿using GameOnlineStore.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace GameOnlineStore.Controllers
+namespace GameOnlineStore.Areas.Admin.Controllers
 {
-    public class AdminController : Controller
+    [Area("Admin")]
+    public class HomeController : Controller
 
     {
         private readonly IProductsStorage productsStorage;
         private readonly IOrdersStorage ordersStorage;
         private readonly IRolesStorage rolesStorage;
 
-        public AdminController(IProductsStorage productsStorage, IOrdersStorage ordersStorage, IRolesStorage rolesStorage)
+        public HomeController(IProductsStorage productsStorage, IOrdersStorage ordersStorage, IRolesStorage rolesStorage)
         {
             this.productsStorage = productsStorage;
             this.ordersStorage = ordersStorage;

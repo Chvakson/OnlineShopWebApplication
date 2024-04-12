@@ -17,11 +17,11 @@
                     <tr>
                         <td>@(i+1)</td>
                         <td>@Model[i].Name</td>
-                        <td><a class="btn btn-dark" onclick="window.location.href='@Url.Action("RemoveRole", "Admin", new { name = Model[i].Name })'">Удалить</a></td>
+                        <td><a class="btn btn-dark" onclick="window.location.href='@Url.Action("RemoveRole", "Home", new { area = "Admin", name = Model[i].Name })'">Удалить</a></td>
                     </tr>
                 }
             </tbody>
         </table>
-        <a class="btn btn-dark" onclick="window.location.href='@Url.Action("CreateNewRole", "Admin")'">Создать</a>
+        <a class="btn btn-dark" onclick="window.location.href='@Url.Action("CreateNewRole", "Home", new { area = "Admin" })'">Создать</a>
     </div>
 </div>

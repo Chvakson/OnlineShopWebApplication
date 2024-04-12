@@ -1,35 +1,33 @@
-﻿@model Product 
+﻿@model Product
 
-<h4>Редактирование продукта</h4>
-
+<h4>Создание нового продукта</h4>
 <form method="post">
+
+    <div class="text-danger font-weight-bold" asp-validation-summary="All"></div>
+
     <div class="col mb-3" style="display: flex; flex-direction: column;">
         <label>Название продукта</label>
-        <input class="col-4" type="text" class="form-control" asp-for="Name" value="@Model.Name">
+        <input class="col-4" asp-for="Name">
         <span asp-validation-for="Name"></span>
     </div>
 
-    <input type="hidden" name="Id" value="@Model.Id">
-
     <div class="col mb-3" style="display: flex; flex-direction: column;">
         <label>Цена</label>
-        <input class="col-2" type="number" class="form-control" asp-for="Cost" value="@Model.Cost">
+        <input class="col-2" asp-for="Cost">
         <span asp-validation-for="Cost"></span>
     </div>
 
     <div class="col mb-3" style="display: flex; flex-direction: column;">
         <label>Описание</label>
-        <textarea style="height:200px" class="col-7 form-control" asp-for="Description">@Model.Description</textarea>
+        <textarea class="col-7" style="height:200px" asp-for="Description"></textarea>
         <span asp-validation-for="Description"></span>
     </div>
 
     <div class="col mb-3" style="display: flex; flex-direction: column;">
         <label>Ссылка на изображение</label>
-        <input class="col-4" class=" form-control" asp-for="ImgPath">
+        <input class="col-4" asp-for="ImgPath">
         <span asp-validation-for="ImgPath"></span>
     </div>
 
-    <button type="submit" class="btn btn-dark" asp-area="" asp-controller="Admin" asp-action="UpdateProduct">Сохранить</button>
+    <button type="submit" class="btn btn-dark" asp-area="Admin" asp-controller="Home" asp-action="AddNewProduct">Сохранить</button>
 </form>
-
-@* asp-route-productId="@Model.Id" *@
