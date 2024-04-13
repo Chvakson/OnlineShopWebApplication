@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace GameOnlineStore.Controllers
+namespace GameOnlineStore.Areas.Admin.Controllers
 {
-    public class Compare : Controller
+    [Area("Admin")]
+    public class UserController : Controller
     {
         public IActionResult Index()
         {

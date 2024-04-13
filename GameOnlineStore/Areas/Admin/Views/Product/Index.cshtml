@@ -4,7 +4,7 @@
     @await Html.PartialAsync("AdminLeftPanel")
     <div class="col-9">
         <h2>Список продуктов</h2>
-        <a class="btn btn-dark" asp-area="Admin" asp-controller="Home" asp-action="CreateNewProduct">Добавить новый продукт</a>
+        <a class="btn btn-dark" asp-area="Admin" asp-controller="Product" asp-action="CreateNewProduct">Добавить новый продукт</a>
         <table class="table">
             <thead>
                 <tr>
@@ -23,10 +23,10 @@
                         <td>@Model[i].Name</td>
                         <td>@Model[i].Cost ₽</td>
                         <td>
-                            <a class="btn btn-dark" onclick="window.location.href='@Url.Action("EditProduct", "Home", new { area = "Admin" , productId = Model[i].Id })'">Редактировать</a>
+                            <a class="btn btn-dark" onclick="window.location.href='@Url.Action("EditProduct", "Product", new { area = "Admin" , productId = Model[i].Id })'">Редактировать</a>
                         </td>
                         <td>
-                            <a class="btn btn-dark" onclick="window.location.href='@Url.Action("RemoveProduct", "Home", new { area = "Admin" , productId = Model[i].Id})'">Удалить</a>
+                            <a class="btn btn-dark" onclick="window.location.href='@Url.Action("RemoveProduct", "Product", new { area = "Admin" , productId = Model[i].Id})'">Удалить</a>
                         </td>
                     </tr>
                 }
