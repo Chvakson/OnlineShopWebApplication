@@ -19,11 +19,11 @@ namespace GameOnlineStore.Areas.Admin.Controllers
             return View(orders);
         }
 
-        public IActionResult OrderDetails(Guid id)
+        public IActionResult Details(Guid id)
         {
             var existingOrder = ordersStorage.TryGetById(id);
 
-            return View("OrderDetails", existingOrder);
+            return View(existingOrder);
         }
 
         public IActionResult UpdateOrderStatus(Guid id, OrderStatus status)

@@ -19,13 +19,13 @@ namespace GameOnlineStore.Areas.Admin.Controllers
             return View(roles);
         }
 
-        public IActionResult CreateNewRole()
+        public IActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult AddNewRole(Role role)
+        public IActionResult Add(Role role)
         {
             if (rolesStorage.TryGetByName(role.Name) != null)
             {
@@ -37,10 +37,10 @@ namespace GameOnlineStore.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
 
-            return View("CreateNewRole", role);
+            return View("Create", role);
         }
 
-        public IActionResult RemoveRole(string name)
+        public IActionResult Remove(string name)
         {
             rolesStorage.Remove(name);
             return RedirectToAction("Index");

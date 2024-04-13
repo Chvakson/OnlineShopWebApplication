@@ -6,7 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Host.UseSerilog((context, configuration) => configuration
 .ReadFrom.Configuration(context.Configuration)
-.Enrich.WithProperty("ApplicationName", "Online Shop"));
+.Enrich.WithProperty("ApplicationName", "Online Store"));
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddSingleton<IProductsStorage, ProductsInMemoryStorage>();

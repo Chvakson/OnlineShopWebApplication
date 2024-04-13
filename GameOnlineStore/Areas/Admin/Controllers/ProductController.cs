@@ -19,40 +19,40 @@ namespace GameOnlineStore.Areas.Admin.Controllers
             return View(products);
         }
 
-        public IActionResult CreateNewProduct()
+        public IActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult AddNewProduct(Product product)
+        public IActionResult Add(Product product)
         {
             if (!ModelState.IsValid)
             {
-                return RedirectToAction("CreateNewProduct", product);
+                return RedirectToAction("Create", product);
             };
             productsStorage.Add(product);
             return RedirectToAction("Index");
         }
 
-        public IActionResult EditProduct(int productId)
+        public IActionResult Edit(int productId)
         {
             var product = productsStorage.TryGetById(productId);
             return View(product);
         }
 
         [HttpPost]
-        public IActionResult UpdateProduct(Product product)
+        public IActionResult Update(Product product)
         {
             if (!ModelState.IsValid)
             {
-                return RedirectToAction("EditProduct", product);
+                return RedirectToAction("Edit", product);
             };
             productsStorage.Update(product);
             return RedirectToAction("Index");
         }
 
-        public IActionResult RemoveProduct(int productId)
+        public IActionResult Remove(int productId)
         {
             productsStorage.Remove(productId);
             return RedirectToAction("Index");
