@@ -31,10 +31,10 @@ namespace OnlineShopWebApplication.Controllers
         [HttpPost]
         public IActionResult Register([FromBody] RegisterDetails registerDetails)
         {
-            if (registerDetails.NewLogin.Length < 7 || registerDetails.NewLogin.Length > 75)
+            if (registerDetails.Login.Length < 7 || registerDetails.Login.Length > 75)
                 return BadRequest("Логин должен содержать от 7 до 75 символов");
 
-            if (registerDetails.NewPassword != registerDetails.ConfirmPassword)
+            if (registerDetails.Password != registerDetails.ConfirmPassword)
                 return BadRequest("Пароли не совпадают");
 
             usersStorage.RegisterNewUser(registerDetails);

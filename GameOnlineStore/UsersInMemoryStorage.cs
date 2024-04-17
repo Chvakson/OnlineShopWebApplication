@@ -30,8 +30,8 @@ namespace GameOnlineStore
         {
             UsersLogins.Add(new LoginCredential
             {
-                Login = registerInfo.NewLogin,
-                Password = registerInfo.NewPassword
+                Login = registerInfo.Login,
+                Password = registerInfo.Password
             });
         }
     }
