@@ -11,11 +11,10 @@ builder.Host.UseSerilog((context, configuration) => configuration
 builder.Services.AddControllersWithViews();
 builder.Services.AddSingleton<IProductsStorage, ProductsInMemoryStorage>();
 builder.Services.AddSingleton<ICartsStorage, CartsInMemoryStorage>();
-builder.Services.AddSingleton<IUsersStorage, UsersInMemoryStorage>();
+builder.Services.AddSingleton<IUsersManager, UsersManager>();
 builder.Services.AddSingleton<IOrdersStorage, OrdersInMemoryStorage>();
 builder.Services.AddSingleton<IFavoriteProducts, FavoriteProductsInMemoryStorage>();
 builder.Services.AddSingleton<ICompareProducts ,CompareProductsInMemoryStorage>();
-builder.Services.AddSingleton<IUsersStorage, UsersInMemoryStorage>();
 builder.Services.AddSingleton<IRolesStorage, RolesInMemoryStorage>();
 // Add services to the container.
 

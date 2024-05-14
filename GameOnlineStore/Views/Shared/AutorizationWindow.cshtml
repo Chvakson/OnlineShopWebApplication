@@ -90,8 +90,8 @@
         $('#registerForm').submit(function (e) {
             e.preventDefault();
             let registerDetails = {
-                newLogin: $('input[name="newLogin"]').val(),
-                newPassword: $('input[name="newPassword"]').val(),
+                login: $('input[name="newLogin"]').val(),
+                password: $('input[name="newPassword"]').val(),
                 confirmPassword: $('input[name="confirmPassword"]').val()
             };
             $.ajax({

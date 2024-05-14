@@ -7,11 +7,11 @@ namespace GameOnlineStore.Models.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly IUsersStorage usersStorage;
+        private readonly IUsersManager usersManager;
 
-        public AccountController(IUsersStorage usersStorage)
+        public AccountController(IUsersManager usersManager)
         {
-            this.usersStorage = usersStorage;
+            this.usersManager = usersManager;
         }
 
         [HttpPost]
@@ -22,9 +22,17 @@ namespace GameOnlineStore.Models.Controllers
             else if (loginCredential.Login.Length < 7 || loginCredential.Login.Length > 75)
                 return BadRequest("Логин должен содержать от 7 до 75 символов");
             else
-                if (!usersStorage.IsUserCredentialsValid(loginCredential))
-                return BadRequest("Указан неверный логин или пароль");
+            {
+                var userAccount = usersManager.TryGetByName(loginCredential.Login);
+                if (userAccount == null)
+                    return BadRequest("Такого пользователя не существует");
+                else
+                {
+                    if(userAccount.Password != loginCredential.Password)
+                        return BadRequest("Неверный пароль");
 
+                }
+            }
             return Ok();
         }
 
@@ -37,7 +45,11 @@ namespace GameOnlineStore.Models.Controllers
             if (registerDetails.Password != registerDetails.ConfirmPassword)
                 return BadRequest("Пароли не совпадают");
 
-            usersStorage.RegisterNewUser(registerDetails);
+            usersManager.Add(new UserAccount
+            {
+                Login = registerDetails.Login,
+                Password = registerDetails.Password
+            });
 
             return Ok();
         }
