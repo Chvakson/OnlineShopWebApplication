@@ -1,6 +1,30 @@
-﻿<div class="row">
+﻿@model List<UserAccount>
+<div class="row">
     @await Html.PartialAsync("AdminLeftPanel")
     <div class="col-9">
         <h2>Список пользователей</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="col-1" scope="col">№</th>
+                    <th class="col-5" scope="col">Логин</th>
+                    <th class="col-5" scope="col">Телефон</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.Count; i++)
+                {
+                    <tr>
+                        <th scope="row">@(i + 1)</th>
+                        <td>@Model[i].Login</td>
+                        <td>@Model[i].Phone</td>
+                        <td>
+                            <a class="btn btn-dark" asp-area="Admin" asp-controller="User" asp-action="Details" asp-route-login="@Model[i].Login">Подробнее</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
 </div>
+

@@ -48,6 +48,7 @@ namespace GameOnlineStore.Models.Controllers
             usersManager.Add(new UserAccount
             {
                 Login = registerDetails.Login,
+                Phone = registerDetails.Phone,
                 Password = registerDetails.Password
             });
 

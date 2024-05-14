@@ -1,0 +1,27 @@
+﻿@model UserAccount
+<div class="row">
+    @await Html.PartialAsync("AdminLeftPanel")
+
+    <div class="col-9">
+        <h3>Пользователь @Model.Login</h3>
+        <br />
+        <div class="row">
+            <p class="col-4">Логин:</p>
+            <p class="col-5">@Model.Login</p>
+        </div>
+        <div class="row">
+            <p class="col-4">Телефон:</p>
+            <p class="col-5">@Model.Phone</p>
+        </div>
+
+        <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Действия
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="ChangePassword" asp-route-id="@Model.Login">Смена пароля</a>
+            <a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="Edit" asp-route-id="@Model.Login">Редактирование данных</a>
+            <a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="EditRights" asp-route-id="@Model.Login">Права доступа</a>
+            <a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="Delete" asp-route-id="@Model.Login">Удалить пользователя</a>
+        </div>
+    </div>
+</div>

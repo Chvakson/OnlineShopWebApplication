@@ -6,6 +6,8 @@ namespace GameOnlineStore.Models
     {
         [Required(ErrorMessage = "Не указан Логин (Email)")]
         public string Login { get; set; }
+        [Required(ErrorMessage = "Номер телефона")]
+        public string Phone { get; set; }
         [Required(ErrorMessage = "Не указан пароль")]
         public string Password { get; set; }
         [Required(ErrorMessage = "Не указан повторный пароль")]

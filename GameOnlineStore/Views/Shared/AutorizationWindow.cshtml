@@ -46,6 +46,9 @@
                                 <input type="email" class="form-control" name="newLogin" placeholder="name@mail.ru" required>
                             </div>
                             <div class="mb-3">
+                                <input type="text" class="form-control" id="phone" name="phone" placeholder="Телефон" required>
+                            </div>
+                            <div class="mb-3">
                                 <input type="password" class="form-control" name="newPassword" placeholder="Пароль" required>
                             </div>
                             <div class="mb-3">
@@ -91,6 +94,7 @@
             e.preventDefault();
             let registerDetails = {
                 login: $('input[name="newLogin"]').val(),
+                phone: $('input[name="phone"]').val(),
                 password: $('input[name="newPassword"]').val(),
                 confirmPassword: $('input[name="confirmPassword"]').val()
             };
@@ -110,6 +114,13 @@
                 }
             });
         });
+    });
+</script>
+
+@* Маска для ввода номера телефона *@
+<script>
+    $(document).ready(function () {
+        $("#phone").mask("+7(999)999-99-99");
     });
 </script>
 
