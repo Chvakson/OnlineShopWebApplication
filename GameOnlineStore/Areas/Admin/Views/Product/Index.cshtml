@@ -23,10 +23,10 @@
                         <td>@Model[i].Name</td>
                         <td>@Model[i].Cost ₽</td>
                         <td>
-                            <a class="btn btn-dark" onclick="window.location.href='@Url.Action("Edit", "Product", new { area = "Admin" , productId = Model[i].Id })'">Редактировать</a>
+                            <a class="btn btn-dark" asp-area="Admin" asp-controller="Product" asp-action="Edit" asp-route-productId="@Model[i].Id">Редактировать</a>
                         </td>
                         <td>
-                            <a class="btn btn-dark" onclick="window.location.href='@Url.Action("Remove", "Product", new { area = "Admin" , productId = Model[i].Id})'">Удалить</a>
+                            <a class="btn btn-dark" asp-area="Admin" asp-controller="Product" asp-action="Remove" asp-route-productId="@Model[i].Id">Удалить</a>
                         </td>
                     </tr>
                 }

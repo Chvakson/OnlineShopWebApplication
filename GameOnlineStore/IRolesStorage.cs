@@ -1,4 +1,4 @@
-﻿using GameOnlineStore.Models;
+﻿using GameOnlineStore.Areas.Admin.Models;
 
 namespace GameOnlineStore
 {

@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApplication;
 using System.Diagnostics;
 
-namespace GameOnlineStore.Controllers
+namespace GameOnlineStore.Models.Controllers
 {
     public class HomeController : Controller
     {
@@ -37,12 +37,6 @@ namespace GameOnlineStore.Controllers
         public IActionResult Privacy()
         {
             return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }

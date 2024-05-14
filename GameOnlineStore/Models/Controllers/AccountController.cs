@@ -3,7 +3,7 @@ using GameOnlineStore.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.RegularExpressions;
 
-namespace OnlineShopWebApplication.Controllers
+namespace GameOnlineStore.Models.Controllers
 {
     public class AccountController : Controller
     {

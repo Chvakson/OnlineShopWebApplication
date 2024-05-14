@@ -1,4 +1,4 @@
-﻿using GameOnlineStore.Models;
+﻿using GameOnlineStore.Areas.Admin.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GameOnlineStore.Areas.Admin.Controllers

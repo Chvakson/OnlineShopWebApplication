@@ -27,9 +27,13 @@
                         <td>@Model.Items[i].Product.Name</td>
                         <td>@Model.Items[i].Product.Cost ₽</td>
                         <td>
-                            <img src="../img/icons/remove_circle_outline_black_24dp.svg" style="cursor:pointer" onclick="window.location.href='/cart/remove?productId=@Model.Items[i].Product.Id'" alt="Alternate Text" />
+                            <a style="cursor:pointer" asp-area="" asp-controller="Cart" asp-action="Remove" asp-route-productId="@Model.Items[i].Product.Id">
+                                <img src="../img/icons/remove_circle_outline_black_24dp.svg" />
+                            </a>
                             @Model.Items[i].Amount
-                            <img src="../img/icons/add_circle_outline_black_24dp.svg" style="cursor:pointer" onclick="window.location.href='/cart/add?productId=@Model.Items[i].Product.Id'" alt="Alternate Text" />
+                            <a style="cursor:pointer" asp-area="" asp-controller="Cart" asp-action="Add" asp-route-productId="@Model.Items[i].Product.Id">
+                                <img src="../img/icons/add_circle_outline_black_24dp.svg" />
+                            </a>
                         </td>
                         <td>@Model.Items[i].Cost ₽</td>
                     </tr>
@@ -40,9 +44,9 @@
             <h4> Итоговая сумма: @Model.Cost ₽</h4>
         </div>
         <div class="row justify-content-md-center">
-            <button class="col-2 btn btn-dark" style="margin-right: 5px" onclick="window.location.href='@Url.Action("Index", "Order")'">Оформить заказ</button>
-            <button class="col-2 btn btn-dark" style="margin-right: 5px"  onclick="window.location.href='@Url.Action("Index", "Home")'">Продолжить покупки</button>
-            <button class="col-2 btn btn-dark" onclick="window.location.href='@Url.Action("Clear", "Cart")'">Очистить корзину</button>
+            <a class="col-2 btn btn-dark" style="margin-right: 5px" asp-area="" asp-controller="Order" asp-action="Index">Оформить заказ</a>
+            <a class="col-2 btn btn-dark" style="margin-right: 5px" asp-area="" asp-controller="Home" asp-action="Index">Продолжить покупки</a>
+            <a class="col-2 btn btn-dark" style="margin-right: 5px" asp-area="" asp-controller="Cart" asp-action="Clear">Очистить корзину</a>
         </div>
     }
 }

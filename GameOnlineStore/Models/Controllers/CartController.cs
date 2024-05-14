@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApplication;
 
 
-namespace GameOnlineStore.Controllers
+namespace GameOnlineStore.Models.Controllers
 {
 
     public class CartController : Controller

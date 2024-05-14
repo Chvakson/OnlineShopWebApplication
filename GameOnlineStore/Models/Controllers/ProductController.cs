@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace GameOnlineStore.Controllers
+namespace GameOnlineStore.Models.Controllers
 {
     public class ProductController : Controller
     {
@@ -14,7 +14,7 @@ namespace GameOnlineStore.Controllers
         public IActionResult Index(int? productId)
         {
 
-            var product = productsStorage.TryGetById(productId); 
+            var product = productsStorage.TryGetById(productId);
             return View(product);
         }
     }
