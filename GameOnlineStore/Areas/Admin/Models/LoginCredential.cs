@@ -1,4 +1,4 @@
-﻿namespace GameOnlineStore.Models
+﻿namespace GameOnlineStore.Areas.Admin.Models
 {
     public class LoginCredential
     {

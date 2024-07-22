@@ -20,5 +20,11 @@ namespace GameOnlineStore
         {
             return users.FirstOrDefault(user => user.Login == login);
         }
+
+        public void ChangePassword(string login, string newPassword)
+        {
+            var account = TryGetByName(login);
+            account.Password = newPassword;
+        }
     }
 }

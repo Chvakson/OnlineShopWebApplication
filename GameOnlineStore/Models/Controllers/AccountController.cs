@@ -1,5 +1,5 @@
 ﻿using GameOnlineStore;
-using GameOnlineStore.Models;
+using GameOnlineStore.Areas.Admin.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.RegularExpressions;
 

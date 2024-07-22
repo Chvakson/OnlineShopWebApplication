@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace GameOnlineStore.Models
+namespace GameOnlineStore.Areas.Admin.Models
 {
     public class RegisterDetails
     {

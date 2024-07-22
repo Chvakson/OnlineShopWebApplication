@@ -34,6 +34,10 @@ body {
   margin-bottom: 60px;
 }
 
+.clicked-tr{
+    cursor: pointer;
+}
+
 #scrollable-content {
     max-width: 100%;
     overflow-x: auto;
