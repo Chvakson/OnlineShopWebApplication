@@ -4,7 +4,7 @@ namespace GameOnlineStore
 {
     public class UsersManager : IUsersManager
     {
-        private List<UserAccount> users = new List<UserAccount>();
+        private List<UserAccount> users = new();
 
         public List<UserAccount> GetAll()
         {
