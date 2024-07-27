@@ -26,5 +26,18 @@ namespace GameOnlineStore
             var account = TryGetByName(login);
             account.Password = newPassword;
         }
+        
+        public void Edit(string prevLogin, string newLogin, string phone)
+        {
+            var account = TryGetByName(prevLogin);
+            account.Login = newLogin;
+            account.Phone = phone;
+        }
+        
+        public void Remove(string login)
+        {
+            var account = TryGetByName(login);
+            users.Remove(account);
+        }
     }
 }

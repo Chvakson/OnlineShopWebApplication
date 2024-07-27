@@ -1,0 +1,25 @@
+﻿@model EditUser
+
+<h4>Релактирование данных пользователя</h4>
+
+<form method="post">
+    
+    <div class="text-danger font-weight-bold" asp-validation-summary="All"></div>
+
+    <input type="hidden" name="prevLogin" value="@Model.PrevLogin">
+
+    <div class="col mb-3" style="display: flex; flex-direction: column;">
+        <label asp-for="NewLogin">Введите новый логин</label><br/>
+        <input type="email" class="form-control" asp-for="NewLogin"/>
+        <span asp-validation-for="NewLogin"></span>
+    </div>
+
+    <div class="col mb-3" style="display: flex; flex-direction: column;">
+        <label asp-for="Phone">Введите новый номер телефона</label><br/>
+        <input type="tel" class="form-control" asp-for="Phone"/>
+        <span asp-validation-for="Phone"></span>
+    </div>
+
+    <button type="submit" class="btn btn-dark" asp-area="Admin" asp-controller="User" asp-action="Edit">Редактировать</button>
+</form>
+

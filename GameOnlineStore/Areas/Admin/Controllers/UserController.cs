@@ -45,5 +45,29 @@ namespace GameOnlineStore.Areas.Admin.Controllers
             }
             return RedirectToAction(nameof(ChangePassword));
         }
+        
+        public IActionResult Edit(string login) 
+        {
+            EditUser editUser = new() { PrevLogin = login };
+            return View(editUser);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(EditUser editUser)
+        {
+            if(ModelState.IsValid)
+            {
+                usersManager.Edit(editUser.PrevLogin, editUser.NewLogin, editUser.Phone);
+                return RedirectToAction(nameof(Index));
+            }
+            return RedirectToAction(nameof(Edit));
+        }
+        
+        public IActionResult Remove(string login) 
+        {
+            usersManager.Remove(login);
+            return RedirectToAction("Index");
+        }
     }
 }
+
