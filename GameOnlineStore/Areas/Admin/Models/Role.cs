@@ -12,5 +12,11 @@ namespace GameOnlineStore.Areas.Admin.Models
         {
             Name = name;
         }
+
+        public override string ToString()
+        {
+            return Name;
+        }
+
     }
 }

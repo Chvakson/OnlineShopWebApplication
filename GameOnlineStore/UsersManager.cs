@@ -1,4 +1,4 @@
-﻿using GameOnlineStore.Models;
+﻿using GameOnlineStore.Models.User;
 
 namespace GameOnlineStore
 {

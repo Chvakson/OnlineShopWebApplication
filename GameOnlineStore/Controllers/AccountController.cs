@@ -1,5 +1,6 @@
 ﻿using GameOnlineStore;
 using GameOnlineStore.Areas.Admin.Models;
+using GameOnlineStore.Models.User;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.RegularExpressions;
 
@@ -49,7 +50,8 @@ namespace GameOnlineStore.Models.Controllers
             {
                 Login = registerDetails.Login,
                 Phone = registerDetails.Phone,
-                Password = registerDetails.Password
+                Password = registerDetails.Password,
+                Role = new Role("User")
             });
 
             return Ok();
