@@ -15,7 +15,7 @@
         </div>
         <div class="row">
             <p class="col-4">Роль:</p>
-            <p class="col-5">@Model.Role</p>
+            <p class="col-5">@Model.Roles</p>
         </div>
 
 
@@ -26,7 +26,7 @@
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                 <li><a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="ChangePassword" asp-route-login="@Model.Login">Смена пароля</a></li>
                 <li><a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="Edit" asp-route-login="@Model.Login">Редактирование данных</a></li>
-                <li><a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="EditRights" asp-route-id="@Model.Login">Права доступа</a></li>
+                <li><a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="Permissions" asp-route-login="@Model.Login">Права доступа</a></li>
                 <li><a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="Remove" asp-route-login="@Model.Login">Удалить пользователя</a></li>
             </ul>
         </div>

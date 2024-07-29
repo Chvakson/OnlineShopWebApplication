@@ -7,7 +7,8 @@ namespace GameOnlineStore
     {
         private readonly List<Role> roles = new()
         {
-            new Role("Admin")
+            new Role("Администратор"),
+            new Role("Пользователь")
         };
 
         public List<Role> GetAll()

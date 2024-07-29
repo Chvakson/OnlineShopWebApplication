@@ -1,6 +1,8 @@
 ﻿using GameOnlineStore.Areas.Admin.Models;
 using GameOnlineStore.Models.User;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
+using System.Data;
 
 namespace GameOnlineStore.Areas.Admin.Controllers
 {
@@ -8,10 +10,12 @@ namespace GameOnlineStore.Areas.Admin.Controllers
     public class UserController : Controller
     {
         private readonly IUsersManager usersManager;
+        private readonly IRolesStorage rolesStorage;
 
-        public UserController(IUsersManager usersManager)
+        public UserController(IUsersManager usersManager, IRolesStorage rolesStorage)
         {
             this.usersManager = usersManager;
+            this.rolesStorage = rolesStorage;
         }
 
         public IActionResult Index()
@@ -67,6 +71,28 @@ namespace GameOnlineStore.Areas.Admin.Controllers
         {
             usersManager.Remove(login);
             return RedirectToAction("Index");
+        }
+
+        public IActionResult Permissions(string login)
+        {
+            var roles = rolesStorage.GetAll();
+            Permissions permissions = new()
+            {
+                Login = login,
+                Roles = roles
+            };
+            return View(permissions);
+        }
+
+        [HttpPost]
+        public IActionResult Permissions(Permissions permissions)
+        {
+            if (ModelState.IsValid)
+            {
+                usersManager.GetPermissions(permissions.Login, permissions.Roles);
+                return RedirectToAction(nameof(Index));
+            }
+            return RedirectToAction(nameof(Permissions));
         }
     }
 }

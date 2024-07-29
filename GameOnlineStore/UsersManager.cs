@@ -1,4 +1,6 @@
-﻿using GameOnlineStore.Models.User;
+﻿using GameOnlineStore.Areas.Admin.Models;
+using GameOnlineStore.Models.User;
+using System.Numerics;
 
 namespace GameOnlineStore
 {
@@ -38,6 +40,12 @@ namespace GameOnlineStore
         {
             var account = TryGetByName(login);
             users.Remove(account);
+        }
+
+        public void GetPermissions(string login, List<Role> roles)
+        {
+            var account = TryGetByName(login);
+            account.Roles = roles;
         }
     }
 }
