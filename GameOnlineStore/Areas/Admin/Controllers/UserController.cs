@@ -1,5 +1,6 @@
 ﻿using GameOnlineStore.Areas.Admin.Models;
 using GameOnlineStore.Models.User;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using System.Data;
@@ -76,11 +77,13 @@ namespace GameOnlineStore.Areas.Admin.Controllers
         public IActionResult Permissions(string login)
         {
             var roles = rolesStorage.GetAll();
+            var availableUserRole = usersManager.TryGetByName(login).Roles;
             Permissions permissions = new()
             {
                 Login = login,
-                Roles = roles
+                Roles = availableUserRole,
             };
+            ViewBag.Roles = roles;
             return View(permissions);
         }
 

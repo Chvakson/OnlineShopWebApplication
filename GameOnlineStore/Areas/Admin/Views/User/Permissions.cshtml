@@ -1,1 +1,44 @@
-﻿
+﻿@model Permissions
+
+<h4>Права доступа</h4>
+
+<form method="post">
+
+    <input type="hidden" name="prevLogin" value="@Model.Login">
+
+    <div class="col-9">
+        <h5>Выберите роли для пользователя @Model.Login</h5>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                    </th>
+                    <th>Название роли</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < @ViewBag.Roles.Count; i++)
+                {
+                    <tr>
+                        @foreach (var role in Model.Roles)
+                        {
+                            if (@ViewBag.Roles[i].Name == role.Name)
+                            {
+                                <td><input class="bg-black" type="checkbox" checked /></td>
+                                <td>@ViewBag.Roles[i].Name</td>
+                            }
+                            else
+                            {
+                                <td><input class="bg-black" type="checkbox" /></td>
+                                <td>@ViewBag.Roles[i].Name</td>
+                            }
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <a class="btn btn-dark" asp-area="Admin" asp-controller="User" asp-action="Permissions">Предоставить права</a>
+    </div>
+</form>
+
