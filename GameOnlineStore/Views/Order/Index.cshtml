@@ -58,7 +58,7 @@
     <div class="col mb-3" style="display: flex; flex-direction: column;">
         <label>Телефон</label>
         <div class="col-4">
-            <input type="tel" id="phone" asp-for="Phone">
+            <input id="order-phone" asp-for="Phone">
         </div>
         <span asp-validation-for="Phone"></span>
     </div>
@@ -98,8 +98,8 @@
 
 @* Маска для ввода номера телефона *@
 <script>
-    $(function () {
-        $("#phone").mask("+7(999)999-99-99");
+    $(document).ready(function () {
+        $("#order-phone").mask("+7(999)999-99-99");
     });
 </script>
 

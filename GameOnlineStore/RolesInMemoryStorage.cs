@@ -5,7 +5,11 @@ namespace GameOnlineStore
 {
     public class RolesInMemoryStorage : IRolesStorage
     {
-        private readonly List<Role> roles = new();
+        private readonly List<Role> roles = new()
+        {
+            new Role("Администратор"),
+            new Role("Пользователь")
+        };
 
         public List<Role> GetAll()
         {

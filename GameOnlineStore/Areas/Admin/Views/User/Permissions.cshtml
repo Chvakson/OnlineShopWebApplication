@@ -1,0 +1,69 @@
+﻿@model Permissions
+
+<h4>Права доступа</h4>
+
+<input type="hidden" name="prevLogin" value="@Model.Login">
+
+<div class="col-9">
+    <h5>Выберите роли для пользователя @Model.Login</h5>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                </th>
+                <th>Название роли</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var role in ViewBag.Roles)
+            {
+                <tr>
+                    <td><input class="bg-black permisson-checkbox" type="checkbox" @(Model.RoleNames.Any(r => r == role.Name) ? "checked" : "") /></td>
+                    <td class="role-name">@role.Name</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <a class="btn btn-dark" onclick="getPermissions();">Предоставить права</a>
+</div>
+
+<script>
+    function getPermissions() {
+
+        let checkboxes = document.querySelectorAll(".permisson-checkbox");
+        let roleNames = [];
+        checkboxes.forEach(checkbox => {
+            let roleName = checkbox.closest("tr").querySelector(".role-name").textContent;
+            if (checkbox.checked) {
+                roleNames.push(roleName);
+            }
+        });
+
+        let data = {
+            Login: "@Model.Login",
+            RoleNames: roleNames
+        };
+        fetch("/Admin/User/Permissions", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        })
+            .then(response => {
+                // Обработка ответа от контроллера
+                if (response.ok) {
+                    // Успех
+                    console.log("Права успешно предоставлены");
+                } else {
+                    // Ошибка
+                    console.error("Не удалось предоставить права");
+                }
+            })
+            .catch(error => {
+                console.error("Произошла ошибка при предоставлении прав:", error);
+            });
+    }
+</script>
+

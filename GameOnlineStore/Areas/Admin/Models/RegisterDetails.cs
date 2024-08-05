@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace GameOnlineStore.Models
+namespace GameOnlineStore.Areas.Admin.Models
 {
     public class RegisterDetails
     {
@@ -16,7 +16,5 @@ namespace GameOnlineStore.Models
         //public string FirstName { get; set; }
         //[Required(ErrorMessage = "Не указана фамилия пользователя")]
         //public string LastName { get; set; }
-        //[Required(ErrorMessage = "Не указан телефон пользователя")]
-        //public string Phone { get; set; }
     }
 }
