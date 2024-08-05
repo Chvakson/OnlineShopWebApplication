@@ -14,8 +14,8 @@ namespace GameOnlineStore.Models
         [StringLength(75)]
         [RegularExpression(@"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$", ErrorMessage = "Указан неверный адрес электронной почты.")]
         public string Email { get; set; }
-        [Required(ErrorMessage = "Не указан номер телефона")]
-        [RegularExpression(@"^\+7\(\d{3}\)\d{3}-\d{2}-\d{2}$", ErrorMessage = "Указан неверный номер телефона.")] 
+        //[Required(ErrorMessage = "Не указан номер телефона")]
+        //[RegularExpression(@"^\+7\(\d{3}\)\d{3}-\d{2}-\d{2}$", ErrorMessage = "Указан неверный номер телефона.")] 
         public string Phone { get; set; }
         public UserAddress UserAddress { get; set; }
         [StringLength(250)]
