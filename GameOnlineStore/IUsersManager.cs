@@ -10,7 +10,8 @@ namespace GameOnlineStore
         UserAccount TryGetByName(string login);
         void ChangePassword(string login, string newPassword);
         void Edit(string prevLogin, string newLogin, string phone);
-        void GetPermissions(string login, List<Role> roles);
+        public Permissions GetPermissions(string login);
+        public void GivePermissions(string login, List<string> roleNames);
         void Remove(string login);
     }
 }

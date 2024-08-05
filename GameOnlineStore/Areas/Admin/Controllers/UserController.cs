@@ -77,22 +77,18 @@ namespace GameOnlineStore.Areas.Admin.Controllers
         public IActionResult Permissions(string login)
         {
             var roles = rolesStorage.GetAll();
+            var existingPermissions = usersManager.GetPermissions(login);
             var availableUserRole = usersManager.TryGetByName(login).Roles;
-            Permissions permissions = new()
-            {
-                Login = login,
-                Roles = availableUserRole,
-            };
             ViewBag.Roles = roles;
-            return View(permissions);
+            return View(existingPermissions);
         }
 
         [HttpPost]
-        public IActionResult Permissions(Permissions permissions)
+        public IActionResult Permissions([FromBody] Permissions permissions)
         {
             if (ModelState.IsValid)
             {
-                usersManager.GetPermissions(permissions.Login, permissions.Roles);
+                usersManager.GivePermissions(permissions.Login, permissions.RoleNames);
                 return RedirectToAction(nameof(Index));
             }
             return RedirectToAction(nameof(Permissions));

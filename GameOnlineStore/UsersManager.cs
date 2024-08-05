@@ -42,9 +42,28 @@ namespace GameOnlineStore
             users.Remove(account);
         }
 
-        public void GetPermissions(string login, List<Role> roles)
+        public Permissions GetPermissions(string login)
         {
             var account = TryGetByName(login);
+
+            var permissions = new Permissions()
+            {
+                Login = account.Login,
+                RoleNames = account.Roles.Select(role => role.Name).ToList()
+            };
+
+            return permissions;
+        }
+
+        public void GivePermissions(string login, List<string> roleNames)
+        {
+            var account = TryGetByName(login);
+            var roles = new List<Role>();
+            foreach (var roleName in roleNames)
+            {
+                var role = new Role(roleName);
+                roles.Add(role);
+            }
             account.Roles = roles;
         }
     }

@@ -7,6 +7,6 @@ namespace GameOnlineStore.Areas.Admin.Models
         [Required]
         [StringLength(100, MinimumLength = 4)]
         public string Login { get; set; }
-        public List<Role> Roles { get; set; }
+        public List<string> RoleNames { get; set; }
     }
 }
