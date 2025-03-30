@@ -2,99 +2,109 @@
 
 <form id="userOrderInfoForm" method="post">
 
-    <h4>Адрес доставки</h4>
+    <div style="display: flex;">
+        <div class="delivery-address-container">
+            <h4>Адрес доставки</h4>
+            <div class="col mb-3 delivery-address-col">
+                <label>Город</label>
+                <div class="col-4">
+                    <input asp-for="UserAddress.City">
+                </div>
+                <span asp-validation-for="UserAddress.City"></span>
+            </div>
 
-    <div class="col mb-3" style="display: flex; flex-direction: column;">
-        <label>Город</label>
-        <div class="col-4">
-            <input asp-for="UserAddress.City">
+
+            <div class="col mb-3 delivery-address-col">
+                <label>Улица</label>
+                <div class="col-4">
+                    <input asp-for="UserAddress.Street">
+                </div>
+                <span asp-validation-for="UserAddress.Street"></span>
+            </div>
+
+            <div class="col mb-3 delivery-address-col">
+                <label>Номер дома</label>
+                <div class="col-4">
+                    <input asp-for="UserAddress.HomeNo">
+                </div>
+                <span asp-validation-for="UserAddress.HomeNo"></span>
+            </div>
+
+            <div class="col mb-3 delivery-address-col">
+                <label>Подъезд</label>
+                <div class="col-1">
+                    <input asp-for="UserAddress.Entrance">
+                </div>
+                <span asp-validation-for="UserAddress.Entrance"></span>
+            </div>
+
+            <div class="col mb-3 delivery-address-col">
+                <label>Этаж</label>
+                <div class="col-1">
+                    <input asp-for="UserAddress.FloorNo">
+                </div>
+                <span asp-validation-for="UserAddress.FloorNo"></span>
+            </div>
+
+            <div class="col mb-3 delivery-address-col">
+                <label>Квартира</label>
+                <div class="col-1">
+                    <input asp-for="UserAddress.FlatNo">
+                </div>
+                <span asp-validation-for="UserAddress.FlatNo"></span>
+            </div>
         </div>
-        <span asp-validation-for="UserAddress.City"></span>
-    </div>
 
+        <div class="recipient-container">
+            <h4>Покупатель</h4>
 
-    <div class="col mb-3" style="display: flex; flex-direction: column;">
-        <label>Улица</label>
-        <div class="col-4">
-            <input asp-for="UserAddress.Street">
+            <div class="col mb-3 recipient-col">
+                <label>Телефон</label>
+                <div class="col-4">
+                    <input id="order-phone" asp-for="Phone">
+                </div>
+                <span asp-validation-for="Phone"></span>
+            </div>
+
+            <div class="col mb-3 recipient-col">
+                <label>Фамилия</label>
+                <div class="col-4">
+                    <input asp-for="LastName">
+                </div>
+                <span asp-validation-for="LastName"></span>
+            </div>
+
+            <div class="col mb-3 recipient-col">
+                <label>Имя</label>
+                <div class="col-4">
+                    <input asp-for="FirstName">
+                </div>
+                <span asp-validation-for="FirstName"></span>
+            </div>
+
+            <div class="col mb-3 recipient-col">
+                <label>Email</label>
+                <div class="col-4">
+                    <input asp-for="Email">
+                </div>
+                <span asp-validation-for="Email"></span>
+            </div>
+
+            <div class="col mb-3 recipient-col">
+                <label>Комментарий к заказу</label>
+                <textarea asp-for="Comment"></textarea>
+                <span asp-validation-for="Comment"></span>
+            </div>
         </div>
-        <span asp-validation-for="UserAddress.Street"></span>
     </div>
-
-    <div class="col mb-3" style="display: flex; flex-direction: column;">
-        <label>Номер дома</label>
-        <div class="col-4">
-            <input asp-for="UserAddress.HomeNo">
-        </div>
-        <span asp-validation-for="UserAddress.HomeNo"></span>
-    </div>
-
-    <div class="col mb-3" style="display: flex; flex-direction: column;">
-        <label>Подъезд</label>
-        <div class="col-1">
-            <input asp-for="UserAddress.Entrance">
-        </div>
-        <span asp-validation-for="UserAddress.Entrance"></span>
-    </div>
-
-    <div class="col mb-3" style="display: flex; flex-direction: column;">
-        <label>Этаж</label>
-        <div class="col-1">
-            <input asp-for="UserAddress.FloorNo">
-        </div>
-        <span asp-validation-for="UserAddress.FloorNo"></span>
-    </div>
-
-    <div class="col mb-3" style="display: flex; flex-direction: column;">
-        <label>Квартира</label>
-        <div class="col-1">
-            <input asp-for="UserAddress.FlatNo">
-        </div>
-        <span asp-validation-for="UserAddress.FlatNo"></span>
-    </div>
-
-    <h4>Покупатель</h4>
-
-    <div class="col mb-3" style="display: flex; flex-direction: column;">
-        <label>Телефон</label>
-        <div class="col-4">
-            <input id="order-phone" asp-for="Phone">
-        </div>
-        <span asp-validation-for="Phone"></span>
-    </div>
-
-    <div class="col mb-3" style="display: flex; flex-direction: column;">
-        <label>Фамилия</label>
-        <div class="col-4">
-            <input asp-for="LastName">
-        </div>
-        <span asp-validation-for="LastName"></span>
-    </div>
-
-    <div class="col mb-3" style="display: flex; flex-direction: column;">
-        <label>Имя</label>
-        <div class="col-4">
-            <input asp-for="FirstName">
-        </div>
-        <span asp-validation-for="FirstName"></span>
-    </div>
-
-    <div class="col mb-3" style="display: flex; flex-direction: column;">
-        <label>Email</label>
-        <div class="col-4">
-            <input asp-for="Email">
-        </div>
-        <span asp-validation-for="Email"></span>
-    </div>
-
-    <div class="col mb-3" style="display: flex; flex-direction: column;">
-        <label>Комментарий к заказу</label>
-        <textarea class="col-5" asp-for="Comment"></textarea>
-        <span asp-validation-for="Comment"></span>
-    </div>
-
     <button type="submit" class="btn btn-dark" asp-controller="Order" asp-action="Buy">Подтвердить</button>
+
 </form>
+
+@section Styles
+{
+<link type="text/css" rel="stylesheet" href="~/css/order.css"/>
+}
 
 @* Маска для ввода номера телефона *@
 <script>
