@@ -1,5 +1,7 @@
 ﻿using GameOnlineStore.Areas.Admin.Models;
 using GameOnlineStore.Models.User;
+using GameOnlineStore.Repositories.Roles;
+using GameOnlineStore.Repositories.Users;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;

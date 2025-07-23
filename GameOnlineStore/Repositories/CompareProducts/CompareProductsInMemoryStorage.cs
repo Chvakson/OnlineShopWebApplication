@@ -1,7 +1,7 @@
 ﻿using GameOnlineStore.Models;
 using OnlineShopWebApplication;
 
-namespace GameOnlineStore
+namespace GameOnlineStore.Repositories.CompareProducts
 {
     public class CompareProductsInMemoryStorage : ICompareProducts
     {

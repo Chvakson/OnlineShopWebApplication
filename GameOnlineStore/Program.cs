@@ -1,4 +1,10 @@
-using GameOnlineStore;
+using GameOnlineStore.Repositories.Carts;
+using GameOnlineStore.Repositories.CompareProducts;
+using GameOnlineStore.Repositories.FavoriteProducts;
+using GameOnlineStore.Repositories.Orders;
+using GameOnlineStore.Repositories.Products;
+using GameOnlineStore.Repositories.Roles;
+using GameOnlineStore.Repositories.Users;
 using Serilog;
 
 

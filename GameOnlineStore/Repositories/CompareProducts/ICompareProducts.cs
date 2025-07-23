@@ -1,8 +1,8 @@
 ﻿using GameOnlineStore.Models;
 
-namespace GameOnlineStore
+namespace GameOnlineStore.Repositories.CompareProducts
 {
-    public interface IFavoriteProducts
+    public interface ICompareProducts
     {
         public ProductsCollection TryGetByUserId(string userId);
         public void Add(Product product);

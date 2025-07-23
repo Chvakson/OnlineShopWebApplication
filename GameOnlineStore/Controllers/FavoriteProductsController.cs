@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using GameOnlineStore.Repositories.FavoriteProducts;
+using GameOnlineStore.Repositories.Products;
+using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApplication;
 
 namespace GameOnlineStore.Models.Controllers

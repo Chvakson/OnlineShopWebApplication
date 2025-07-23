@@ -1,4 +1,6 @@
 ﻿using GameOnlineStore.Models;
+using GameOnlineStore.Repositories.Carts;
+using GameOnlineStore.Repositories.Orders;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApplication;
 

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using GameOnlineStore.Repositories.Carts;
+using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApplication;
 
 namespace GameOnlineStore.Views.Shared.Components.CartViewComponent

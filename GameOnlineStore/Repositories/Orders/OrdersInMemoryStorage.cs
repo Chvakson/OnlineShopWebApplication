@@ -1,7 +1,7 @@
 ﻿using GameOnlineStore.Models;
 using OnlineShopWebApplication;
 
-namespace GameOnlineStore
+namespace GameOnlineStore.Repositories.Orders
 {
     public class OrdersInMemoryStorage : IOrdersStorage
     {

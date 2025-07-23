@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using GameOnlineStore.Repositories.Products;
+using Microsoft.AspNetCore.Mvc;
 
 namespace GameOnlineStore.Models.Controllers
 {

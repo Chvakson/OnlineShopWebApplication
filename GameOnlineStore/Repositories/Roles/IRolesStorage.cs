@@ -1,6 +1,6 @@
 ﻿using GameOnlineStore.Areas.Admin.Models;
 
-namespace GameOnlineStore
+namespace GameOnlineStore.Repositories.Roles
 {
     public interface IRolesStorage
     {

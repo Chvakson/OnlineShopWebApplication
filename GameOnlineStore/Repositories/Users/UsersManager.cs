@@ -2,7 +2,7 @@
 using GameOnlineStore.Models.User;
 using System.Numerics;
 
-namespace GameOnlineStore
+namespace GameOnlineStore.Repositories.Users
 {
     public class UsersManager : IUsersManager
     {

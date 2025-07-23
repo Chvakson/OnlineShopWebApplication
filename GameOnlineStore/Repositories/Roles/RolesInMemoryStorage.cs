@@ -1,7 +1,7 @@
 ﻿using GameOnlineStore.Areas.Admin.Models;
 using System.Linq;
 
-namespace GameOnlineStore
+namespace GameOnlineStore.Repositories.Roles
 {
     public class RolesInMemoryStorage : IRolesStorage
     {

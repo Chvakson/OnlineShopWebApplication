@@ -1,7 +1,7 @@
 ﻿using GameOnlineStore.Models;
 using System.Net.NetworkInformation;
 
-namespace GameOnlineStore
+namespace GameOnlineStore.Repositories.Orders
 {
     public interface IOrdersStorage
     {

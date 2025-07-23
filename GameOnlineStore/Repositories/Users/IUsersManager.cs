@@ -1,7 +1,7 @@
 ﻿using GameOnlineStore.Areas.Admin.Models;
 using GameOnlineStore.Models.User;
 
-namespace GameOnlineStore
+namespace GameOnlineStore.Repositories.Users
 {
     public interface IUsersManager
     {

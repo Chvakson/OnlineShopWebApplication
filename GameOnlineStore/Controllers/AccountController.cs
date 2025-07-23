@@ -1,6 +1,6 @@
-﻿using GameOnlineStore;
-using GameOnlineStore.Areas.Admin.Models;
+﻿using GameOnlineStore.Areas.Admin.Models;
 using GameOnlineStore.Models.User;
+using GameOnlineStore.Repositories.Users;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.RegularExpressions;
 
