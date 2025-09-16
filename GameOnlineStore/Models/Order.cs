@@ -1,4 +1,5 @@
-﻿using OnlineShopWebApplication;
+﻿using GameOnlineStore.Db.Models;
+using OnlineShopWebApplication;
 
 namespace GameOnlineStore.Models
 {

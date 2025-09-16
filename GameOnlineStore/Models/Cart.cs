@@ -1,4 +1,6 @@
-﻿namespace GameOnlineStore.Models
+﻿using GameOnlineStore.Db.Models;
+
+namespace GameOnlineStore.Models
 {
     public class Cart
     {

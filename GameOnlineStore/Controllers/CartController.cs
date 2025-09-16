@@ -1,5 +1,5 @@
 ﻿using GameOnlineStore.Repositories.Carts;
-using GameOnlineStore.Repositories.Products;
+using GameOnlineStore.Db.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApplication;
@@ -10,12 +10,12 @@ namespace GameOnlineStore.Models.Controllers
 
     public class CartController : Controller
     {
-        private readonly IProductsStorage productsStorage;
+        private readonly IProductsDbRepository productsDbRepositoty;
         private readonly ICartsStorage cartsStorage;
 
-        public CartController(IProductsStorage productsStorage, ICartsStorage cartsStorage)
+        public CartController(IProductsDbRepository productsDbRepositoty, ICartsStorage cartsStorage)
         {
-            this.productsStorage = productsStorage;
+            this.productsDbRepositoty = productsDbRepositoty;
             this.cartsStorage = cartsStorage;
         }
 
@@ -25,18 +25,18 @@ namespace GameOnlineStore.Models.Controllers
             return View(cart);
         }
 
-        public IActionResult Add(int productId)
+        public IActionResult Add(Guid productId)
         {
-            var product = productsStorage.TryGetById(productId);
-            cartsStorage.Add(product, Constants.UserId);
+            var product = productsDbRepositoty.TryGetById(productId);
+            //cartsStorage.Add(product, Constants.UserId);
 
             return RedirectToAction("Index");
         }
 
-        public IActionResult Remove(int productId)
+        public IActionResult Remove(Guid productId)
         {
-            var product = productsStorage.TryGetById(productId);
-            cartsStorage.Remove(product, Constants.UserId);
+            var product = productsDbRepositoty.TryGetById(productId);
+            //cartsStorage.Remove(product, Constants.UserId);
 
             return RedirectToAction("Index");
         }

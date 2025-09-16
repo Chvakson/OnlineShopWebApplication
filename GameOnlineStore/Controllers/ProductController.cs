@@ -1,22 +1,29 @@
-﻿using GameOnlineStore.Repositories.Products;
+﻿using GameOnlineStore.Db.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GameOnlineStore.Models.Controllers
 {
     public class ProductController : Controller
     {
-        private readonly IProductsStorage productsStorage;
+        private readonly IProductsDbRepository productsRepository;
 
-        public ProductController(IProductsStorage productsStorage)
+        public ProductController(IProductsDbRepository productsRepository)
         {
-            this.productsStorage = productsStorage;
+            this.productsRepository = productsRepository;
         }
 
-        public IActionResult Index(int? productId)
+        public IActionResult Index(Guid? productId)
         {
-
-            var product = productsStorage.TryGetById(productId);
-            return View(product);
+            var product = productsRepository.TryGetById(productId);
+            var productViewModel = new ProductViewModel()
+            {
+                Id = product.Id,
+                Name = product.Name,
+                Cost = product.Cost,
+                Description = product.Description,
+                ImgPath = product.ImgPath,
+            };
+            return View(productViewModel);
         }
     }
 }

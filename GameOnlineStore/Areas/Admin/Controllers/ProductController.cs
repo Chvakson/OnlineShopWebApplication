@@ -1,5 +1,6 @@
-﻿using GameOnlineStore.Models;
-using GameOnlineStore.Repositories.Products;
+﻿using GameOnlineStore.Db.Models;
+using GameOnlineStore.Db.Repositories;
+using GameOnlineStore.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GameOnlineStore.Areas.Admin.Controllers
@@ -7,17 +8,30 @@ namespace GameOnlineStore.Areas.Admin.Controllers
     [Area("Admin")]
     public class ProductController : Controller
     {
-        private readonly IProductsStorage productsStorage;
+        private readonly IProductsDbRepository productsDbRepository;
 
-        public ProductController(IProductsStorage productsStorage)
+        public ProductController(IProductsDbRepository productsStorage)
         {
-            this.productsStorage = productsStorage;
+            this.productsDbRepository = productsStorage;
         }
 
         public IActionResult Index()
         {
-            var products = productsStorage.GetAll();
-            return View(products);
+            var productsDb = productsDbRepository.GetAll();
+            var productViewModels = new List<ProductViewModel>();
+            foreach (var product in productsDb) 
+            { 
+                ProductViewModel productViewModel = new ProductViewModel()
+                {
+                    Id = product.Id,
+                    Name = product.Name,    
+                    Cost = product.Cost,
+                    Description = product.Description,
+                    ImgPath = product.ImgPath,
+                };
+                productViewModels.Add(productViewModel);
+            }
+            return View(productViewModels);
         }
 
         public IActionResult Create()
@@ -26,36 +40,54 @@ namespace GameOnlineStore.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(Product product)
+        public IActionResult Add(ProductViewModel product)
         {
             if (!ModelState.IsValid)
             {
                 return RedirectToAction("Create", product);
             };
-            productsStorage.Add(product);
+
+            var productDb = new Product
+            {
+                Name = product.Name,
+                Cost = product.Cost,
+                Description = product.Description,
+                ImgPath = product.ImgPath
+            };
+
+            productsDbRepository.Add(productDb);
             return RedirectToAction("Index");
         }
 
-        public IActionResult Edit(int productId)
+        public IActionResult Edit(Guid productId)
         {
-            var product = productsStorage.TryGetById(productId);
+            var product = productsDbRepository.TryGetById(productId);
             return View(product);
         }
 
         [HttpPost]
-        public IActionResult Update(Product product)
+        public IActionResult Update(ProductViewModel product)
         {
             if (!ModelState.IsValid)
             {
                 return RedirectToAction("Edit", product);
             };
-            productsStorage.Update(product);
+
+            var productDb = new Product
+            {
+                Name = product.Name,
+                Cost = product.Cost,
+                Description = product.Description,
+                ImgPath = product.ImgPath
+            };
+
+            productsDbRepository.Update(productDb);
             return RedirectToAction("Index");
         }
 
-        public IActionResult Remove(int productId)
+        public IActionResult Remove(Guid productId)
         {
-            productsStorage.Remove(productId);
+            productsDbRepository.Remove(productId);
             return RedirectToAction("Index");
         }
 

@@ -1,4 +1,4 @@
-﻿namespace GameOnlineStore.Models
+﻿namespace GameOnlineStore.Db.Models
 {
     public class CartItem
     {

@@ -1,5 +1,5 @@
 using GameOnlineStore.Models;
-using GameOnlineStore.Repositories.Products;
+using GameOnlineStore.Db.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApplication;
 using System.Diagnostics;
@@ -8,31 +8,57 @@ namespace GameOnlineStore.Models.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IProductsStorage productsStorage;
+        private readonly IProductsDbRepository productsRepository;
 
-
-        public HomeController(IProductsStorage productsStorage)
+        public HomeController(IProductsDbRepository productsRepository)
         {
-            this.productsStorage = productsStorage;
+            this.productsRepository = productsRepository;
         }
+
         public IActionResult Index()
         {
-            var products = productsStorage.GetAll();
-            return View(products);
+            var productsDb = productsRepository.GetAll();
+            var productViewModels = new List<ProductViewModel>();
+            foreach (var product in productsDb)
+            {
+                ProductViewModel productViewModel = new ProductViewModel()
+                {
+                    Id = product.Id,
+                    Name = product.Name,
+                    Cost = product.Cost,
+                    Description = product.Description,
+                    ImgPath = product.ImgPath,
+                };
+                productViewModels.Add(productViewModel);
+            }
+            return View(productViewModels);
         }
 
         [HttpPost]
         public IActionResult Index(string? query)
         {
-            var products = productsStorage.GetAll();
+            var productsDb = productsRepository.GetAll();
+            var productViewModels = new List<ProductViewModel>();
+            foreach (var product in productsDb)
+            {
+                ProductViewModel productViewModel = new ProductViewModel()
+                {
+                    Id = product.Id,
+                    Name = product.Name,
+                    Cost = product.Cost,
+                    Description = product.Description,
+                    ImgPath = product.ImgPath,
+                };
+                productViewModels.Add(productViewModel);
+            }
 
             if (!string.IsNullOrWhiteSpace(query))
             {
-                products = products.Where(p => p.Name != null && p.Name.ToLower().Contains(query.ToLower())).ToList();
+                productViewModels = productViewModels.Where(p => p.Name != null && p.Name.ToLower().Contains(query.ToLower())).ToList();
             }
 
 
-            return View(products);
+            return View(productViewModels);
         }
 
         public IActionResult Privacy()

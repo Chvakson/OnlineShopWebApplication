@@ -2,10 +2,12 @@ using GameOnlineStore.Repositories.Carts;
 using GameOnlineStore.Repositories.CompareProducts;
 using GameOnlineStore.Repositories.FavoriteProducts;
 using GameOnlineStore.Repositories.Orders;
-using GameOnlineStore.Repositories.Products;
+using GameOnlineStore.Db.Repositories;
 using GameOnlineStore.Repositories.Roles;
 using GameOnlineStore.Repositories.Users;
 using Serilog;
+using GameOnlineStore.Db;
+using Microsoft.EntityFrameworkCore;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,8 +16,11 @@ builder.Host.UseSerilog((context, configuration) => configuration
 .ReadFrom.Configuration(context.Configuration)
 .Enrich.WithProperty("ApplicationName", "Online Store"));
 
+builder.Services.AddDbContext<ApplicationContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 builder.Services.AddControllersWithViews();
-builder.Services.AddSingleton<IProductsStorage, ProductsInMemoryStorage>();
+builder.Services.AddTransient<IProductsDbRepository, ProductsDbRepository>();
 builder.Services.AddSingleton<ICartsStorage, CartsInMemoryStorage>();
 builder.Services.AddSingleton<IUsersManager, UsersManager>();
 builder.Services.AddSingleton<IOrdersStorage, OrdersInMemoryStorage>();

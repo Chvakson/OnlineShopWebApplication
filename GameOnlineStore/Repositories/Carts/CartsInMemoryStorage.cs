@@ -1,4 +1,5 @@
-﻿using GameOnlineStore.Models;
+﻿using GameOnlineStore.Db.Models;
+using GameOnlineStore.Models;
 
 namespace GameOnlineStore.Repositories.Carts
 {
@@ -11,9 +12,17 @@ namespace GameOnlineStore.Repositories.Carts
             return carts.FirstOrDefault(cart => cart.UserId == userId);
         }
 
-        public void Add(Product product, string userId)
+        public void Add(ProductViewModel product, string userId)
         {
             var existingCart = TryGetByUserId(userId);
+            var productDb = new Product()
+            {
+                Id = product.Id,
+                Name = product.Name,
+                Cost = product.Cost,
+                Description = product.Description,
+                ImgPath = product.ImgPath,
+            };
             if (existingCart == null)
             {
                 var cart = new Cart
@@ -25,7 +34,7 @@ namespace GameOnlineStore.Repositories.Carts
                         new CartItem
                         {
                             Id = Guid.NewGuid(),
-                            Product = product,
+                            Product = productDb,
                             Amount = 1
                         }
                     }
@@ -40,7 +49,7 @@ namespace GameOnlineStore.Repositories.Carts
                     existingCart.Items.Add(new CartItem
                     {
                         Id = Guid.NewGuid(),
-                        Product = product,
+                        Product = productDb,
                         Amount = 1
                     });
                 }
@@ -49,7 +58,7 @@ namespace GameOnlineStore.Repositories.Carts
             }
         }
 
-        public void Remove(Product product, string userId)
+        public void Remove(ProductViewModel product, string userId)
         {
             var existingCart = TryGetByUserId(userId);
             var existingCartItem = existingCart.Items.FirstOrDefault(cartItem => cartItem.Product.Id == product.Id);

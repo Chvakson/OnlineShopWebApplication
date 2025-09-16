@@ -1,4 +1,4 @@
-﻿using GameOnlineStore.Models;
+﻿using GameOnlineStore.Db.Models;
 
 namespace GameOnlineStore.Repositories.FavoriteProducts
 {
