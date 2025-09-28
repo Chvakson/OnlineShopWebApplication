@@ -12,6 +12,17 @@ namespace GameOnlineStore.Db.Models
 
         public string Description { get; set; }
 
-        public string? ImgPath { get; set; }
+        public string ImgFileName { get; set; }
+
+        public string ImgPath
+        {
+            get
+            {
+                const string root = "/img/games/";
+                return string.IsNullOrEmpty(ImgFileName)
+                    ? $"{root}default.jpg"
+                    : $"{root}{ImgFileName}";
+            }
+        }
     }
 }

@@ -21,7 +21,7 @@ namespace GameOnlineStore.Models.Controllers
                 Name = product.Name,
                 Cost = product.Cost,
                 Description = product.Description,
-                ImgPath = product.ImgPath,
+                ImgFileName = product.ImgFileName,
             };
             return View(productViewModel);
         }

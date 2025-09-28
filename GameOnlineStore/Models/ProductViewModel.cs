@@ -4,6 +4,8 @@ namespace GameOnlineStore.Models
 {
     public class ProductViewModel
     {
+        private const string imageRootPath = "/img/games/";
+
         public Guid Id { get; set; }
         [Required(ErrorMessage = "Не указано название продукта")]
         [StringLength(50)]
@@ -12,13 +14,16 @@ namespace GameOnlineStore.Models
         public int Cost { get; set; }
         [Required(ErrorMessage = "Не указано описание продукта")]
         public string Description { get; set; }
+        public string? ImgFileName { get; set; }
 
-        private string? _imgPath;
-
-        public string? ImgPath
+        public string ImgPath
         {
-            get { return _imgPath ?? "default.jpg"; }
-            set { _imgPath = value; }
+            get
+            {
+                return string.IsNullOrEmpty(ImgFileName)
+                    ? $"{imageRootPath}default.jpg"
+                    : $"{imageRootPath}{ImgFileName}";
+            }
         }
     }
 }

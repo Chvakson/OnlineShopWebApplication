@@ -27,7 +27,7 @@ namespace GameOnlineStore.Areas.Admin.Controllers
                     Name = product.Name,    
                     Cost = product.Cost,
                     Description = product.Description,
-                    ImgPath = product.ImgPath,
+                    ImgFileName = product.ImgFileName,
                 };
                 productViewModels.Add(productViewModel);
             }
@@ -52,7 +52,7 @@ namespace GameOnlineStore.Areas.Admin.Controllers
                 Name = product.Name,
                 Cost = product.Cost,
                 Description = product.Description,
-                ImgPath = product.ImgPath
+                ImgFileName = product.ImgFileName
             };
 
             productsDbRepository.Add(productDb);
@@ -62,7 +62,15 @@ namespace GameOnlineStore.Areas.Admin.Controllers
         public IActionResult Edit(Guid productId)
         {
             var product = productsDbRepository.TryGetById(productId);
-            return View(product);
+            ProductViewModel productViewModel = new ProductViewModel()
+            {
+                Id = product.Id,
+                Name = product.Name,
+                Cost = product.Cost,
+                Description = product.Description,
+                ImgFileName = product.ImgFileName,
+            };
+            return View(productViewModel);
         }
 
         [HttpPost]
@@ -75,10 +83,11 @@ namespace GameOnlineStore.Areas.Admin.Controllers
 
             var productDb = new Product
             {
+                Id = product.Id,
                 Name = product.Name,
                 Cost = product.Cost,
                 Description = product.Description,
-                ImgPath = product.ImgPath
+                ImgFileName = product.ImgFileName
             };
 
             productsDbRepository.Update(productDb);

@@ -21,7 +21,7 @@ namespace GameOnlineStore.Repositories.Carts
                 Name = product.Name,
                 Cost = product.Cost,
                 Description = product.Description,
-                ImgPath = product.ImgPath,
+                ImgFileName = product.ImgFileName,
             };
             if (existingCart == null)
             {

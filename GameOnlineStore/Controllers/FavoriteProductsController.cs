@@ -25,14 +25,14 @@ namespace GameOnlineStore.Models.Controllers
         public IActionResult Add(Guid productId)
         {
             var product = productsDbRepository.TryGetById(productId);
-            //favoriteProductsStorage.Add(product);
+            favoriteProductsStorage.Add(product);
             return RedirectToAction("Index");
         }
 
         public IActionResult Remove(Guid productId)
         {
             var product = productsDbRepository.TryGetById(productId);
-            //favoriteProductsStorage.Remove(product);
+            favoriteProductsStorage.Remove(product);
             return RedirectToAction("Index");
         }
     }

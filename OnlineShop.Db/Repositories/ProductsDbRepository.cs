@@ -68,7 +68,6 @@ namespace GameOnlineStore.Db.Repositories
 
         public void Add(Product product)
         {
-            product.ImgPath = "img/games/default.jpg";
             context.Products.Add(product);
             context.SaveChanges();
         }
@@ -93,6 +92,7 @@ namespace GameOnlineStore.Db.Repositories
             exisingProduct.Name = product.Name;
             exisingProduct.Cost = product.Cost;
             exisingProduct.Description = product.Description;
+            exisingProduct.ImgFileName = product.ImgFileName;
             context.SaveChanges();
         }
     }
