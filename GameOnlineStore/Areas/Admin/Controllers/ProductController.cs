@@ -1,5 +1,6 @@
 ﻿using GameOnlineStore.Db.Models;
-using GameOnlineStore.Db.Repositories;
+using GameOnlineStore.Db.Repositories.Products;
+using GameOnlineStore.Helpers;
 using GameOnlineStore.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,16 +21,8 @@ namespace GameOnlineStore.Areas.Admin.Controllers
             var productsDb = productsDbRepository.GetAll();
             var productViewModels = new List<ProductViewModel>();
             foreach (var product in productsDb) 
-            { 
-                ProductViewModel productViewModel = new ProductViewModel()
-                {
-                    Id = product.Id,
-                    Name = product.Name,    
-                    Cost = product.Cost,
-                    Description = product.Description,
-                    ImgFileName = product.ImgFileName,
-                };
-                productViewModels.Add(productViewModel);
+            {
+                productViewModels.Add(Mapping.ToProductViewModel(product));
             }
             return View(productViewModels);
         }
@@ -62,14 +55,11 @@ namespace GameOnlineStore.Areas.Admin.Controllers
         public IActionResult Edit(Guid productId)
         {
             var product = productsDbRepository.TryGetById(productId);
-            ProductViewModel productViewModel = new ProductViewModel()
-            {
-                Id = product.Id,
-                Name = product.Name,
-                Cost = product.Cost,
-                Description = product.Description,
-                ImgFileName = product.ImgFileName,
-            };
+
+            Mapping.ToProductViewModel(product);
+
+            ProductViewModel productViewModel = Mapping.ToProductViewModel(product);
+
             return View(productViewModel);
         }
 

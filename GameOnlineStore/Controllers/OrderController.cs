@@ -1,16 +1,17 @@
 ﻿using GameOnlineStore.Models;
-using GameOnlineStore.Repositories.Carts;
+using GameOnlineStore.Db.Repositories.Carts;
 using GameOnlineStore.Repositories.Orders;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApplication;
+using GameOnlineStore.Helpers;
 
 namespace GameOnlineStore.Models.Controllers
 {
     public class OrderController : Controller
     {
         private readonly IOrdersStorage ordersStorage;
-        private readonly ICartsStorage cartsStorage;
-        public OrderController(IOrdersStorage ordersStorage, ICartsStorage cartsStorage)
+        private readonly ICartsDbRepository cartsStorage;
+        public OrderController(IOrdersStorage ordersStorage, ICartsDbRepository cartsStorage)
         {
             this.ordersStorage = ordersStorage;
             this.cartsStorage = cartsStorage;
@@ -26,10 +27,12 @@ namespace GameOnlineStore.Models.Controllers
             if (ModelState.IsValid)
             {
                 var existingCart = cartsStorage.TryGetByUserId(Constants.UserId);
+                var existingCartViewModel = Mapping.ToCartViewModel(existingCart);
+
                 var order = new Order
                 {
                     UserDeliveryInfo = userDeliveryInfo,
-                    Items = existingCart.Items
+                    Items = existingCartViewModel.Items
                 };
                 ordersStorage.Add(order);
                 cartsStorage.Clear(Constants.UserId);

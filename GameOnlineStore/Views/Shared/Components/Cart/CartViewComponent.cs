@@ -1,22 +1,27 @@
-﻿using GameOnlineStore.Repositories.Carts;
+﻿using GameOnlineStore.Db.Models;
+using GameOnlineStore.Db.Repositories.Carts;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApplication;
+using GameOnlineStore.Helpers;
+
 
 namespace GameOnlineStore.Views.Shared.Components.CartViewComponent
 {
     public class CartViewComponent : ViewComponent
     {
-        private readonly ICartsStorage cartsStorage;
+        private readonly ICartsDbRepository cartsDbRepository;
 
-        public CartViewComponent(ICartsStorage cartsStorage)
+        public CartViewComponent(ICartsDbRepository cartsDbRepository)
         {
-            this.cartsStorage = cartsStorage;
+            this.cartsDbRepository = cartsDbRepository;
         }
 
         public IViewComponentResult Invoke()
         {
-            var cart = cartsStorage.TryGetByUserId(Constants.UserId);
-            var productCounts = cart?.Amount ?? 0;
+            var cart = cartsDbRepository.TryGetByUserId(Constants.UserId);
+
+            var cartViewModel = Mapping.ToCartViewModel(cart);
+            var productCounts = cartViewModel?.Amount ?? 0;
             return View("Cart", productCounts);
         }
     }

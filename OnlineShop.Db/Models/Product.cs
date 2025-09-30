@@ -12,6 +12,8 @@ namespace GameOnlineStore.Db.Models
 
         public string Description { get; set; }
 
+        public List<CartItem> CartItems { get; set; }  
+
         public string ImgFileName { get; set; }
 
         public string ImgPath

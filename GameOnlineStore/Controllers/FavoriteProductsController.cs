@@ -1,7 +1,7 @@
 ﻿using GameOnlineStore.Repositories.FavoriteProducts;
-using GameOnlineStore.Db.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApplication;
+using GameOnlineStore.Db.Repositories.Products;
 
 namespace GameOnlineStore.Models.Controllers
 {

@@ -7,7 +7,7 @@ namespace GameOnlineStore.Models
     {
         public Guid Id { get; set; }
         public DateTime OrderDateTime;
-        public List<CartItem> Items { get; set; }
+        public List<CartItemViewModel> Items { get; set; }
         public UserDeliveryInfo UserDeliveryInfo { get; set; }
         public OrderStatus Status { get; set; }
 

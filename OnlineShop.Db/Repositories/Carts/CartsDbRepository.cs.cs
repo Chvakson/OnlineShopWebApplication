@@ -1,18 +1,22 @@
 ﻿using GameOnlineStore.Db.Models;
-using GameOnlineStore.Models;
 
-namespace GameOnlineStore.Repositories.Carts
+namespace GameOnlineStore.Db.Repositories.Carts
 {
-    public class CartsInMemoryStorage : ICartsStorage
+    public class CartsDbRepository : ICartsDbRepository
     {
-        private List<Cart> carts = new List<Cart>();
+        private readonly ApplicationContext context;
+
+        public CartsDbRepository(ApplicationContext context)
+        {
+            this.context = context;
+        }
 
         public Cart TryGetByUserId(string userId)
         {
-            return carts.FirstOrDefault(cart => cart.UserId == userId);
+            return context.Carts.FirstOrDefault(cart => cart.UserId == userId);
         }
 
-        public void Add(ProductViewModel product, string userId)
+        public void Add(Product product, string userId)
         {
             var existingCart = TryGetByUserId(userId);
             var productDb = new Product()
@@ -27,19 +31,17 @@ namespace GameOnlineStore.Repositories.Carts
             {
                 var cart = new Cart
                 {
-                    Id = Guid.NewGuid(),
                     UserId = userId,
                     Items = new List<CartItem>
                     {
                         new CartItem
                         {
-                            Id = Guid.NewGuid(),
                             Product = productDb,
                             Amount = 1
                         }
                     }
                 };
-                carts.Add(cart);
+                context.Carts.Add(cart);
             }
             else
             {
@@ -48,7 +50,6 @@ namespace GameOnlineStore.Repositories.Carts
                 {
                     existingCart.Items.Add(new CartItem
                     {
-                        Id = Guid.NewGuid(),
                         Product = productDb,
                         Amount = 1
                     });
@@ -56,9 +57,10 @@ namespace GameOnlineStore.Repositories.Carts
                 else
                     existingCartItem.Amount++;
             }
+            context.SaveChanges();
         }
 
-        public void Remove(ProductViewModel product, string userId)
+        public void Remove(Product product, string userId)
         {
             var existingCart = TryGetByUserId(userId);
             var existingCartItem = existingCart.Items.FirstOrDefault(cartItem => cartItem.Product.Id == product.Id);
@@ -69,12 +71,15 @@ namespace GameOnlineStore.Repositories.Carts
 
             if (existingCartItem.Amount == 0)
                 existingCart.Items.Remove(existingCartItem);
+
+            context.SaveChanges();
         }
 
         public void Clear(string userId)
         {
             var existingCart = TryGetByUserId(userId);
-            carts.Remove(existingCart);
+            context.Carts.Remove(existingCart);
+            context.SaveChanges();
         }
     }
 }

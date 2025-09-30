@@ -1,8 +1,9 @@
-﻿using GameOnlineStore.Repositories.Carts;
-using GameOnlineStore.Db.Repositories;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApplication;
+using GameOnlineStore.Db.Repositories.Products;
+using GameOnlineStore.Db.Repositories.Carts;
+using GameOnlineStore.Helpers;
 
 
 namespace GameOnlineStore.Models.Controllers
@@ -11,39 +12,37 @@ namespace GameOnlineStore.Models.Controllers
     public class CartController : Controller
     {
         private readonly IProductsDbRepository productsDbRepositoty;
-        private readonly ICartsStorage cartsStorage;
+        private readonly ICartsDbRepository cartsDbRepository;
 
-        public CartController(IProductsDbRepository productsDbRepositoty, ICartsStorage cartsStorage)
+        public CartController(IProductsDbRepository productsDbRepositoty, ICartsDbRepository cartsDbRepository)
         {
             this.productsDbRepositoty = productsDbRepositoty;
-            this.cartsStorage = cartsStorage;
+            this.cartsDbRepository = cartsDbRepository;
         }
 
         public IActionResult Index()
         {
-            var cart = cartsStorage.TryGetByUserId(Constants.UserId);
-            return View(cart);
+            var cart = cartsDbRepository.TryGetByUserId(Constants.UserId);
+            return View(Mapping.ToCartViewModel(cart));
         }
 
         public IActionResult Add(Guid productId)
         {
             var product = productsDbRepositoty.TryGetById(productId);
-            //cartsStorage.Add(product, Constants.UserId);
-
+            cartsDbRepository.Add(product, Constants.UserId);
             return RedirectToAction("Index");
         }
 
         public IActionResult Remove(Guid productId)
         {
             var product = productsDbRepositoty.TryGetById(productId);
-            //cartsStorage.Remove(product, Constants.UserId);
-
+            cartsDbRepository.Remove(product, Constants.UserId);
             return RedirectToAction("Index");
         }
 
         public IActionResult Clear()
         {
-            cartsStorage.Clear(Constants.UserId);
+            cartsDbRepository.Clear(Constants.UserId);
 
             return RedirectToAction("Index");
         }

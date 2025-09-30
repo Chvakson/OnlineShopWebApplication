@@ -1,13 +1,14 @@
-using GameOnlineStore.Repositories.Carts;
 using GameOnlineStore.Repositories.CompareProducts;
 using GameOnlineStore.Repositories.FavoriteProducts;
 using GameOnlineStore.Repositories.Orders;
-using GameOnlineStore.Db.Repositories;
 using GameOnlineStore.Repositories.Roles;
 using GameOnlineStore.Repositories.Users;
 using Serilog;
 using GameOnlineStore.Db;
 using Microsoft.EntityFrameworkCore;
+using GameOnlineStore.Db.Repositories.Products;
+using GameOnlineStore.Db.Repositories.Carts;
+
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,7 +22,7 @@ builder.Services.AddDbContext<ApplicationContext>(options =>
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IProductsDbRepository, ProductsDbRepository>();
-builder.Services.AddSingleton<ICartsStorage, CartsInMemoryStorage>();
+builder.Services.AddTransient<ICartsDbRepository, CartsDbRepository>();
 builder.Services.AddSingleton<IUsersManager, UsersManager>();
 builder.Services.AddSingleton<IOrdersStorage, OrdersInMemoryStorage>();
 builder.Services.AddSingleton<IFavoriteProducts, FavoriteProductsInMemoryStorage>();

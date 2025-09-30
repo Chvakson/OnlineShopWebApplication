@@ -1,6 +1,6 @@
 ﻿using GameOnlineStore.Db.Models;
 
-namespace GameOnlineStore.Db.Repositories
+namespace GameOnlineStore.Db.Repositories.Products
 {
     public interface IProductsDbRepository
     {

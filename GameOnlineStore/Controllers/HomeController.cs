@@ -1,8 +1,6 @@
-using GameOnlineStore.Models;
-using GameOnlineStore.Db.Repositories;
+using GameOnlineStore.Helpers;
 using Microsoft.AspNetCore.Mvc;
-using OnlineShopWebApplication;
-using System.Diagnostics;
+using GameOnlineStore.Db.Repositories.Products;
 
 namespace GameOnlineStore.Models.Controllers
 {
@@ -21,15 +19,7 @@ namespace GameOnlineStore.Models.Controllers
             var productViewModels = new List<ProductViewModel>();
             foreach (var product in productsDb)
             {
-                ProductViewModel productViewModel = new ProductViewModel()
-                {
-                    Id = product.Id,
-                    Name = product.Name,
-                    Cost = product.Cost,
-                    Description = product.Description,
-                    ImgFileName = product.ImgFileName,
-                };
-                productViewModels.Add(productViewModel);
+                productViewModels.Add(Mapping.ToProductViewModel(product));
             }
             return View(productViewModels);
         }
@@ -41,15 +31,7 @@ namespace GameOnlineStore.Models.Controllers
             var productViewModels = new List<ProductViewModel>();
             foreach (var product in productsDb)
             {
-                ProductViewModel productViewModel = new ProductViewModel()
-                {
-                    Id = product.Id,
-                    Name = product.Name,
-                    Cost = product.Cost,
-                    Description = product.Description,
-                    ImgFileName = product.ImgFileName,
-                };
-                productViewModels.Add(productViewModel);
+                productViewModels.Add(Mapping.ToProductViewModel(product));
             }
 
             if (!string.IsNullOrWhiteSpace(query))

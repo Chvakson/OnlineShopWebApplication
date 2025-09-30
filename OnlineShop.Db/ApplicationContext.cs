@@ -16,5 +16,8 @@ namespace GameOnlineStore.Db
         }
 
         public DbSet<Product> Products { get; set; }
+        public DbSet<Cart> Carts { get; set; }
+        public DbSet<CartItem> CartItem { get; set; }
+
     }
 }
