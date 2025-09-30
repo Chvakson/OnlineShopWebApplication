@@ -2,6 +2,13 @@
 {
     public static class Constants
     {
-        public static string UserId { get; set; }
+        public static string UserId
+        {
+            get
+            {
+                return "UserId";
+            }
+            set { }
+        }
     }
 }

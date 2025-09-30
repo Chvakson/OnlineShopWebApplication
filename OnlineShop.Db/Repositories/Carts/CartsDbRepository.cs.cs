@@ -1,4 +1,5 @@
 ﻿using GameOnlineStore.Db.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace GameOnlineStore.Db.Repositories.Carts
 {
@@ -13,7 +14,10 @@ namespace GameOnlineStore.Db.Repositories.Carts
 
         public Cart TryGetByUserId(string userId)
         {
-            return context.Carts.FirstOrDefault(cart => cart.UserId == userId);
+            return context.Carts
+                .Include(c => c.Items)
+                .ThenInclude(c => c.Product)
+                .FirstOrDefault(cart => cart.UserId == userId);
         }
 
         public void Add(Product product, string userId)
@@ -21,7 +25,6 @@ namespace GameOnlineStore.Db.Repositories.Carts
             var existingCart = TryGetByUserId(userId);
             var productDb = new Product()
             {
-                Id = product.Id,
                 Name = product.Name,
                 Cost = product.Cost,
                 Description = product.Description,
@@ -29,18 +32,21 @@ namespace GameOnlineStore.Db.Repositories.Carts
             };
             if (existingCart == null)
             {
-                var cart = new Cart
+                var cart = new Cart()
                 {
                     UserId = userId,
-                    Items = new List<CartItem>
+                };
+
+                cart.Items = new List<CartItem>
+                {
+                    new CartItem
                     {
-                        new CartItem
-                        {
-                            Product = productDb,
-                            Amount = 1
-                        }
+                        Product = productDb,
+                        Amount = 1,
+                        Cart = cart
                     }
                 };
+
                 context.Carts.Add(cart);
             }
             else
@@ -51,7 +57,8 @@ namespace GameOnlineStore.Db.Repositories.Carts
                     existingCart.Items.Add(new CartItem
                     {
                         Product = productDb,
-                        Amount = 1
+                        Amount = 1,
+                        Cart = existingCart
                     });
                 }
                 else

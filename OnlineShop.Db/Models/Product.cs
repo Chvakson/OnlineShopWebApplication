@@ -14,9 +14,9 @@ namespace GameOnlineStore.Db.Models
 
         public List<CartItem> CartItems { get; set; }  
 
-        public string ImgFileName { get; set; }
+        public string? ImgFileName { get; set; }
 
-        public string ImgPath
+        public string? ImgPath
         {
             get
             {
@@ -25,6 +25,11 @@ namespace GameOnlineStore.Db.Models
                     ? $"{root}default.jpg"
                     : $"{root}{ImgFileName}";
             }
+        }
+
+        public Product()
+        {
+            CartItems = new List<CartItem>();
         }
     }
 }

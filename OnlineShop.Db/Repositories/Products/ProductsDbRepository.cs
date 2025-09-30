@@ -37,6 +37,7 @@ namespace GameOnlineStore.Db.Repositories.Products
                 return;
             }
             context.Products.Remove(exisingProduct);
+            context.SaveChanges();
         }
 
         public void Update(Product product)

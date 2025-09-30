@@ -16,7 +16,7 @@ namespace GameOnlineStore.Models
         public string Description { get; set; }
         public string? ImgFileName { get; set; }
 
-        public string ImgPath
+        public string? ImgPath
         {
             get
             {
