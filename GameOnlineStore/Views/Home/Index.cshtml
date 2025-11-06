@@ -24,7 +24,7 @@
                 <img src="@Url.Content(product.ImgPath)" class="card-img-top" alt="...">
                 <p class="card-text">Цена: @product.Cost р.</p>
                 <a class="btn btn-dark" asp-area="" asp-controller="Cart" asp-action="Add" asp-route-productId="@product.Id">Добавить в корзину</a>
-                <a class="btn btn-dark" asp-area="" asp-controller="FavoriteProducts" asp-action="Add" asp-route-productId="@product.Id">Добавить в избранное</a>
+                <a class="btn btn-dark" asp-area="" asp-controller="Favorite" asp-action="Add" asp-route-productId="@product.Id">Добавить в избранное</a>
                 <a class="btn btn-dark" asp-area="" asp-controller="CompareProducts" asp-action="Add" asp-route-productId="@product.Id">Добавить в сравнение</a>
             </div>
         </div>

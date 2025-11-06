@@ -1,10 +1,10 @@
 ﻿@using GameOnlineStore.Db.Models
-@model ProductsCollection
+@model List<ProductViewModel>
 
 <h2>Избранное</h2>
 
 @{
-    if (Model == null || Model.Products.Count == 0)
+    if (Model == null || Model.Count == 0)
     {
         <h4>В избранном пока нет товаров</h4>
     }
@@ -12,7 +12,7 @@
     else
     {
         <div class="row">
-            @foreach (var product in Model.Products)
+            @foreach (var product in Model)
             {
                 <div class="card col-4 border-secondary">
                     <a class="card-header" style="cursor: pointer" asp-area="" asp-controller="Product" asp-action="Index" asp-route-productId="@product.Id">
@@ -22,7 +22,7 @@
                         <img src="@Url.Content(product.ImgPath)" class="card-img-top" alt="...">
                         <p class="card-text">Цена: @product.Cost р.</p>
                         <a class="btn btn-dark" asp-area="" asp-controller="Cart" asp-action="Add" asp-route-productId="@product.Id">Добавить в корзину</a>
-                        <a class="btn btn-dark" asp-area="" asp-controller="FavoriteProducts" asp-action="Remove" asp-route-productId="@product.Id">Убрать из избранного</a>
+                        <a class="btn btn-dark" asp-area="" asp-controller="Favorite" asp-action="Remove" asp-route-productId="@product.Id">Убрать из избранного</a>
                     </div>
                 </div>
             }

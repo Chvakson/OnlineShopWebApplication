@@ -2,37 +2,38 @@
 using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApplication;
 using GameOnlineStore.Db.Repositories.Products;
+using GameOnlineStore.Helpers;
 
 namespace GameOnlineStore.Models.Controllers
 {
-    public class FavoriteProductsController : Controller
+    public class FavoriteController : Controller
     {
         private readonly IProductsDbRepository productsDbRepository;
-        private readonly IFavoriteProducts favoriteProductsStorage;
+        private readonly IFavoriteDbRepository favoriteDbRepository;
 
-        public FavoriteProductsController(IProductsDbRepository productsDbRepository, IFavoriteProducts favoriteProductsStorage)
+        public FavoriteController(IProductsDbRepository productsDbRepository, IFavoriteDbRepository favoriteDbRepository)
         {
             this.productsDbRepository = productsDbRepository;
-            this.favoriteProductsStorage = favoriteProductsStorage;
+            this.favoriteDbRepository = favoriteDbRepository;
         }
 
         public IActionResult Index()
         {
-            var favorite = favoriteProductsStorage.TryGetByUserId(Constants.UserId);
-            return View(favorite);
+            var products = favoriteDbRepository.GetAll(Constants.UserId);
+            return View(Mapping.ToProductViewModels(products));
         }
 
         public IActionResult Add(Guid productId)
         {
             var product = productsDbRepository.TryGetById(productId);
-            favoriteProductsStorage.Add(product);
+            favoriteDbRepository.Add(Constants.UserId, product);
             return RedirectToAction("Index");
         }
 
         public IActionResult Remove(Guid productId)
         {
             var product = productsDbRepository.TryGetById(productId);
-            favoriteProductsStorage.Remove(product);
+            favoriteDbRepository.Remove(Constants.UserId, productId);
             return RedirectToAction("Index");
         }
     }

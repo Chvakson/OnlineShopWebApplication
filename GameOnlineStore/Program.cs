@@ -25,7 +25,7 @@ builder.Services.AddTransient<IProductsDbRepository, ProductsDbRepository>();
 builder.Services.AddTransient<ICartsDbRepository, CartsDbRepository>();
 builder.Services.AddSingleton<IUsersManager, UsersManager>();
 builder.Services.AddSingleton<IOrdersStorage, OrdersInMemoryStorage>();
-builder.Services.AddSingleton<IFavoriteProducts, FavoriteProductsInMemoryStorage>();
+builder.Services.AddTransient<IFavoriteDbRepository, FavoriteDbRepository>();
 builder.Services.AddSingleton<ICompareProducts ,CompareProductsInMemoryStorage>();
 builder.Services.AddSingleton<IRolesStorage, RolesInMemoryStorage>();
 // Add services to the container.
