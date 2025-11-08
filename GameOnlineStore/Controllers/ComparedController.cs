@@ -1,38 +1,39 @@
-﻿using GameOnlineStore.Repositories.CompareProducts;
+﻿using GameOnlineStore.Repositories.ComparedProducts;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApplication;
 using GameOnlineStore.Db.Repositories.Products;
+using GameOnlineStore.Helpers;
 
 namespace GameOnlineStore.Models.Controllers
 {
-    public class CompareProductsController : Controller
+    public class ComparedController : Controller
     {
         private readonly IProductsDbRepository productsDbRepository;
-        private readonly ICompareProducts compareProductsStorage;
+        private readonly IComparedDbRepository comparedDbRepository;
 
-        public CompareProductsController(IProductsDbRepository productsDbRepository, ICompareProducts compareProductsStorage)
+        public ComparedController(IProductsDbRepository productsDbRepository, IComparedDbRepository comparedDbRepository)
         {
             this.productsDbRepository = productsDbRepository;
-            this.compareProductsStorage = compareProductsStorage;
+            this.comparedDbRepository = comparedDbRepository;
         }
 
         public IActionResult Index()
         {
-            var favorite = compareProductsStorage.TryGetByUserId(Constants.UserId);
-            return View(favorite);
+            var products = comparedDbRepository.GetAll(Constants.UserId);
+            return View(Mapping.ToProductViewModels(products));
         }
 
         public IActionResult Add(Guid productId)
         {
             var product = productsDbRepository.TryGetById(productId);
-           // compareProductsStorage.Add(product);
+            comparedDbRepository.Add(Constants.UserId, product);
             return RedirectToAction("Index");
         }
 
         public IActionResult Remove(Guid productId)
         {
             var product = productsDbRepository.TryGetById(productId);
-           // compareProductsStorage.Remove(product);
+            comparedDbRepository.Remove(Constants.UserId, productId);
             return RedirectToAction("Index");
         }
     }

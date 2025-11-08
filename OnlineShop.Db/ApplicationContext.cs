@@ -14,5 +14,7 @@ namespace GameOnlineStore.Db
         public DbSet<Cart> Carts { get; set; }
         public DbSet<CartItem> CartItem { get; set; }
         public DbSet<FavoriteProduct> FavoriteProducts { get; set; }
+        public DbSet<ComparedProduct> ComparedProducts { get; set; }
+
     }
 }

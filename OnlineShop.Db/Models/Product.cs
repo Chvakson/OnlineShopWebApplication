@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace GameOnlineStore.Db.Models
+﻿namespace GameOnlineStore.Db.Models
 {
     public class Product
     {

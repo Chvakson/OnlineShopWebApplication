@@ -1,6 +1,6 @@
 ﻿namespace GameOnlineStore.Db.Models
 {
-    public class FavoriteProduct
+     public class ComparedProduct
     {
         public Guid Id { get; set; }
         public string UserId { get; set; }

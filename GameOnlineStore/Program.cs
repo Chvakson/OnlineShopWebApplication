@@ -1,4 +1,4 @@
-using GameOnlineStore.Repositories.CompareProducts;
+using GameOnlineStore.Repositories.ComparedProducts;
 using GameOnlineStore.Repositories.FavoriteProducts;
 using GameOnlineStore.Repositories.Orders;
 using GameOnlineStore.Repositories.Roles;
@@ -26,7 +26,7 @@ builder.Services.AddTransient<ICartsDbRepository, CartsDbRepository>();
 builder.Services.AddSingleton<IUsersManager, UsersManager>();
 builder.Services.AddSingleton<IOrdersStorage, OrdersInMemoryStorage>();
 builder.Services.AddTransient<IFavoriteDbRepository, FavoriteDbRepository>();
-builder.Services.AddSingleton<ICompareProducts ,CompareProductsInMemoryStorage>();
+builder.Services.AddTransient<IComparedDbRepository, ComparedDbRepository>();
 builder.Services.AddSingleton<IRolesStorage, RolesInMemoryStorage>();
 // Add services to the container.
 

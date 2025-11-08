@@ -1,10 +1,10 @@
 ﻿@using GameOnlineStore.Db.Models
-@model ProductsCollection
+@model List<ProductViewModel>
 
 <h2>Сравнение товаров</h2>
 
 @{
-    if (Model == null || Model.Products.Count == 0)
+    if (Model == null || Model.Count == 0)
     {
         <h4>Нет товаров для сравнения</h4>
     }
@@ -13,7 +13,7 @@
     {
         <div>
             <div  id="scrollable-content">
-                @foreach (var product in Model.Products)
+                @foreach (var product in Model)
                 {
                     <div class="card col-4 border-secondary">
                         <a class="card-header" style="cursor: pointer" asp-area="" asp-controller="Product" asp-action="Index" asp-route-productId="@product.Id">
@@ -23,14 +23,14 @@
                             <img src="@Url.Content(product.ImgPath)" class="card-img-top" alt="...">
                             <p class="card-text">Цена: @product.Cost р.</p>
                             <a class="btn btn-dark" asp-area="" asp-controller="Cart" asp-action="Add" asp-route-productId="@product.Id">Добавить в корзину</a>
-                            <a class="btn btn-dark" asp-area="" asp-controller="CompareProducts" asp-action="Remove" asp-route-productId="@product.Id">Убрать из сравнения</a>
+                            <a class="btn btn-dark" asp-area="" asp-controller="Compared" asp-action="Remove" asp-route-productId="@product.Id">Убрать из сравнения</a>
                         </div>
                     </div>
                 }
             </div>
             <h5>Сравнение характеристик</h5>
             <div  id="scrollable-content">
-                @foreach (var product in Model.Products)
+                @foreach (var product in Model)
                 {
                     <div class="col-4">
                         <div>
