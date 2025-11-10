@@ -23,13 +23,6 @@ namespace GameOnlineStore.Db.Repositories.Carts
         public void Add(Product product, string userId)
         {
             var existingCart = TryGetByUserId(userId);
-            var productDb = new Product()
-            {
-                Name = product.Name,
-                Cost = product.Cost,
-                Description = product.Description,
-                ImgFileName = product.ImgFileName,
-            };
             if (existingCart == null)
             {
                 var cart = new Cart()
@@ -41,9 +34,8 @@ namespace GameOnlineStore.Db.Repositories.Carts
                 {
                     new CartItem
                     {
-                        Product = productDb,
+                        Product = product,
                         Amount = 1,
-                        Cart = cart
                     }
                 };
 
@@ -56,9 +48,8 @@ namespace GameOnlineStore.Db.Repositories.Carts
                 {
                     existingCart.Items.Add(new CartItem
                     {
-                        Product = productDb,
+                        Product = product,
                         Amount = 1,
-                        Cart = existingCart
                     });
                 }
                 else

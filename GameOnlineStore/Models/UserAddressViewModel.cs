@@ -2,8 +2,9 @@
 
 namespace GameOnlineStore.Models
 {
-    public class UserAddress
+    public class UserAddressViewModel
     {
+        public Guid Id { get; set; }
         [Required(ErrorMessage ="Не указан город")]
         [StringLength(75)]
         public string City { get; set; }

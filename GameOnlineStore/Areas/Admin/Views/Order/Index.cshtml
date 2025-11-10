@@ -1,4 +1,4 @@
-﻿@model List<Order>
+﻿@model List<OrderViewModel>
 <div class="row">
     @await Html.PartialAsync("AdminLeftPanel")
     <div class="col-9">
@@ -22,8 +22,8 @@
                         <td>@Model[i].Cost ₽</td>
                         <td>@EnumHelper.GetDisplayName(Model[i].Status)</td>
                         <td>user@mail.ru</td>
-                        <td>@Model[i].OrderDateTime.ToString("d")</td>
-                        <td>@Model[i].OrderDateTime.ToString("t")</td>
+                        <td>@Model[i].CreatedDateTime.ToString("d")</td>
+                        <td>@Model[i].CreatedDateTime.ToString("t")</td>
                     </tr>
                 }
             </tbody>

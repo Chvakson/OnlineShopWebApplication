@@ -1,9 +1,10 @@
 ﻿using GameOnlineStore.Areas.Admin.Models;
 
-namespace GameOnlineStore.Models.User
+namespace GameOnlineStore.Models
 {
     public class UserAccount
     {
+        Guid Id { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }
         public bool RememberMe { get; set; }

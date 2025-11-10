@@ -15,6 +15,16 @@ namespace GameOnlineStore.Db
         public DbSet<CartItem> CartItem { get; set; }
         public DbSet<FavoriteProduct> FavoriteProducts { get; set; }
         public DbSet<ComparedProduct> ComparedProducts { get; set; }
+        public DbSet<UserDeliveryInfo> UserDeliveryInfo { get; set; }
+        public DbSet<UserAddress> UsersAddresses { get; set; }
+        public DbSet<Order> Orders { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Order>()
+                .Property(o => o.Status)
+                .HasConversion<string>()
+                .HasMaxLength(20);
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿@model Order
+﻿@using GameOnlineStore.Db.Models
+@model OrderViewModel
 <div class="row">
     @await Html.PartialAsync("AdminLeftPanel")
 
@@ -8,7 +9,7 @@
             <br />
             <div class="row">
                 <p class="col-4">Дата и время оформления:</p>
-                <p class="col-5">@Model.OrderDateTime.ToString("d") в @Model.OrderDateTime.ToString("t")</p>
+                <p class="col-5">@Model.CreatedDateTime.ToString("d") в @Model.CreatedDateTime.ToString("t")</p>
             </div>
             <div class="row">
                 <p class="col-4">Адрес доставки:</p>
@@ -37,7 +38,7 @@
             <div class="row">
                 <p class="col-4">Статус заказа:</p>
                 <div class="col-5">
-                    <select asp-for="@Model.Status" asp-items="@Html.GetEnumSelectList<OrderStatus>()" class="form-control"></select>
+                    <select asp-for="@Model.Status" asp-items="@Html.GetEnumSelectList<OrderStatusViewModel>()" class="form-control"></select>
                 </div>
             </div>
             <button class="btn btn-dark" type="submit" asp-area="Admin" asp-controller="Order" asp-action="UpdateOrderStatus" asp-route-id="@Model.Id">Сохранить</button>

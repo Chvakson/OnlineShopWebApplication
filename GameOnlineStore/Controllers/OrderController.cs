@@ -1,20 +1,20 @@
 ﻿using GameOnlineStore.Models;
 using GameOnlineStore.Db.Repositories.Carts;
-using GameOnlineStore.Repositories.Orders;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApplication;
 using GameOnlineStore.Helpers;
+using GameOnlineStore.Db.Repositories.Orders;
 
 namespace GameOnlineStore.Models.Controllers
 {
     public class OrderController : Controller
     {
-        private readonly IOrdersStorage ordersStorage;
-        private readonly ICartsDbRepository cartsStorage;
-        public OrderController(IOrdersStorage ordersStorage, ICartsDbRepository cartsStorage)
+        private readonly IOrdersDbRepository ordersDbRepository;
+        private readonly ICartsDbRepository cartsDbRepository;
+        public OrderController(IOrdersDbRepository ordersDbRepository, ICartsDbRepository cartsDbRepository)
         {
-            this.ordersStorage = ordersStorage;
-            this.cartsStorage = cartsStorage;
+            this.ordersDbRepository = ordersDbRepository;
+            this.cartsDbRepository = cartsDbRepository;
         }
         public IActionResult Index()
         {
@@ -22,20 +22,22 @@ namespace GameOnlineStore.Models.Controllers
         }
 
         [HttpPost]
-        public IActionResult Buy(UserDeliveryInfo userDeliveryInfo)
+        public IActionResult Buy(UserDeliveryInfoViewModel userDeliveryInfoViewModel)
         {
             if (ModelState.IsValid)
             {
-                var existingCart = cartsStorage.TryGetByUserId(Constants.UserId);
+                var existingCart = cartsDbRepository.TryGetByUserId(Constants.UserId);
                 var existingCartViewModel = Mapping.ToCartViewModel(existingCart);
 
-                var order = new Order
+                var orderViewModel = new OrderViewModel
                 {
-                    UserDeliveryInfo = userDeliveryInfo,
-                    Items = existingCartViewModel.Items
+                    UserDeliveryInfo = userDeliveryInfoViewModel,
+                    Items = Mapping.ToCartItemViewModels(existingCart.Items)
                 };
-                ordersStorage.Add(order);
-                cartsStorage.Clear(Constants.UserId);
+                var orderDb = Mapping.ToOrderDbModel(orderViewModel, existingCart);
+                ordersDbRepository.Add(orderDb);
+                cartsDbRepository.Clear(Constants.UserId);
+
                 return View();
             }
             return View();

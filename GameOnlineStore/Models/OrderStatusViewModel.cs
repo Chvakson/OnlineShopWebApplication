@@ -2,9 +2,9 @@
 
 namespace GameOnlineStore.Models
 {
-    public enum OrderStatus
+    public enum OrderStatusViewModel
     {
-        [Display(Name ="Создан")]
+        [Display(Name = "Создан")]
         Created,
         [Display(Name = "Обработан")]
         Processed,

@@ -1,5 +1,5 @@
 ﻿using GameOnlineStore.Areas.Admin.Models;
-using GameOnlineStore.Models.User;
+using GameOnlineStore.Models;
 
 namespace GameOnlineStore.Repositories.Users
 {
