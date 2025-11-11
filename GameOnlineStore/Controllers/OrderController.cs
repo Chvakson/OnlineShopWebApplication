@@ -1,5 +1,4 @@
-﻿using GameOnlineStore.Models;
-using GameOnlineStore.Db.Repositories.Carts;
+﻿using GameOnlineStore.Db.Repositories.Carts;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApplication;
 using GameOnlineStore.Helpers;

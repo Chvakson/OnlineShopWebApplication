@@ -1,9 +1,6 @@
 ﻿using GameOnlineStore.Db.Models;
-using GameOnlineStore.Db.Repositories.Products;
 using GameOnlineStore.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using System.ComponentModel.DataAnnotations;
-using System.Reflection;
 
 namespace GameOnlineStore.Helpers
 {
@@ -68,7 +65,8 @@ namespace GameOnlineStore.Helpers
                 Id = orderDb.Id,
                 Items = ToCartItemViewModels(orderDb.Items),
                 UserDeliveryInfo = ToUserDeliveryInfoViewModel(orderDb.UserDeliveryInfo),
-                Status = (OrderStatusViewModel)(int)orderDb.Status
+                Status = (OrderStatusViewModel)(int)orderDb.Status,
+                CreatedDateTime = orderDb.CreatedDateTime.ToLocalTime(),
             };
         }
 
@@ -127,7 +125,7 @@ namespace GameOnlineStore.Helpers
         {
             return new Order
             {
-                CreatedDateTime = orderViewModel.CreatedDateTime,
+                CreatedDateTime = DateTime.UtcNow,
                 Status = (OrderStatus)orderViewModel.Status,
                 UserDeliveryInfo = new UserDeliveryInfo
                 {
