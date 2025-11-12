@@ -26,14 +26,14 @@ namespace GameOnlineStore.Models.Controllers
             if (ModelState.IsValid)
             {
                 var existingCart = cartsDbRepository.TryGetByUserId(Constants.UserId);
-                var existingCartViewModel = Mapping.ToCartViewModel(existingCart);
+                var existingCartViewModel = existingCart.ToCartViewModel;
 
                 var orderViewModel = new OrderViewModel
                 {
                     UserDeliveryInfo = userDeliveryInfoViewModel,
-                    Items = Mapping.ToCartItemViewModels(existingCart.Items)
+                    Items = existingCart.Items.ToCartItemViewModels()
                 };
-                var orderDb = Mapping.ToOrderDbModel(orderViewModel, existingCart);
+                var orderDb = orderViewModel.ToOrderDbModel(existingCart);
                 ordersDbRepository.Add(orderDb);
                 cartsDbRepository.Clear(Constants.UserId);
 

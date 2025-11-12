@@ -19,7 +19,7 @@ namespace GameOnlineStore.Models.Controllers
             var productViewModels = new List<ProductViewModel>();
             foreach (var product in productsDb)
             {
-                productViewModels.Add(Mapping.ToProductViewModel(product));
+                productViewModels.Add(product.ToProductViewModel());
             }
             return View(productViewModels);
         }
@@ -31,7 +31,7 @@ namespace GameOnlineStore.Models.Controllers
             var productViewModels = new List<ProductViewModel>();
             foreach (var product in productsDb)
             {
-                productViewModels.Add(Mapping.ToProductViewModel(product));
+                productViewModels.Add(product.ToProductViewModel());
             }
 
             if (!string.IsNullOrWhiteSpace(query))

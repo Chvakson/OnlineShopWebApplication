@@ -11,9 +11,9 @@ namespace GameOnlineStore.Areas.Admin.Controllers
     {
         private readonly IProductsDbRepository productsDbRepository;
 
-        public ProductController(IProductsDbRepository productsStorage)
+        public ProductController(IProductsDbRepository productsDbRepository)
         {
-            this.productsDbRepository = productsStorage;
+            this.productsDbRepository = productsDbRepository;
         }
 
         public IActionResult Index()
@@ -22,7 +22,7 @@ namespace GameOnlineStore.Areas.Admin.Controllers
             var productViewModels = new List<ProductViewModel>();
             foreach (var product in productsDb) 
             {
-                productViewModels.Add(Mapping.ToProductViewModel(product));
+                productViewModels.Add(product.ToProductViewModel());
             }
             return View(productViewModels);
         }
@@ -33,19 +33,19 @@ namespace GameOnlineStore.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(ProductViewModel product)
+        public IActionResult Add(ProductViewModel productViewModel)
         {
             if (!ModelState.IsValid)
             {
-                return RedirectToAction("Create", product);
+                return RedirectToAction("Create", productViewModel);
             };
 
             var productDb = new Product
             {
-                Name = product.Name,
-                Cost = product.Cost,
-                Description = product.Description,
-                ImgFileName = product.ImgFileName
+                Name = productViewModel.Name,
+                Cost = productViewModel.Cost,
+                Description = productViewModel.Description,
+                ImgFileName = productViewModel.ImgFileName
             };
 
             productsDbRepository.Add(productDb);
@@ -55,29 +55,24 @@ namespace GameOnlineStore.Areas.Admin.Controllers
         public IActionResult Edit(Guid productId)
         {
             var product = productsDbRepository.TryGetById(productId);
-
-            Mapping.ToProductViewModel(product);
-
-            ProductViewModel productViewModel = Mapping.ToProductViewModel(product);
-
-            return View(productViewModel);
+            return View(product.ToProductViewModel());
         }
 
         [HttpPost]
-        public IActionResult Update(ProductViewModel product)
+        public IActionResult Update(ProductViewModel productViewModel)
         {
             if (!ModelState.IsValid)
             {
-                return RedirectToAction("Edit", product);
+                return RedirectToAction("Edit", productViewModel);
             };
 
             var productDb = new Product
             {
-                Id = product.Id,
-                Name = product.Name,
-                Cost = product.Cost,
-                Description = product.Description,
-                ImgFileName = product.ImgFileName
+                Id = productViewModel.Id,
+                Name = productViewModel.Name,
+                Cost = productViewModel.Cost,
+                Description = productViewModel.Description,
+                ImgFileName = productViewModel.ImgFileName
             };
 
             productsDbRepository.Update(productDb);

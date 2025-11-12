@@ -4,9 +4,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace GameOnlineStore.Helpers
 {
-    public class Mapping
+    public static class Mapping
     {
-        public static ProductViewModel ToProductViewModel(Product productDb)
+        public static ProductViewModel ToProductViewModel(this Product productDb)
         {
             return new ProductViewModel()
             {
@@ -18,7 +18,7 @@ namespace GameOnlineStore.Helpers
             };
         }
 
-        public static List<ProductViewModel> ToProductViewModels(List<Product> productsDb)
+        public static List<ProductViewModel> ToProductViewModels(this List<Product> productsDb)
         {
             var productViewModels = new List<ProductViewModel>();
             foreach (var product in productsDb) {
@@ -27,7 +27,7 @@ namespace GameOnlineStore.Helpers
             return productViewModels;
         }
 
-        public static List<CartItemViewModel> ToCartItemViewModels(List<CartItem> cartDbItems)
+        public static List<CartItemViewModel> ToCartItemViewModels(this List<CartItem> cartDbItems)
         {
             List<CartItemViewModel> cartItemViewModels = new();
             foreach (var item in cartDbItems)
@@ -43,7 +43,7 @@ namespace GameOnlineStore.Helpers
             return cartItemViewModels;
         }
 
-        public static CartViewModel ToCartViewModel(Cart cartDb)
+        public static CartViewModel ToCartViewModel(this Cart cartDb)
         {
             if (cartDb == null)
                 return null;
@@ -55,7 +55,7 @@ namespace GameOnlineStore.Helpers
             };
         }
 
-        public static OrderViewModel ToOrderViewModel(Order orderDb)
+        public static OrderViewModel ToOrderViewModel(this Order orderDb)
         {
             if (orderDb == null)
                 return null;
@@ -70,7 +70,7 @@ namespace GameOnlineStore.Helpers
             };
         }
 
-        public static List<OrderViewModel> ToOrderViewModels(List<Order> ordersDb)
+        public static List<OrderViewModel> ToOrderViewModels(this List<Order> ordersDb)
         {
             var orderViewModels = new List<OrderViewModel>();
             foreach (var order in ordersDb)
@@ -80,7 +80,7 @@ namespace GameOnlineStore.Helpers
             return orderViewModels;
         }
 
-        public static UserDeliveryInfoViewModel ToUserDeliveryInfoViewModel(UserDeliveryInfo userDeliveryInfo)
+        public static UserDeliveryInfoViewModel ToUserDeliveryInfoViewModel(this UserDeliveryInfo userDeliveryInfo)
         {
 
             return new UserDeliveryInfoViewModel
@@ -95,7 +95,7 @@ namespace GameOnlineStore.Helpers
             };
         }
 
-        public static UserAddressViewModel ToUserAddressViewModel(UserAddress userAddress)
+        public static UserAddressViewModel ToUserAddressViewModel(this UserAddress userAddress)
         {
             return new UserAddressViewModel
             {
@@ -121,7 +121,7 @@ namespace GameOnlineStore.Helpers
                 .ToList();
         }
 
-        public static Order ToOrderDbModel(OrderViewModel orderViewModel, Cart existingCart)
+        public static Order ToOrderDbModel(this OrderViewModel orderViewModel, Cart existingCart)
         {
             return new Order
             {

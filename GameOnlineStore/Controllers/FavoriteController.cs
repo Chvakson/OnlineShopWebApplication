@@ -20,7 +20,7 @@ namespace GameOnlineStore.Models.Controllers
         public IActionResult Index()
         {
             var products = favoriteDbRepository.GetAll(Constants.UserId);
-            return View(Mapping.ToProductViewModels(products));
+            return View(products.ToProductViewModels());
         }
 
         public IActionResult Add(Guid productId)

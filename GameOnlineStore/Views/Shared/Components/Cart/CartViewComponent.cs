@@ -19,9 +19,7 @@ namespace GameOnlineStore.Views.Shared.Components.CartViewComponent
         public IViewComponentResult Invoke()
         {
             var cart = cartsDbRepository.TryGetByUserId(Constants.UserId);
-
-            var cartViewModel = Mapping.ToCartViewModel(cart);
-            var productCounts = cartViewModel?.Amount ?? 0;
+            var productCounts = cart.ToCartViewModel()?.Amount ?? 0;
             return View("Cart", productCounts);
         }
     }

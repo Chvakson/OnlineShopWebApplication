@@ -10,23 +10,23 @@ namespace GameOnlineStore.Areas.Admin.Controllers
     {
         private readonly IOrdersDbRepository ordersDbRepository;
 
-        public OrderController(IOrdersDbRepository ordersStorage)
+        public OrderController(IOrdersDbRepository ordersDbRepository)
         {
-            this.ordersDbRepository = ordersStorage;
+            this.ordersDbRepository = ordersDbRepository;
         }
 
         public IActionResult Index()
         {
             var orders = ordersDbRepository.GetAll();
             
-            return View(Mapping.ToOrderViewModels(orders));
+            return View(orders.ToOrderViewModels());
         }
 
         public IActionResult Details(Guid id)
         {
             var existingOrder = ordersDbRepository.TryGetById(id);
             if (existingOrder != null) {
-                return View(Mapping.ToOrderViewModel(existingOrder));
+                return View(existingOrder.ToOrderViewModel());
             }
 
             return RedirectToAction("Index");
