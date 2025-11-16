@@ -7,7 +7,7 @@ namespace GameOnlineStore.Db
     {
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
         {
-            Database.EnsureCreated();
+            Database.Migrate();
         }
 
         public DbSet<Product> Products { get; set; }
