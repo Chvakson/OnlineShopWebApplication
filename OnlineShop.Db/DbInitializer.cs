@@ -1,14 +1,45 @@
 ﻿using GameOnlineStore.Db.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using OnlineShopWebApplication;
 
 namespace GameOnlineStore.Db
 {
     public class DbInitializer
     {
-        public static async Task Initialize(ApplicationContext context)
+        public static async Task Initialize(ApplicationContext context, UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
         {
             await context.Database.EnsureCreatedAsync();
+            await InitializeUsersAsync(userManager, roleManager);
             await InitializeProductsAsync(context);
+        }
+
+        private static async Task InitializeUsersAsync(UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
+        {
+            var adminEmail = "admin@gmail.com";
+            var password = "_Aa123456";
+
+            // Асинхронно создаем роли
+            await CreateRoleIfNotExistsAsync(roleManager, Constants.AdminRoleName);
+            await CreateRoleIfNotExistsAsync(roleManager, Constants.UserRoleName);
+
+            if (userManager.FindByNameAsync(adminEmail).Result == null)
+            {
+                var admin = new User { Email = adminEmail, UserName = adminEmail };
+                var result = userManager.CreateAsync(admin, password).Result;
+                if (result.Succeeded)
+                {
+                    await userManager.AddToRoleAsync(admin, Constants.AdminRoleName);
+                }
+            }
+        }
+
+        private static async Task CreateRoleIfNotExistsAsync(RoleManager<IdentityRole> roleManager, string roleName)
+        {
+            if (await roleManager.FindByNameAsync(roleName) == null)
+            {
+                await roleManager.CreateAsync(new IdentityRole(roleName));
+            }
         }
 
         private static async Task InitializeProductsAsync(ApplicationContext context)

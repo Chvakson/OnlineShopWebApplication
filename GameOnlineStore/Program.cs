@@ -1,22 +1,27 @@
+using GameOnlineStore.Db;
+using GameOnlineStore.Db.Models;
+using GameOnlineStore.Db.Repositories.Carts;
+using GameOnlineStore.Db.Repositories.Orders;
+using GameOnlineStore.Db.Repositories.Products;
 using GameOnlineStore.Repositories.ComparedProducts;
 using GameOnlineStore.Repositories.FavoriteProducts;
 using GameOnlineStore.Repositories.Roles;
 using GameOnlineStore.Repositories.Users;
-using GameOnlineStore.Db.Repositories.Products;
-using GameOnlineStore.Db.Repositories.Carts;
-using GameOnlineStore.Db.Repositories.Orders;
-using Serilog;
-using GameOnlineStore.Db;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
+var connection = builder.Configuration.GetConnectionString("DefaultConnection");
 
 builder.Host.UseSerilog((context, configuration) => configuration
 .ReadFrom.Configuration(context.Configuration)
 .Enrich.WithProperty("ApplicationName", "Online Store"));
 
 builder.Services.AddDbContext<ApplicationContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseNpgsql(connection));
+
+builder.Services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<ApplicationContext>();
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IProductsDbRepository, ProductsDbRepository>();
@@ -37,7 +42,10 @@ using (var scope = app.Services.CreateScope())
     try
     {
         var context = services.GetRequiredService<ApplicationContext>();
-        await DbInitializer.Initialize(context);
+        var userManager = services.GetRequiredService<UserManager<User>>();
+        var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+
+        await DbInitializer.Initialize(context, userManager, roleManager);
     }
     catch (Exception ex)
     {
@@ -62,6 +70,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

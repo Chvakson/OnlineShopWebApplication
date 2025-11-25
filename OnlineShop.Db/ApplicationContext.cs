@@ -6,10 +6,7 @@ namespace GameOnlineStore.Db
 {
     public class ApplicationContext : IdentityDbContext<User>
     {
-        public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
-        {
-            //Database.Migrate();
-        }
+        public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options) {}
 
         public DbSet<Product> Products { get; set; }
         public DbSet<Cart> Carts { get; set; }
