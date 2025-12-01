@@ -1,43 +1,74 @@
 ﻿using GameOnlineStore.Areas.Admin.Models;
-using GameOnlineStore.Repositories.Users;
+using GameOnlineStore.Db.Models;
+using GameOnlineStore.Models.Controllers;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.RegularExpressions;
 
-namespace GameOnlineStore.Models.Controllers
+namespace GameOnlineStore.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly IUsersManager usersManager;
+        private readonly UserManager<User> userManager;
+        private readonly SignInManager<User> signInManager;
 
-        public AccountController(IUsersManager usersManager)
+
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
         {
-            this.usersManager = usersManager;
+            this.userManager = userManager;
+            this.signInManager = signInManager;
+        }
+
+        [HttpGet]
+        public IActionResult SignIn(string returnUrl)
+        {
+            ViewData["ReturnUrl"] = returnUrl;
+            return View();
         }
 
         [HttpPost]
-        public IActionResult SignIn([FromBody] LoginCredential loginCredential)
+        public async Task<IActionResult> SignIn([FromBody] LoginCredential loginCredential)
         {
+            // Валидация email
             if (!Regex.IsMatch(loginCredential.Login, @"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$"))
-                return BadRequest("Указан неверный адрес электронной почты");
-            else if (loginCredential.Login.Length < 7 || loginCredential.Login.Length > 75)
-                return BadRequest("Логин должен содержать от 7 до 75 символов");
-            else
-            {
-                var userAccount = usersManager.TryGetByName(loginCredential.Login);
-                if (userAccount == null)
-                    return BadRequest("Такого пользователя не существует");
-                else
-                {
-                    if(userAccount.Password != loginCredential.Password)
-                        return BadRequest("Неверный пароль");
+                return Json(new { success = false, message = "Указан неверный адрес электронной почты" });
 
-                }
+            // Поиск пользователя
+            var user = await userManager.FindByEmailAsync(loginCredential.Login);
+            if (user == null)
+                return Json(new { success = false, message = "Пользователь не найден" });
+
+            // Вход
+            var result = await signInManager.PasswordSignInAsync(
+                user,
+                loginCredential.Password,
+                loginCredential.RememberMe ?? false,
+                lockoutOnFailure: false);
+
+            if (result.Succeeded)
+            {
+                return Json(new
+                {
+                    success = true,
+                    redirectUrl = Url.Action("Index", "Home")
+                });
             }
-            return Ok();
+
+            if (result.IsLockedOut)
+            {
+                return Json(new { success = false, message = "Аккаунт заблокирован" });
+            }
+
+            return Json(new
+            {
+                success = false,
+                message = "Неверный пароль"
+            });
         }
 
+
         [HttpPost]
-        public IActionResult Register([FromBody] RegisterDetails registerDetails)
+        public async Task<IActionResult> Register([FromBody] RegisterDetails registerDetails)
         {
             if (registerDetails.Login.Length < 7 || registerDetails.Login.Length > 75)
                 return BadRequest("Логин должен содержать от 7 до 75 символов");
@@ -45,18 +76,37 @@ namespace GameOnlineStore.Models.Controllers
             if (registerDetails.Password != registerDetails.ConfirmPassword)
                 return BadRequest("Пароли не совпадают");
 
-            usersManager.Add(new UserAccount
+            // Создаем пользователя через UserManager
+            var user = new User
             {
-                Login = registerDetails.Login,
-                Phone = registerDetails.Phone,
-                Password = registerDetails.Password,
-                Roles = new List<Role>
-                {
-                    new("Пользователь")
-                }
-            });
+                UserName = registerDetails.Login,
+                Email = registerDetails.Login,
+                PhoneNumber = registerDetails.Phone
+            };
 
-            return Ok();
+            var result = await userManager.CreateAsync(user, registerDetails.Password);
+
+            if (result.Succeeded)
+            {
+                // Добавляем роль "Пользователь"
+                await userManager.AddToRoleAsync(user, "Пользователь");
+
+                // Автоматически логиним после регистрации
+                await signInManager.SignInAsync(user, isPersistent: false);
+
+                return Ok(new { message = "Регистрация успешна" });
+            }
+
+            // Возвращаем ошибки Identity
+            return BadRequest(string.Join(", ", result.Errors.Select(e => e.Description)));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Logout()
+        {
+            await signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
         }
     }
 }

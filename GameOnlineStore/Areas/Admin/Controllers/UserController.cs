@@ -1,4 +1,5 @@
 ﻿using GameOnlineStore.Areas.Admin.Models;
+using GameOnlineStore.Db;
 using GameOnlineStore.Repositories.Roles;
 using GameOnlineStore.Repositories.Users;
 using Microsoft.AspNetCore.Mvc;
@@ -8,18 +9,20 @@ namespace GameOnlineStore.Areas.Admin.Controllers
     [Area("Admin")]
     public class UserController : Controller
     {
+        private readonly ApplicationContext context;
         private readonly IUsersManager usersManager;
         private readonly IRolesStorage rolesStorage;
 
-        public UserController(IUsersManager usersManager, IRolesStorage rolesStorage)
+        public UserController(ApplicationContext context, IUsersManager usersManager, IRolesStorage rolesStorage)
         {
+            this.context = context;
             this.usersManager = usersManager;
             this.rolesStorage = rolesStorage;
         }
 
         public IActionResult Index()
         {
-            var userAccounts = usersManager.GetAll();
+            var userAccounts = context.Users;
             return View(userAccounts);
         }
 

@@ -1,4 +1,4 @@
-using GameOnlineStore.Db;
+﻿using GameOnlineStore.Db;
 using GameOnlineStore.Db.Models;
 using GameOnlineStore.Db.Repositories.Carts;
 using GameOnlineStore.Db.Repositories.Orders;
@@ -21,17 +21,18 @@ builder.Host.UseSerilog((context, configuration) => configuration
 builder.Services.AddDbContext<ApplicationContext>(options =>
     options.UseNpgsql(connection));
 
-builder.Services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<ApplicationContext>();
+builder.Services
+    .AddIdentity<User, IdentityRole>() // ← Подключаем Identity
+    .AddEntityFrameworkStores<ApplicationContext>() // ← Говорим где хранить пользователей
+    .AddDefaultTokenProviders(); // ← Для сброса паролей и т.д.
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IProductsDbRepository, ProductsDbRepository>();
 builder.Services.AddTransient<ICartsDbRepository, CartsDbRepository>();
-builder.Services.AddSingleton<IUsersManager, UsersManager>();
 builder.Services.AddTransient<IOrdersDbRepository, OrdersDbRepository>();
 builder.Services.AddTransient<IFavoriteDbRepository, FavoriteDbRepository>();
 builder.Services.AddTransient<IComparedDbRepository, ComparedDbRepository>();
 builder.Services.AddSingleton<IRolesStorage, RolesInMemoryStorage>();
-// Add services to the container.
 
 
 var app = builder.Build();
@@ -45,6 +46,7 @@ using (var scope = app.Services.CreateScope())
         var userManager = services.GetRequiredService<UserManager<User>>();
         var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
 
+        // Создаем роли и админа при запуске
         await DbInitializer.Initialize(context, userManager, roleManager);
     }
     catch (Exception ex)

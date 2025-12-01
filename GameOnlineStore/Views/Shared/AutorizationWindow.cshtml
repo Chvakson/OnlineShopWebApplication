@@ -80,12 +80,15 @@
                 contentType: 'application/json',
                 data: JSON.stringify(loginCredential),
                 success: function (response) {
-                    // Закрыть модальное окно
-                    $('#loginModalWindow').modal('hide');
-                    // Отобразить сообщение об успехе
+                    if (response.success) {
+                        $('#loginModalWindow').modal('hide');
+                        window.location.href = response.redirectUrl || '/';
+                    } else {
+                        alert(response.message);
+                    }
                 },
-                error: function (response) {
-                    alert(response.responseText);
+                error: function (xhr) {
+                    alert(xhr.responseJSON?.message || 'Ошибка сервера');
                 }
             });
         });

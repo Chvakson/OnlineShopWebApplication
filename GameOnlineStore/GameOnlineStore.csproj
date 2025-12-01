@@ -31,6 +31,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\GameOnlineStore.Data\GameOnlineStore.Data.csproj" />
     <ProjectReference Include="..\OnlineShop.Db\GameOnlineStore.Db.csproj" />
   </ItemGroup>
 

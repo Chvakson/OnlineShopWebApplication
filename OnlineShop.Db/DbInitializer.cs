@@ -10,18 +10,26 @@ namespace GameOnlineStore.Db
         public static async Task Initialize(ApplicationContext context, UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
         {
             await context.Database.EnsureCreatedAsync();
+            await InitializeRolesAsync(roleManager); 
             await InitializeUsersAsync(userManager, roleManager);
             await InitializeProductsAsync(context);
+        }
+
+        private static async Task InitializeRolesAsync(RoleManager<IdentityRole> roleManager)
+        {
+            // Создаем все необходимые роли
+            var roles = new[] { Constants.AdminRoleName, Constants.UserRoleName, Constants.ModeratorRoleName };
+
+            foreach (var roleName in roles)
+            {
+                await CreateRoleIfNotExistsAsync(roleManager, roleName);
+            }
         }
 
         private static async Task InitializeUsersAsync(UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
         {
             var adminEmail = "admin@gmail.com";
             var password = "_Aa123456";
-
-            // Асинхронно создаем роли
-            await CreateRoleIfNotExistsAsync(roleManager, Constants.AdminRoleName);
-            await CreateRoleIfNotExistsAsync(roleManager, Constants.UserRoleName);
 
             if (userManager.FindByNameAsync(adminEmail).Result == null)
             {
@@ -39,6 +47,7 @@ namespace GameOnlineStore.Db
             if (await roleManager.FindByNameAsync(roleName) == null)
             {
                 await roleManager.CreateAsync(new IdentityRole(roleName));
+                Console.WriteLine($"Роль '{roleName}' создана");
             }
         }
 
