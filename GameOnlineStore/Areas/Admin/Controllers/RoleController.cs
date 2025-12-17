@@ -1,5 +1,7 @@
 ﻿using GameOnlineStore.Areas.Admin.Models;
+using GameOnlineStore.Db.Models;
 using GameOnlineStore.Repositories.Roles;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GameOnlineStore.Areas.Admin.Controllers
@@ -8,15 +10,19 @@ namespace GameOnlineStore.Areas.Admin.Controllers
     public class RoleController : Controller
     {
         private readonly IRolesStorage rolesStorage;
+        private readonly RoleManager<IdentityRole> roleManager;
+        private readonly UserManager<User> userManager;
 
-        public RoleController(IRolesStorage rolesStorage)
+        public RoleController(IRolesStorage rolesStorage, UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
         {
             this.rolesStorage = rolesStorage;
+            this.userManager = userManager;
+            this.roleManager = roleManager;
         }
 
         public IActionResult Index()
         {
-            var roles = rolesStorage.GetAll();
+            var roles = roleManager.Roles.ToList();
             return View(roles);
         }
 
@@ -28,6 +34,8 @@ namespace GameOnlineStore.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Add(Role role)
         {
+            var user = (User)User.Identities;
+            //userManager.AddToRoleAsync(User, role.Name);
             if (rolesStorage.TryGetByName(role.Name) != null)
             {
                 ModelState.AddModelError("", "Такая роль уже существует");

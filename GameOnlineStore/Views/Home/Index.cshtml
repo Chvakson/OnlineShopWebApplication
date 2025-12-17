@@ -1,4 +1,13 @@
 ﻿@model List<ProductViewModel>
+@if (TempData["ShowAccountModal"] != null && (bool)TempData["ShowAccountModal"])
+{
+    <text>
+        setTimeout(function() {
+        var accountModal = new bootstrap.Modal(document.getElementById('accountModalWindow'));
+        accountModal.show();
+        }, 500);
+    </text>
+}
 
 <div class="d-flex justify-content-center">
     <form action="/" method="post">

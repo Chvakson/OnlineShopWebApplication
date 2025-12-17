@@ -101,6 +101,20 @@ namespace GameOnlineStore.Controllers
             return BadRequest(string.Join(", ", result.Errors.Select(e => e.Description)));
         }
 
+        public IActionResult AccessDenied(string returnUrl = null)
+        {
+            // Сохраняем URL для возврата после входа
+            if (!string.IsNullOrEmpty(returnUrl))
+            {
+                TempData["ReturnUrl"] = returnUrl;
+            }
+
+            // Добавляем флаг для открытия модального окна
+            TempData["ShowLoginModal"] = true;
+
+            return RedirectToAction("Index", "Home");
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()

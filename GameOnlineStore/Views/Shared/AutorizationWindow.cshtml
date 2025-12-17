@@ -1,6 +1,6 @@
 ﻿@* Источники *@
 @* https://bootstrap-4.ru/docs/5.0/components/modal/ *@
-@*  https://bootstrap-4.ru/docs/5.0/components/navs-tabs/ *@
+@* https://bootstrap-4.ru/docs/5.0/components/navs-tabs/ *@
 
 <div class="modal fade" id="loginModalWindow" tabindex="-1" aria-labelledby="loginWindowLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -65,65 +65,6 @@
     </div>
 </div>
 
-<script>
-    $(document).ready(function () {
-        $('#signInForm').submit(function (e) {
-            e.preventDefault();
-            let loginCredential = {
-                login: $('input[name="login"]').val(),
-                password: $('input[name="password"]').val(),
-                rememberMe: $('input[name="rememberMe"]').is(":checked")
-            };
-            $.ajax({
-                type: 'POST',
-                url: '@Url.Action("SignIn", "Account")',
-                contentType: 'application/json',
-                data: JSON.stringify(loginCredential),
-                success: function (response) {
-                    if (response.success) {
-                        $('#loginModalWindow').modal('hide');
-                        window.location.href = response.redirectUrl || '/';
-                    } else {
-                        alert(response.message);
-                    }
-                },
-                error: function (xhr) {
-                    alert(xhr.responseJSON?.message || 'Ошибка сервера');
-                }
-            });
-        });
-        $('#registerForm').submit(function (e) {
-            e.preventDefault();
-            let registerDetails = {
-                login: $('input[name="newLogin"]').val(),
-                phone: $('input[name="phone"]').val(),
-                password: $('input[name="newPassword"]').val(),
-                confirmPassword: $('input[name="confirmPassword"]').val()
-            };
-            $.ajax({
-                type: 'POST',
-                url: '@Url.Action("Register", "Account")',
-                contentType: 'application/json',
-                data: JSON.stringify(registerDetails),
-                success: function (response) {
-                    // Закрыть модальное окно
-                    $('#loginModalWindow').modal('hide');
-                    // Отобразить сообщение об успехе
-                },
-                error: function (response) {
-                    alert(response.responseText);
-                }
-            });
-        });
-    });
-</script>
-
-@* Маска для ввода номера телефона *@
-<script>
-    $(document).ready(function () {
-        $("#phone").mask("+7(999)999-99-99");
-    });
-</script>
-
-
-
+@section Scripts {
+    <script type="text/javascript" src="~/js/autorization.js"></script>
+}

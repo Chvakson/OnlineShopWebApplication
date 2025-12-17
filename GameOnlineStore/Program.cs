@@ -9,6 +9,7 @@ using GameOnlineStore.Repositories.Roles;
 using GameOnlineStore.Repositories.Users;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -25,6 +26,13 @@ builder.Services
     .AddIdentity<User, IdentityRole>() // ← Подключаем Identity
     .AddEntityFrameworkStores<ApplicationContext>() // ← Говорим где хранить пользователей
     .AddDefaultTokenProviders(); // ← Для сброса паролей и т.д.
+
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/Home/Index";
+    options.AccessDeniedPath = "/Home/Index";
+    options.LogoutPath = "/Home/Index";
+});
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IProductsDbRepository, ProductsDbRepository>();

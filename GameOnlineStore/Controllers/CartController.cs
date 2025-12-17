@@ -4,11 +4,12 @@ using OnlineShopWebApplication;
 using GameOnlineStore.Db.Repositories.Products;
 using GameOnlineStore.Db.Repositories.Carts;
 using GameOnlineStore.Helpers;
+using Microsoft.AspNetCore.Authorization;
 
 
 namespace GameOnlineStore.Models.Controllers
 {
-
+    [Authorize]
     public class CartController : Controller
     {
         private readonly IProductsDbRepository productsDbRepositoty;
