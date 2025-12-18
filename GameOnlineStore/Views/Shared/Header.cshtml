@@ -15,7 +15,7 @@
                             @User.Identity.Name
                         </li>
                         <li class="nav-item">
-                            <form asp-controller="Account" asp-action="Logout" method="post" class="d-inline">
+                            <form asp-area=""  asp-controller="Account" asp-action="Logout" method="post" class="d-inline">
                                 @Html.AntiForgeryToken()
                                 <button type="submit" class="btn btn-link nav-link text-dark">
                                     <img src="~/img/icons/logout_24.svg" />

@@ -29,9 +29,13 @@ builder.Services
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
-    options.LoginPath = "/Home/Index";
-    options.AccessDeniedPath = "/Home/Index";
-    options.LogoutPath = "/Home/Index";
+    options.LoginPath = "/Account/SignIn";
+    options.AccessDeniedPath = "/Account/AccessDenied";
+    options.LogoutPath = "/Account/Logout";
+    options.Cookie = new CookieBuilder
+    {
+        IsEssential = true,
+    };
 });
 
 builder.Services.AddControllersWithViews();

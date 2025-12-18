@@ -10,7 +10,7 @@
         };
         $.ajax({
             type: 'POST',
-            url: '@Url.Action("SignIn", "Account")',
+            url: 'Account/SignIn',
             contentType: 'application/json',
             data: JSON.stringify(loginCredential),
             success: function (response) {
@@ -36,7 +36,7 @@
         };
         $.ajax({
             type: 'POST',
-            url: '@Url.Action("Register", "Account")',
+            url: 'Account/Register',
             contentType: 'application/json',
             data: JSON.stringify(registerDetails),
             success: function (response) {

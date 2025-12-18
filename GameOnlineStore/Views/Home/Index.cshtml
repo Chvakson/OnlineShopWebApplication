@@ -1,12 +1,15 @@
 ﻿@model List<ProductViewModel>
-@if (TempData["ShowAccountModal"] != null && (bool)TempData["ShowAccountModal"])
+
+@if(ViewBag.showModal == true)
 {
-    <text>
-        setTimeout(function() {
-        var accountModal = new bootstrap.Modal(document.getElementById('accountModalWindow'));
-        accountModal.show();
-        }, 500);
-    </text>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                var accountModal = new bootstrap.Modal(document.getElementById('loginModalWindow'));
+                accountModal.show();
+            }, 500);
+        });
+    </script>
 }
 
 <div class="d-flex justify-content-center">

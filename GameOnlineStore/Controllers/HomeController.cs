@@ -1,6 +1,7 @@
-using GameOnlineStore.Helpers;
-using Microsoft.AspNetCore.Mvc;
 using GameOnlineStore.Db.Repositories.Products;
+using GameOnlineStore.Helpers;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace GameOnlineStore.Models.Controllers
 {
@@ -15,6 +16,9 @@ namespace GameOnlineStore.Models.Controllers
 
         public IActionResult Index()
         {
+            if (!User.Identity.IsAuthenticated) {
+                ViewBag.ShowModal = true;
+            }
             var productsDb = productsRepository.GetAll();
             var productViewModels = new List<ProductViewModel>();
             foreach (var product in productsDb)

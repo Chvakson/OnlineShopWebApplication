@@ -23,7 +23,7 @@ namespace GameOnlineStore.Controllers
         public IActionResult SignIn(string returnUrl)
         {
             ViewData["ReturnUrl"] = returnUrl;
-            return View();
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpPost]
