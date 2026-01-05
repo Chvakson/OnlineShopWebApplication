@@ -36,7 +36,7 @@ namespace GameOnlineStore.Areas.Admin.Controllers
         {
             var user = (User)User.Identities;
             //userManager.AddToRoleAsync(User, role.Name);
-            if (rolesStorage.TryGetByName(role.Name) != null)
+            if (roleManager.FindByNameAsync(role.Name) != null)
             {
                 ModelState.AddModelError("", "Такая роль уже существует");
             }

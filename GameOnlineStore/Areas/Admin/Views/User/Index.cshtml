@@ -1,4 +1,5 @@
-﻿@model List<UserAccount>
+﻿@using GameOnlineStore.Db.Models
+@model List<User>
 <div class="row">
     @await Html.PartialAsync("AdminLeftPanel")
     <div class="col-9">
@@ -16,10 +17,10 @@
                 {
                     <tr>
                         <th scope="row">@(i + 1)</th>
-                        <td>@Model[i].Login</td>
-                        <td>@Model[i].Phone</td>
+                        <td>@Model[i].UserName</td>
+                        <td>@Model[i].PhoneNumber</td>
                         <td>
-                            <a class="btn btn-dark" asp-area="Admin" asp-controller="User" asp-action="Details" asp-route-login="@Model[i].Login">Подробнее</a>
+                            <a class="btn btn-dark" asp-area="Admin" asp-controller="User" asp-action="Details" asp-route-login="@Model[i].UserName">Подробнее</a>
                         </td>
                     </tr>
                 }
