@@ -1,6 +1,4 @@
 ﻿using GameOnlineStore.Areas.Admin.Models;
-using GameOnlineStore.Db.Models;
-using GameOnlineStore.Repositories.Roles;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,14 +7,10 @@ namespace GameOnlineStore.Areas.Admin.Controllers
     [Area("Admin")]
     public class RoleController : Controller
     {
-        private readonly IRolesStorage rolesStorage;
         private readonly RoleManager<IdentityRole> roleManager;
-        private readonly UserManager<User> userManager;
 
-        public RoleController(IRolesStorage rolesStorage, UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
+        public RoleController(RoleManager<IdentityRole> roleManager)
         {
-            this.rolesStorage = rolesStorage;
-            this.userManager = userManager;
             this.roleManager = roleManager;
         }
 
@@ -32,26 +26,27 @@ namespace GameOnlineStore.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(Role role)
+        public async Task<IActionResult> Add(Role role)
         {
-            var user = (User)User.Identities;
             //userManager.AddToRoleAsync(User, role.Name);
-            if (roleManager.FindByNameAsync(role.Name) != null)
+            if (await roleManager.FindByNameAsync(role.Name) != null)
             {
                 ModelState.AddModelError("", "Такая роль уже существует");
             }
             if (ModelState.IsValid)
             {
-                rolesStorage.Add(role);
+                await roleManager.CreateAsync(new IdentityRole(role.Name));
                 return RedirectToAction("Index");
             }
 
             return View("Create", role);
         }
 
-        public IActionResult Remove(string name)
+        public async Task<IActionResult> Remove(string name)
         {
-            rolesStorage.Remove(name);
+            var existingRole = await roleManager.FindByNameAsync(name);
+            if(existingRole != null)
+                await roleManager.DeleteAsync(existingRole);
             return RedirectToAction("Index");
         }
     }
