@@ -1,11 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using OnlineShopWebApplication;
+﻿using GameOnlineStore.Db.Repositories.Carts;
 using GameOnlineStore.Db.Repositories.Products;
-using GameOnlineStore.Db.Repositories.Carts;
 using GameOnlineStore.Helpers;
 using Microsoft.AspNetCore.Authorization;
-
+using Microsoft.AspNetCore.Mvc;
+using OnlineShopWebApplication;
 
 namespace GameOnlineStore.Models.Controllers
 {
@@ -30,6 +28,11 @@ namespace GameOnlineStore.Models.Controllers
         public IActionResult Add(Guid productId)
         {
             var product = productsDbRepositoty.TryGetById(productId);
+            if (product == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             cartsDbRepository.Add(product, Constants.UserId);
             return RedirectToAction("Index");
         }
@@ -37,14 +40,17 @@ namespace GameOnlineStore.Models.Controllers
         public IActionResult Remove(Guid productId)
         {
             var product = productsDbRepositoty.TryGetById(productId);
-            cartsDbRepository.Remove(product, Constants.UserId);
+            if (product != null)
+            {
+                cartsDbRepository.Remove(product, Constants.UserId);
+            }
+
             return RedirectToAction("Index");
         }
 
         public IActionResult Clear()
         {
             cartsDbRepository.Clear(Constants.UserId);
-
             return RedirectToAction("Index");
         }
     }

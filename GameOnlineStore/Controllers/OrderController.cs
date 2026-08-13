@@ -1,8 +1,9 @@
 ﻿using GameOnlineStore.Db.Repositories.Carts;
+using GameOnlineStore.Db.Repositories.Orders;
+using GameOnlineStore.Helpers;
+using GameOnlineStore.Services;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApplication;
-using GameOnlineStore.Helpers;
-using GameOnlineStore.Db.Repositories.Orders;
 
 namespace GameOnlineStore.Models.Controllers
 {
@@ -10,35 +11,54 @@ namespace GameOnlineStore.Models.Controllers
     {
         private readonly IOrdersDbRepository ordersDbRepository;
         private readonly ICartsDbRepository cartsDbRepository;
-        public OrderController(IOrdersDbRepository ordersDbRepository, ICartsDbRepository cartsDbRepository)
+        private readonly IOrderEmailService orderEmailService;
+
+        public OrderController(
+            IOrdersDbRepository ordersDbRepository,
+            ICartsDbRepository cartsDbRepository,
+            IOrderEmailService orderEmailService)
         {
             this.ordersDbRepository = ordersDbRepository;
             this.cartsDbRepository = cartsDbRepository;
+            this.orderEmailService = orderEmailService;
         }
+
         public IActionResult Index()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult Buy(UserDeliveryInfoViewModel userDeliveryInfoViewModel)
+        public async Task<IActionResult> Buy(UserDeliveryInfoViewModel userDeliveryInfoViewModel)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                var existingCart = cartsDbRepository.TryGetByUserId(Constants.UserId);
-                var existingCartViewModel = existingCart.ToCartViewModel;
-
-                var orderViewModel = new OrderViewModel
-                {
-                    UserDeliveryInfo = userDeliveryInfoViewModel,
-                    Items = existingCart.Items.ToCartItemViewModels()
-                };
-                var orderDb = orderViewModel.ToOrderDbModel(existingCart);
-                ordersDbRepository.Add(orderDb);
-                cartsDbRepository.Clear(Constants.UserId);
-
-                return View();
+                return View("Index", userDeliveryInfoViewModel);
             }
+
+            var existingCart = cartsDbRepository.TryGetByUserId(Constants.UserId);
+            if (existingCart?.Items == null || existingCart.Items.Count == 0)
+            {
+                return RedirectToAction("Index", "Cart");
+            }
+
+            var orderViewModel = new OrderViewModel
+            {
+                UserDeliveryInfo = userDeliveryInfoViewModel,
+                Items = existingCart.Items.ToCartItemViewModels()
+            };
+            var orderDb = orderViewModel.ToOrderDbModel(existingCart);
+            ordersDbRepository.Add(orderDb);
+
+            orderViewModel.Id = orderDb.Id;
+            orderViewModel.CreatedDateTime = orderDb.CreatedDateTime;
+
+            var emailResult = await orderEmailService.SendOrderConfirmationAsync(orderViewModel);
+            cartsDbRepository.Clear(Constants.UserId);
+
+            ViewBag.EmailSent = emailResult.Sent;
+            ViewBag.EmailError = emailResult.Error;
+            ViewBag.CustomerEmail = userDeliveryInfoViewModel.Email;
             return View();
         }
     }

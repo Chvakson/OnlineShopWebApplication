@@ -9,8 +9,9 @@
             <thead>
                 <tr>
                     <th class="col-1" scope="col">№</th>
-                    <th class="col-5" scope="col">Название</th>
-                    <th class="col-3" scope="col">Цена</th>
+                    <th class="col-4" scope="col">Название</th>
+                    <th class="col-3" scope="col">Жанры</th>
+                    <th class="col-2" scope="col">Цена</th>
                     <th class="col-2" scope="col"></th>
                     <th class="col-2" scope="col"></th>
                 </tr>
@@ -21,6 +22,7 @@
                     <tr>
                         <th scope="row">@(i + 1)</th>
                         <td>@Model[i].Name</td>
+                        <td>@(Model[i].Genre ?? "—")</td>
                         <td>@Model[i].Cost ₽</td>
                         <td>
                             <a class="btn btn-dark" asp-area="Admin" asp-controller="Product" asp-action="Edit" asp-route-productId="@Model[i].Id">Редактировать</a>

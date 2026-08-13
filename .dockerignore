@@ -1,0 +1,16 @@
+**/.git
+**/.vs
+**/.idea
+**/.vscode
+**/bin
+**/obj
+**/App_Data
+**/logs
+**/*.user
+**/*.suo
+**/*.md
+**/node_modules
+OnlineShopWebApplication
+.cursor
+agent-transcripts
+*.eml

@@ -1,24 +1,51 @@
 ﻿@using OnlineShopWebApplication
-<header>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-        <div class="container-fluid">
-            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">GameOnlineStore</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
+<header class="site-header">
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-xl header-inner">
+            <a class="brand" asp-area="" asp-controller="Home" asp-action="Index">
+                <span class="brand-mark">▶</span>
+                <span class="brand-text">Game<span>Store</span></span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#siteNav" aria-controls="siteNav"
+                    aria-expanded="false" aria-label="Открыть меню">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="navbar-collapse collapse d-sm-inline-flex">
-                <ul class="navbar-nav">
+            <div class="collapse navbar-collapse" id="siteNav">
+                <div class="header-search-wrap">
+                    <form class="header-search" id="catalogSearchForm" asp-area="" asp-controller="Home" asp-action="Index" method="get" autocomplete="off">
+                        <input id="catalogSearchInput" type="search" name="query" value="@Context.Request.Query["query"]" placeholder="Поиск игр, жанров, студий..." autocomplete="off" aria-autocomplete="list" aria-controls="catalogSearchSuggest">
+                        @if (!string.IsNullOrWhiteSpace(Context.Request.Query["genres"]))
+                        {
+                            <input type="hidden" name="genres" value="@Context.Request.Query["genres"]">
+                        }
+                        else if (!string.IsNullOrWhiteSpace(Context.Request.Query["genre"]))
+                        {
+                            <input type="hidden" name="genres" value="@Context.Request.Query["genre"]">
+                        }
+                        @if (!string.IsNullOrWhiteSpace(Context.Request.Query["sort"]))
+                        {
+                            <input type="hidden" name="sort" value="@Context.Request.Query["sort"]">
+                        }
+                        @if (!string.IsNullOrWhiteSpace(Context.Request.Query["pageSize"]))
+                        {
+                            <input type="hidden" name="pageSize" value="@Context.Request.Query["pageSize"]">
+                        }
+                        <button type="submit" aria-label="Найти">Найти</button>
+                    </form>
+                    <ul class="search-suggest" id="catalogSearchSuggest" hidden></ul>
+                </div>
+            </div>
+            <ul class="navbar-nav header-actions">
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <li class="nav-item text-dark">
-                            @User.Identity.Name
+                        <li class="nav-item user-chip">
+                            <span>@User.Identity.Name</span>
                         </li>
                         <li class="nav-item">
-                            <form asp-area=""  asp-controller="Account" asp-action="Logout" method="post" class="d-inline">
+                            <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" class="d-inline">
                                 @Html.AntiForgeryToken()
-                                <button type="submit" class="btn btn-link nav-link text-dark">
-                                    <img src="~/img/icons/logout_24.svg" />
+                                <button type="submit" class="icon-btn" title="Выйти">
+                                    <img src="~/img/icons/logout_24.svg" alt="Выйти" />
                                 </button>
                             </form>
                         </li>
@@ -26,8 +53,8 @@
                     else
                     {
                         <li class="nav-item">
-                            <a id="singin" data-bs-toggle="modal" asp-area="" data-bs-target="#loginModalWindow" class="nav-link text-dark">
-                                <img src="~/img/icons/account_circle_black_24dp.svg" />
+                            <a id="singin" data-bs-toggle="modal" asp-area="" data-bs-target="#loginModalWindow" class="icon-btn" title="Войти">
+                                <img src="~/img/icons/account_circle_black_24dp.svg" alt="Войти" />
                             </a>
                         </li>
                     }
@@ -35,26 +62,30 @@
                     @if (User.IsInRole(Constants.AdminRoleName))
                     {
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Home" asp-action="Index">
-                                <img src="~/img/icons/admin_panel_settings_black_24dp.svg" />
+                            <a class="icon-btn" asp-area="Admin" asp-controller="Home" asp-action="Index" title="Админ-панель">
+                                <img src="~/img/icons/admin_panel_settings_black_24dp.svg" alt="Админ" />
                             </a>
                         </li>
                     }
 
-
-                   
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Cart" asp-action="Index"><img src="~/img/icons/shopping_cart_black_24dp.svg" />@await Component.InvokeAsync("Cart")</a>
+                        <a class="icon-btn" asp-area="" asp-controller="Cart" asp-action="Index" title="Корзина">
+                            <img src="~/img/icons/shopping_cart_black_24dp.svg" alt="Корзина" />
+                            @await Component.InvokeAsync("Cart")
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Favorite" asp-action="Index"><img src="~/img/icons/favorite_border_black_24dp.svg" />@await Component.InvokeAsync("Favorite")</a>
+                        <a class="icon-btn" asp-area="" asp-controller="Favorite" asp-action="Index" title="Избранное">
+                            <img src="~/img/icons/favorite_border_black_24dp.svg" alt="Избранное" />
+                            @await Component.InvokeAsync("Favorite")
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Compared" asp-action="Index"><img src="~/img/icons/compare_black_24dp.svg" /></a>
+                        <a class="icon-btn" asp-area="" asp-controller="Compared" asp-action="Index" title="Сравнение">
+                            <img src="~/img/icons/compare_black_24dp.svg" alt="Сравнение" />
+                        </a>
                     </li>
                 </ul>
-            </div>
         </div>
     </nav>
-    @await Html.PartialAsync("AutorizationWindow")
 </header>

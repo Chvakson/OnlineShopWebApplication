@@ -10,6 +10,12 @@
 
         public string Description { get; set; }
 
+        public string? Genre { get; set; }
+
+        public string? Developer { get; set; }
+
+        public int? ReleaseYear { get; set; }
+
         public List<CartItem> CartItems { get; set; }  
 
         public string? ImgFileName { get; set; }
@@ -18,10 +24,18 @@
         {
             get
             {
-                const string root = "/img/games/";
-                return string.IsNullOrEmpty(ImgFileName)
-                    ? $"{root}default.jpg"
-                    : $"{root}{ImgFileName}";
+                if (string.IsNullOrEmpty(ImgFileName))
+                {
+                    return "/img/games/default.jpg";
+                }
+
+                if (ImgFileName.StartsWith("http", StringComparison.OrdinalIgnoreCase) ||
+                    ImgFileName.StartsWith('/'))
+                {
+                    return ImgFileName;
+                }
+
+                return $"/img/games/{ImgFileName}";
             }
         }
 

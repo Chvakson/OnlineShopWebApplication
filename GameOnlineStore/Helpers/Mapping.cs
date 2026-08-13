@@ -15,6 +15,9 @@ namespace GameOnlineStore.Helpers
                 Cost = productDb.Cost,
                 Description = productDb.Description,
                 ImgFileName = productDb.ImgFileName,
+                Genre = productDb.Genre,
+                Developer = productDb.Developer,
+                ReleaseYear = productDb.ReleaseYear,
             };
         }
 
@@ -30,8 +33,18 @@ namespace GameOnlineStore.Helpers
         public static List<CartItemViewModel> ToCartItemViewModels(this List<CartItem> cartDbItems)
         {
             List<CartItemViewModel> cartItemViewModels = new();
+            if (cartDbItems == null)
+            {
+                return cartItemViewModels;
+            }
+
             foreach (var item in cartDbItems)
             {
+                if (item?.Product == null)
+                {
+                    continue;
+                }
+
                 var carItemViewModel = new CartItemViewModel()
                 {
                     Id = item.Id,

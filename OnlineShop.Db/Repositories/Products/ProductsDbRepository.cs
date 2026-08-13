@@ -51,6 +51,9 @@ namespace GameOnlineStore.Db.Repositories.Products
             exisingProduct.Cost = product.Cost;
             exisingProduct.Description = product.Description;
             exisingProduct.ImgFileName = product.ImgFileName;
+            exisingProduct.Genre = product.Genre;
+            exisingProduct.Developer = product.Developer;
+            exisingProduct.ReleaseYear = product.ReleaseYear;
             context.SaveChanges();
         }
     }

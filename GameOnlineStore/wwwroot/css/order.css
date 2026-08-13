@@ -1,19 +1,77 @@
-input{
-    width:200px
+.order-page {
+    max-width: 980px;
 }
 
-textarea {
-    width: 250px;
-    max-height: 100px;
-    height: 100px;
+.order-page h1 {
+    margin-bottom: 24px;
 }
 
-.delivery-address-container {
-    margin-right: 50px;
+.order-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    align-items: start;
+    margin-bottom: 24px;
 }
 
-.delivery-address-co, 
-.recipient-col {
+.order-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    padding: 24px;
+    min-width: 0;
+}
+
+.order-card h2,
+.order-card h4 {
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+}
+
+.order-field {
     display: flex;
     flex-direction: column;
-} 
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.order-field label {
+    color: var(--muted);
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.order-field input,
+.order-field textarea,
+.order-page input,
+.order-page textarea {
+    width: 100%;
+    max-width: none;
+    background: var(--input-bg);
+    color: var(--input-text);
+}
+
+.order-field textarea,
+.order-page textarea {
+    min-height: 110px;
+    resize: vertical;
+}
+
+.order-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+}
+
+.order-page .text-danger,
+.order-field span {
+    color: var(--danger);
+    font-size: 0.85rem;
+}
+
+@media (max-width: 991px) {
+    .order-grid,
+    .order-row {
+        grid-template-columns: 1fr;
+    }
+}

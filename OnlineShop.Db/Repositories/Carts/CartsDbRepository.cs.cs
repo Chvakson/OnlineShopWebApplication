@@ -76,6 +76,11 @@ namespace GameOnlineStore.Db.Repositories.Carts
         public void Clear(string userId)
         {
             var existingCart = TryGetByUserId(userId);
+            if (existingCart == null)
+            {
+                return;
+            }
+
             context.Carts.Remove(existingCart);
             context.SaveChanges();
         }

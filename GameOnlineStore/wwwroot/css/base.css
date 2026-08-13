@@ -1,0 +1,144 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    color-scheme: dark;
+}
+
+html,
+body {
+    min-height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: "Manrope", sans-serif;
+    background:
+        radial-gradient(1200px 600px at 10% -10%, rgba(14, 116, 144, 0.28), transparent 50%),
+        radial-gradient(900px 500px at 100% 0%, rgba(103, 232, 249, 0.08), transparent 45%),
+        var(--bg);
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+img {
+    max-width: 100%;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+a:hover {
+    color: inherit;
+}
+
+.site-main {
+    flex: 1;
+    padding: 24px 0 80px;
+}
+
+.container-xl {
+    max-width: 1240px;
+}
+
+.catalog-count,
+.game-card__meta,
+.product-meta,
+.muted,
+.footer-copy,
+.footer-legal {
+    color: var(--muted);
+}
+
+.hero-content h1,
+.product-info h1,
+.page-section h1,
+.catalog-toolbar h2 {
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    margin-bottom: 12px;
+}
+
+.page-section h2,
+.page-section h4 {
+    color: var(--text);
+}
+
+.empty-state,
+.page-section {
+    padding-top: 8px;
+}
+
+.empty-state {
+    text-align: center;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 28px;
+    padding: 56px 24px;
+}
+
+.empty-state p {
+    color: var(--muted);
+    margin-bottom: 20px;
+}
+
+.catalog-sort select,
+.form-control,
+.form-control:focus,
+.form-control:active,
+input,
+input:focus,
+input:active,
+select,
+select:focus,
+textarea,
+textarea:focus {
+    background-color: var(--input-bg) !important;
+    color: var(--input-text) !important;
+    caret-color: var(--input-text);
+    border: 1px solid var(--line) !important;
+    border-radius: 12px;
+    padding: 10px 12px;
+    box-shadow: none;
+}
+
+.form-control::placeholder,
+input::placeholder,
+textarea::placeholder {
+    color: var(--placeholder) !important;
+    opacity: 1;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-text-fill-color: var(--input-text) !important;
+    caret-color: var(--input-text);
+    box-shadow: 0 0 0 1000px var(--input-bg) inset !important;
+    -webkit-box-shadow: 0 0 0 1000px var(--input-bg) inset !important;
+    transition: background-color 99999s ease-out;
+}
+
+textarea:focus,
+input:focus,
+select:focus,
+.form-control:focus,
+.form-check-input:focus,
+.btn:focus {
+    border-color: var(--accent) !important;
+    box-shadow: 0 0 0 0.2rem rgba(14, 116, 144, 0.28) !important;
+    outline: none;
+}
+
+.table {
+    --bs-table-bg: transparent;
+    --bs-table-color: var(--text);
+    --bs-table-border-color: var(--line);
+}

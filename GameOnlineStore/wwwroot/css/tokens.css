@@ -1,0 +1,20 @@
+:root {
+    --bg: #061318;
+    --bg-elevated: #0a1c24;
+    --surface: #0d2730;
+    --surface-2: #123540;
+    --line: rgba(103, 232, 249, 0.14);
+    --text: #e8f6f8;
+    --muted: #8aaeb6;
+    --accent: #0e7490;
+    --accent-strong: #155e75;
+    --accent-2: #67e8f9;
+    --accent-soft: rgba(14, 116, 144, 0.28);
+    --on-accent: #f0fdff;
+    --input-bg: #082028;
+    --input-text: #f4fdff;
+    --placeholder: #7fb4bf;
+    --danger: #ff6b81;
+    --shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+    --radius: 22px;
+}

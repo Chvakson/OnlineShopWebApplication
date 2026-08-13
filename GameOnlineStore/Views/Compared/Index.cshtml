@@ -1,53 +1,81 @@
-﻿@using GameOnlineStore.Db.Models
-@model List<ProductViewModel>
-
-<h2>Сравнение товаров</h2>
-
+﻿@model List<ProductViewModel>
 @{
-    if (Model == null || Model.Count == 0)
-    {
-        <h4>Нет товаров для сравнения</h4>
-    }
+    ViewData["Title"] = "Сравнение";
+}
 
-    else
+<section class="page-section">
+    <h1>Сравнение игр</h1>
+    @if (Model == null || Model.Count == 0)
     {
-        <div>
-            <div  id="scrollable-content">
-                @foreach (var product in Model)
-                {
-                    <div class="card col-4 border-secondary">
-                        <a class="card-header" style="cursor: pointer" asp-area="" asp-controller="Product" asp-action="Index" asp-route-productId="@product.Id">
-                            <h4>@product.Name</h4>
-                        </a>
-                        <div class="card-body text-secondary">
-                            <img src="@Url.Content(product.ImgPath)" class="card-img-top" alt="...">
-                            <p class="card-text">Цена: @product.Cost р.</p>
-                            <a class="btn btn-dark" asp-area="" asp-controller="Cart" asp-action="Add" asp-route-productId="@product.Id">Добавить в корзину</a>
-                            <a class="btn btn-dark" asp-area="" asp-controller="Compared" asp-action="Remove" asp-route-productId="@product.Id">Убрать из сравнения</a>
-                        </div>
-                    </div>
-                }
-            </div>
-            <h5>Сравнение характеристик</h5>
-            <div  id="scrollable-content">
-                @foreach (var product in Model)
-                {
-                    <div class="col-4">
-                        <div>
-                            Жанр
-                        </div>
-                        <div>
-                            Год издания
-                        </div>
-                        <div>
-                            Студия-разработчик
-                        </div>
-                        <div>
-                            Системные требования
-                        </div>
-                    </div>
-                }
-            </div>
+        <div class="empty-state">
+            <h3>Нечего сравнивать</h3>
+            <p>Добавьте несколько игр из каталога, чтобы сравнить жанр, студию и год выхода.</p>
+            <a class="btn-store" asp-area="" asp-controller="Home" asp-action="Index">Открыть каталог</a>
         </div>
     }
-}
+    else
+    {
+        <div class="compare-track">
+            @foreach (var product in Model)
+            {
+                ViewData["CardVariant"] = "compared";
+                @await Html.PartialAsync("_ProductCard", product)
+            }
+        </div>
+
+        <div class="compare-table-wrap">
+            <table class="compare-table">
+                <thead>
+                    <tr>
+                        <th>Характеристика</th>
+                        @foreach (var product in Model)
+                        {
+                            <th>@product.Name</th>
+                        }
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>Жанр</th>
+                        @foreach (var product in Model)
+                        {
+                            <td>
+                                <div class="hero-tags">
+                                    @foreach (var tag in product.GenreTags)
+                                    {
+                                        <span class="genre-tag" data-genre="@tag">@tag</span>
+                                    }
+                                    @if (!product.GenreTags.Any())
+                                    {
+                                        <span class="muted">—</span>
+                                    }
+                                </div>
+                            </td>
+                        }
+                    </tr>
+                    <tr>
+                        <th>Год издания</th>
+                        @foreach (var product in Model)
+                        {
+                            <td>@(product.ReleaseYear?.ToString() ?? "—")</td>
+                        }
+                    </tr>
+                    <tr>
+                        <th>Студия-разработчик</th>
+                        @foreach (var product in Model)
+                        {
+                            <td>@(string.IsNullOrWhiteSpace(product.Developer) ? "—" : product.Developer)</td>
+                        }
+                    </tr>
+                    <tr>
+                        <th>Цена</th>
+                        @foreach (var product in Model)
+                        {
+                            <td class="compare-price">@product.Cost.ToString("N0") ₽</td>
+                        }
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    }
+</section>

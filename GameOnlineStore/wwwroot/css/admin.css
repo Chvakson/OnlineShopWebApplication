@@ -1,0 +1,14 @@
+.menu-category {
+    display: block;
+    padding: 10px 14px;
+    margin-bottom: 8px;
+    border-radius: 12px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    color: var(--text);
+    font-weight: 700;
+}
+
+.menu-category:hover {
+    background: var(--accent-soft);
+}

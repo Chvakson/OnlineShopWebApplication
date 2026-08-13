@@ -22,8 +22,13 @@ namespace GameOnlineStore.Controllers
         [HttpGet]
         public IActionResult SignIn(string returnUrl)
         {
-            ViewData["ReturnUrl"] = returnUrl;
-            return RedirectToAction("Index", "Home");
+            TempData["ShowLoginModal"] = true;
+            if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+            {
+                TempData["ReturnUrl"] = returnUrl;
+            }
+
+            return RedirectToAction("Index", "Home", new { login = 1 });
         }
 
         [HttpPost]
@@ -47,10 +52,16 @@ namespace GameOnlineStore.Controllers
 
             if (result.Succeeded)
             {
+                var redirectUrl = TempData["ReturnUrl"] as string;
+                if (string.IsNullOrEmpty(redirectUrl) || !Url.IsLocalUrl(redirectUrl))
+                {
+                    redirectUrl = Url.Action("Index", "Home");
+                }
+
                 return Json(new
                 {
                     success = true,
-                    redirectUrl = Url.Action("Index", "Home")
+                    redirectUrl
                 });
             }
 
@@ -112,7 +123,7 @@ namespace GameOnlineStore.Controllers
             // Добавляем флаг для открытия модального окна
             TempData["ShowLoginModal"] = true;
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Home", new { login = 1 });
         }
 
         [HttpPost]

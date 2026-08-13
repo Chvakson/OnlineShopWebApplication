@@ -36,6 +36,9 @@ builder.Services.ConfigureApplicationCookie(options =>
 });
 
 builder.Services.AddControllersWithViews();
+builder.Services.Configure<GameOnlineStore.Services.EmailSettings>(
+    builder.Configuration.GetSection(GameOnlineStore.Services.EmailSettings.SectionName));
+builder.Services.AddTransient<GameOnlineStore.Services.IOrderEmailService, GameOnlineStore.Services.OrderEmailService>();
 builder.Services.AddTransient<IProductsDbRepository, ProductsDbRepository>();
 builder.Services.AddTransient<ICartsDbRepository, CartsDbRepository>();
 builder.Services.AddTransient<IOrdersDbRepository, OrdersDbRepository>();
@@ -44,38 +47,55 @@ builder.Services.AddTransient<IComparedDbRepository, ComparedDbRepository>();
 
 
 var app = builder.Build();
+var runningInContainer = string.Equals(
+    Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER"),
+    "true",
+    StringComparison.OrdinalIgnoreCase);
 
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
-    try
-    {
-        var context = services.GetRequiredService<ApplicationContext>();
-        var userManager = services.GetRequiredService<UserManager<User>>();
-        var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+    var logger = services.GetRequiredService<ILogger<Program>>();
+    const int maxAttempts = 15;
 
-        // Создаем роли и админа при запуске
-        await DbInitializer.Initialize(context, userManager, roleManager);
-    }
-    catch (Exception ex)
+    for (var attempt = 1; attempt <= maxAttempts; attempt++)
     {
-        var logger = services.GetRequiredService<ILogger<Program>>();
-        logger.LogError(ex, "An error occurred while initializing the database.");
+        try
+        {
+            var context = services.GetRequiredService<ApplicationContext>();
+            var userManager = services.GetRequiredService<UserManager<User>>();
+            var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+            await DbInitializer.Initialize(context, userManager, roleManager);
+            break;
+        }
+        catch (Exception ex) when (attempt < maxAttempts)
+        {
+            logger.LogWarning(ex, "База данных ещё не готова, попытка {Attempt}/{MaxAttempts}", attempt, maxAttempts);
+            await Task.Delay(TimeSpan.FromSeconds(2));
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Не удалось инициализировать базу данных.");
+        }
     }
 }
 
-
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
+    if (!runningInContainer)
+    {
+        app.UseHsts();
+    }
 }
 
 app.UseSerilogRequestLogging();
 
-app.UseHttpsRedirection();
+if (!runningInContainer)
+{
+    app.UseHttpsRedirection();
+}
+
 app.UseStaticFiles();
 
 app.UseRouting();

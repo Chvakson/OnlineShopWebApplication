@@ -24,6 +24,24 @@
     </div>
 
     <div class="col mb-3" style="display: flex; flex-direction: column;">
+        <label>Жанры (через запятую)</label>
+        <input class="col-4 form-control" asp-for="Genre" placeholder="Экшен, RPG, Открытый мир">
+        <span asp-validation-for="Genre"></span>
+    </div>
+
+    <div class="col mb-3" style="display: flex; flex-direction: column;">
+        <label>Разработчик</label>
+        <input class="col-4 form-control" asp-for="Developer">
+        <span asp-validation-for="Developer"></span>
+    </div>
+
+    <div class="col mb-3" style="display: flex; flex-direction: column;">
+        <label>Год издания</label>
+        <input class="col-2 form-control" type="number" asp-for="ReleaseYear">
+        <span asp-validation-for="ReleaseYear"></span>
+    </div>
+
+    <div class="col mb-3" style="display: flex; flex-direction: column;">
         <label>Ссылка на изображение</label>
         <input class="col-4" asp-for="ImgFileName">
         <span asp-validation-for="ImgFileName"></span>

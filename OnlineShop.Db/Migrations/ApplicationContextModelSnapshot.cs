@@ -143,12 +143,21 @@ namespace GameOnlineStore.Db.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("Developer")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Genre")
+                        .HasColumnType("text");
+
                     b.Property<string>("ImgFileName")
                         .HasColumnType("text");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<int?>("ReleaseYear")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 

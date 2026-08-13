@@ -1,202 +1,86 @@
 ﻿@model UserDeliveryInfoViewModel
-
-<form id="userOrderInfoForm" method="post">
-
-    <div style="display: flex;">
-        <div class="delivery-address-container">
-            <h4>Адрес доставки</h4>
-            <div class="col mb-3 delivery-address-col">
-                <label>Город</label>
-                <div class="col-4">
-                    <input asp-for="UserAddress.City">
-                </div>
-                <span asp-validation-for="UserAddress.City"></span>
-            </div>
-
-
-            <div class="col mb-3 delivery-address-col">
-                <label>Улица</label>
-                <div class="col-4">
-                    <input asp-for="UserAddress.Street">
-                </div>
-                <span asp-validation-for="UserAddress.Street"></span>
-            </div>
-
-            <div class="col mb-3 delivery-address-col">
-                <label>Номер дома</label>
-                <div class="col-4">
-                    <input asp-for="UserAddress.HomeNo">
-                </div>
-                <span asp-validation-for="UserAddress.HomeNo"></span>
-            </div>
-
-            <div class="col mb-3 delivery-address-col">
-                <label>Подъезд</label>
-                <div class="col-1">
-                    <input asp-for="UserAddress.Entrance">
-                </div>
-                <span asp-validation-for="UserAddress.Entrance"></span>
-            </div>
-
-            <div class="col mb-3 delivery-address-col">
-                <label>Этаж</label>
-                <div class="col-1">
-                    <input asp-for="UserAddress.FloorNo">
-                </div>
-                <span asp-validation-for="UserAddress.FloorNo"></span>
-            </div>
-
-            <div class="col mb-3 delivery-address-col">
-                <label>Квартира</label>
-                <div class="col-1">
-                    <input asp-for="UserAddress.FlatNo">
-                </div>
-                <span asp-validation-for="UserAddress.FlatNo"></span>
-            </div>
-        </div>
-
-        <div class="recipient-container">
-            <h4>Покупатель</h4>
-
-            <div class="col mb-3 recipient-col">
-                <label>Телефон</label>
-                <div class="col-4">
-                    <input id="order-phone" asp-for="Phone">
-                </div>
-                <span asp-validation-for="Phone"></span>
-            </div>
-
-            <div class="col mb-3 recipient-col">
-                <label>Фамилия</label>
-                <div class="col-4">
-                    <input asp-for="LastName">
-                </div>
-                <span asp-validation-for="LastName"></span>
-            </div>
-
-            <div class="col mb-3 recipient-col">
-                <label>Имя</label>
-                <div class="col-4">
-                    <input asp-for="FirstName">
-                </div>
-                <span asp-validation-for="FirstName"></span>
-            </div>
-
-            <div class="col mb-3 recipient-col">
-                <label>Email</label>
-                <div class="col-4">
-                    <input asp-for="Email">
-                </div>
-                <span asp-validation-for="Email"></span>
-            </div>
-
-            <div class="col mb-3 recipient-col">
-                <label>Комментарий к заказу</label>
-                <textarea asp-for="Comment"></textarea>
-                <span asp-validation-for="Comment"></span>
-            </div>
-        </div>
-    </div>
-    <button type="submit" class="btn btn-dark" asp-controller="Order" asp-action="Buy">Подтвердить</button>
-
-</form>
-
-@section Styles
-{
-<link type="text/css" rel="stylesheet" href="~/css/order.css"/>
+@{
+    ViewData["Title"] = "Оформление заказа";
 }
 
-@* Маска для ввода номера телефона *@
-<script>
-    $(document).ready(function () {
-        $("#order-phone").mask("+7(999)999-99-99");
-    });
-</script>
+<section class="page-section order-page">
+    <h1>Оформление заказа</h1>
+    <form id="userOrderInfoForm" method="post" asp-controller="Order" asp-action="Buy">
+        <div class="order-grid">
+            <div class="order-card">
+                <h4>Адрес доставки</h4>
+                <div class="order-field">
+                    <label>Город</label>
+                    <input asp-for="UserAddress.City">
+                    <span asp-validation-for="UserAddress.City"></span>
+                </div>
+                <div class="order-field">
+                    <label>Улица</label>
+                    <input asp-for="UserAddress.Street">
+                    <span asp-validation-for="UserAddress.Street"></span>
+                </div>
+                <div class="order-field">
+                    <label>Номер дома</label>
+                    <input asp-for="UserAddress.HomeNo">
+                    <span asp-validation-for="UserAddress.HomeNo"></span>
+                </div>
+                <div class="order-row">
+                    <div class="order-field">
+                        <label>Подъезд</label>
+                        <input asp-for="UserAddress.Entrance">
+                        <span asp-validation-for="UserAddress.Entrance"></span>
+                    </div>
+                    <div class="order-field">
+                        <label>Этаж</label>
+                        <input asp-for="UserAddress.FloorNo">
+                        <span asp-validation-for="UserAddress.FloorNo"></span>
+                    </div>
+                    <div class="order-field">
+                        <label>Квартира</label>
+                        <input asp-for="UserAddress.FlatNo">
+                        <span asp-validation-for="UserAddress.FlatNo"></span>
+                    </div>
+                </div>
+            </div>
 
-
-
-@* // Вариант отправки формы через js
-
-    <form id="userOrderInfoForm" method="post">
-    <div class="mb-3 col-4">
-        <input type="text" class="form-control" placeholder="Город" name="city">
-    </div>
-
-    <div class="mb-3 col-4">
-        <input type="text" class="form-control" placeholder="Улица" name="street">
-    </div>
-
-    <div class="mb-3 col-4">
-        <input type="text" class="form-control" placeholder="Номер дома" name="homeNo">
-    </div>
-
-    <div class="mb-3 row">
-        <div class="col-1">
-            <input type="text" class="form-control" placeholder="Подъезд" name="entrance">
+            <div class="order-card">
+                <h4>Покупатель</h4>
+                <div class="order-field">
+                    <label>Телефон</label>
+                    <input id="order-phone" asp-for="Phone">
+                    <span asp-validation-for="Phone"></span>
+                </div>
+                <div class="order-field">
+                    <label>Фамилия</label>
+                    <input asp-for="LastName">
+                    <span asp-validation-for="LastName"></span>
+                </div>
+                <div class="order-field">
+                    <label>Имя</label>
+                    <input asp-for="FirstName">
+                    <span asp-validation-for="FirstName"></span>
+                </div>
+                <div class="order-field">
+                    <label>Email</label>
+                    <input asp-for="Email">
+                    <span asp-validation-for="Email"></span>
+                </div>
+                <div class="order-field">
+                    <label>Комментарий к заказу</label>
+                    <textarea asp-for="Comment"></textarea>
+                    <span asp-validation-for="Comment"></span>
+                </div>
+            </div>
         </div>
-        <div class="col-1">
-            <input type="text" class="form-control" placeholder="Этаж" name="floorNo">
-        </div>
-        <div class="col-1">
-            <input type="text" class="form-control" placeholder="Квартира" name="flatNo">
-        </div>
-    </div>
+        <button type="submit" class="btn-store btn-store-lg">Подтвердить</button>
+    </form>
+</section>
 
-    <h3>Покупатель</h3>
-
-    <div class="mb-3 col-5">
-        <input type="tel" class="form-control" placeholder="Телефон" name="phone">
-    </div>
-    <div class="mb-3 col-5">
-        <input type="text" class="form-control" placeholder="Фамилия" name="lastName">
-    </div>
-    <div class="mb-3 col-5">
-        <input type="text" class="form-control" placeholder="Имя" name="firstName">
-    </div>
-    <div class="mb-3 col-5">
-        <input type="email" class="form-control" placeholder="email" name="email">
-    </div>
-
-    <div class="mb-3 col-4">
-        <textarea class="form-control" placeholder="Комментарий курьеру" name="comment"></textarea>
-    </div>
-
-    <button type="submit" class="btn btn-dark">Подтвердить</button>
-</form>
-
-<script>
-    $(document).ready(function () {
-        $('#userOrderInfoForm').submit(function (e) {
-            e.preventDefault();
-            let userAddress = {
-                city: $('input[name="city"]').val(),
-                street: $('input[name="street"]').val(),
-                homeNo: $('input[name="homeNo"]').val(),
-                entrance: $('input[name="entrance"]').val(),
-                floorNo: $('input[name="floorNo"]').val(),
-                flatNo: $('input[name="flatNo"]').val()
-            };
-            let userDeliveryInfo = {
-                firstName: $('input[name="firstName"]').val(),
-                lastName: $('input[name="lastName"]').val(),
-                email: $('input[name="email"]').val(),
-                phone: $('input[name="phone"]').val(),
-                userAddress: userAddress,
-                comment: $('textarea[name="comment"]').val()
-            };
-            $.ajax({
-                type: 'POST',
-                url: '@Url.Action("Buy", "Order")',
-                contentType: 'application/json',
-                data: JSON.stringify(userDeliveryInfo),
-                success: function (response) {
-                    // Отобразить сообщение об успехе
-                    alert('Ваш заказ успешно оформлен');
-                },
-                error: function (response) {
-                    alert(response.responseText);
-                }
-            });
+@section Scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#order-phone").mask("+7(999)999-99-99");
         });
-    });
-</script> *@
+    </script>
+}

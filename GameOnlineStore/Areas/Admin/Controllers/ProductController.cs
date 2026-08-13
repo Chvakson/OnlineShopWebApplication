@@ -45,7 +45,10 @@ namespace GameOnlineStore.Areas.Admin.Controllers
                 Name = productViewModel.Name,
                 Cost = productViewModel.Cost,
                 Description = productViewModel.Description,
-                ImgFileName = productViewModel.ImgFileName
+                ImgFileName = productViewModel.ImgFileName,
+                Genre = productViewModel.Genre,
+                Developer = productViewModel.Developer,
+                ReleaseYear = productViewModel.ReleaseYear
             };
 
             productsDbRepository.Add(productDb);
@@ -72,7 +75,10 @@ namespace GameOnlineStore.Areas.Admin.Controllers
                 Name = productViewModel.Name,
                 Cost = productViewModel.Cost,
                 Description = productViewModel.Description,
-                ImgFileName = productViewModel.ImgFileName
+                ImgFileName = productViewModel.ImgFileName,
+                Genre = productViewModel.Genre,
+                Developer = productViewModel.Developer,
+                ReleaseYear = productViewModel.ReleaseYear
             };
 
             productsDbRepository.Update(productDb);

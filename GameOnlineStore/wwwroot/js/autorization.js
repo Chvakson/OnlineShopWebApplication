@@ -1,6 +1,14 @@
 ﻿ $(document).ready(function () {
     $("#phone").mask("+7(999)999-99-99");
 
+    function hideLoginModal() {
+        var el = document.getElementById('loginModalWindow');
+        if (el && window.bootstrap) {
+            var instance = bootstrap.Modal.getInstance(el) || bootstrap.Modal.getOrCreateInstance(el);
+            instance.hide();
+        }
+    }
+
     $('#signInForm').submit(function (e) {
         e.preventDefault();
         let loginCredential = {
@@ -10,12 +18,12 @@
         };
         $.ajax({
             type: 'POST',
-            url: 'Account/SignIn',
+            url: '/Account/SignIn',
             contentType: 'application/json',
             data: JSON.stringify(loginCredential),
             success: function (response) {
                 if (response.success) {
-                    $('#loginModalWindow').modal('hide');
+                    hideLoginModal();
                     window.location.href = response.redirectUrl || '/';
                 } else {
                     alert(response.message);
@@ -36,13 +44,12 @@
         };
         $.ajax({
             type: 'POST',
-            url: 'Account/Register',
+            url: '/Account/Register',
             contentType: 'application/json',
             data: JSON.stringify(registerDetails),
-            success: function (response) {
-                // Закрыть модальное окно
-                $('#loginModalWindow').modal('hide');
-                // Отобразить сообщение об успехе
+            success: function () {
+                hideLoginModal();
+                window.location.href = '/';
             },
             error: function (response) {
                 alert(response.responseText);
