@@ -1,7 +1,7 @@
-﻿using GameOnlineStore.Db.Models;
+﻿using GameOnlineShop.Db.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace GameOnlineStore.Db.Repositories.Products
+namespace GameOnlineShop.Db.Repositories.Products
 {
     public class ProductsDbRepository : IProductsDbRepository
     {

@@ -1,0 +1,55 @@
+﻿@using GameOnlineShop.Db.Models
+@model CartViewModel
+@{
+    ViewData["Title"] = "Корзина";
+}
+
+<section class="page-section">
+    <h1>Корзина</h1>
+    @if (Model == null || Model.Items == null || Model.Items.Count == 0)
+    {
+        <div class="empty-state">
+            <h3>Корзина пуста</h3>
+            <p>Добавьте игры из каталога — они появятся здесь.</p>
+            <a class="btn-shop" asp-area="" asp-controller="Home" asp-action="Index">Перейти в каталог</a>
+        </div>
+    }
+    else
+    {
+        <div class="cart-layout">
+            <div class="cart-list">
+                @for (int i = 0; i < Model.Items.Count; i++)
+                {
+                    var item = Model.Items[i];
+                    <article class="cart-item">
+                        <img src="@item.Product.ImgPath" alt="@item.Product.Name" onerror="this.onerror=null;this.src='/img/games/default.jpg';">
+                        <div class="cart-item__info">
+                            <a asp-area="" asp-controller="Product" asp-action="Index" asp-route-productId="@item.Product.Id">@item.Product.Name</a>
+                            <div class="hero-tags">
+                                @foreach (var tag in item.Product.GenreTags.Take(2))
+                                {
+                                    <span class="genre-tag" data-genre="@tag">@tag</span>
+                                }
+                            </div>
+                            <p>@item.Product.Cost.ToString("N0") ₽</p>
+                        </div>
+                        <div class="cart-item__qty">
+                            <a asp-area="" asp-controller="Cart" asp-action="Remove" asp-route-productId="@item.Product.Id" aria-label="Уменьшить">−</a>
+                            <span>@item.Amount</span>
+                            <a asp-area="" asp-controller="Cart" asp-action="Add" asp-route-productId="@item.Product.Id" aria-label="Увеличить">+</a>
+                        </div>
+                        <div class="cart-item__sum">@item.Cost.ToString("N0") ₽</div>
+                    </article>
+                }
+            </div>
+            <aside class="cart-summary">
+                <h2>Итого</h2>
+                <p class="cart-summary__row"><span>Позиций</span><span>@Model.Amount</span></p>
+                <p class="cart-summary__total">@Model.Cost.ToString("N0") ₽</p>
+                <a class="btn-shop btn-shop-lg" asp-area="" asp-controller="Order" asp-action="Index">Оформить заказ</a>
+                <a class="btn-ghost" asp-area="" asp-controller="Home" asp-action="Index">Продолжить покупки</a>
+                <a class="btn-ghost btn-danger-ghost" asp-area="" asp-controller="Cart" asp-action="Clear">Очистить корзину</a>
+            </aside>
+        </div>
+    }
+</section>

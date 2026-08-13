@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace GameOnlineStore.Db.Migrations
+namespace GameOnlineShop.Db.Migrations
 {
     /// <inheritdoc />
     public partial class Initialization : Migration

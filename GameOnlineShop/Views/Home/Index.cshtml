@@ -1,0 +1,145 @@
+﻿@model CatalogViewModel
+@{
+    ViewData["Title"] = "Каталог игр";
+    var featured = Model.Featured;
+}
+
+<section class="shop-hero">
+    <div class="hero-glow"></div>
+    @if (featured != null && string.IsNullOrWhiteSpace(Model.Query) && !Model.SelectedGenres.Any() && Model.Page <= 1)
+    {
+        <div class="hero-card">
+            <img src="@featured.ImgPath" alt="@featured.Name" onerror="this.onerror=null;this.src='/img/games/default.jpg';">
+            <div class="hero-content">
+                <p class="hero-kicker">Рекомендуем сегодня</p>
+                <h1>@featured.Name</h1>
+                <div class="hero-tags">
+                    @foreach (var tag in featured.GenreTags)
+                    {
+                        <a class="genre-tag @(Model.IsGenreSelected(tag) ? "is-active" : null)"
+                           data-genre="@tag"
+                           asp-area="" asp-controller="Home" asp-action="Index"
+                           asp-route-query="@Model.Query" asp-route-genres="@Model.ToggleGenres(tag)"
+                           asp-route-sort="@Model.Sort" asp-route-pageSize="@Model.PageSize">@tag</a>
+                    }
+                </div>
+                <p class="hero-text">@featured.Description</p>
+                <div class="hero-cta">
+                    <span class="hero-price">@featured.Cost.ToString("N0") ₽</span>
+                    <a class="btn-shop btn-shop-lg" asp-area="" asp-controller="Product" asp-action="Index" asp-route-productId="@featured.Id">Подробнее</a>
+                    <a class="btn-ghost" asp-area="" asp-controller="Cart" asp-action="Add" asp-route-productId="@featured.Id">Купить</a>
+                </div>
+            </div>
+        </div>
+    }
+</section>
+
+<section class="catalog">
+    <div class="catalog-toolbar">
+        <div>
+            <h2>Каталог</h2>
+            <p class="catalog-count">
+                @if (Model.TotalCount == 0)
+                {
+                    <text>Нет игр</text>
+                }
+                else
+                {
+                    <text>Показано @Model.FromItem–@Model.ToItem из @Model.TotalCount</text>
+                }
+            </p>
+        </div>
+        <form class="catalog-sort" method="get" asp-area="" asp-controller="Home" asp-action="Index">
+            @if (!string.IsNullOrWhiteSpace(Model.Query))
+            {
+                <input type="hidden" name="query" value="@Model.Query">
+            }
+            @if (!string.IsNullOrWhiteSpace(Model.GenresParam))
+            {
+                <input type="hidden" name="genres" value="@Model.GenresParam">
+            }
+            <label>
+                На странице
+                <select name="pageSize" onchange="this.form.submit()">
+                    @foreach (var size in Model.PageSizeOptions)
+                    {
+                        <option value="@size" selected="@(Model.PageSize == size)">@size</option>
+                    }
+                </select>
+            </label>
+            <label>
+                Сортировка
+                <select name="sort" onchange="this.form.submit()">
+                    <option value="" selected="@string.IsNullOrEmpty(Model.Sort)">По названию</option>
+                    <option value="price_asc" selected="@(Model.Sort == "price_asc")">Сначала дешевле</option>
+                    <option value="price_desc" selected="@(Model.Sort == "price_desc")">Сначала дороже</option>
+                    <option value="year" selected="@(Model.Sort == "year")">По году выхода</option>
+                </select>
+            </label>
+        </form>
+    </div>
+
+    @if (Model.AvailableGenres.Any())
+    {
+        <div class="genre-filter">
+            <a class="genre-chip @(!Model.SelectedGenres.Any() ? "is-active" : null)"
+               asp-area="" asp-controller="Home" asp-action="Index"
+               asp-route-query="@Model.Query" asp-route-sort="@Model.Sort" asp-route-pageSize="@Model.PageSize">Все жанры</a>
+            @foreach (var tag in Model.AvailableGenres)
+            {
+                <a class="genre-chip @(Model.IsGenreSelected(tag) ? "is-active" : null)"
+                   asp-area="" asp-controller="Home" asp-action="Index"
+                   asp-route-query="@Model.Query" asp-route-genres="@Model.ToggleGenres(tag)"
+                   asp-route-sort="@Model.Sort" asp-route-pageSize="@Model.PageSize">@tag</a>
+            }
+        </div>
+    }
+
+    @if (!Model.Products.Any())
+    {
+        <div class="empty-state">
+            <h3>Ничего не нашлось</h3>
+            <p>Попробуйте другой запрос или сбросьте фильтр по жанру.</p>
+            <a class="btn-shop" asp-area="" asp-controller="Home" asp-action="Index">Показать все игры</a>
+        </div>
+    }
+    else
+    {
+        <div class="game-grid">
+            @foreach (var product in Model.Products)
+            {
+                ViewData["CardVariant"] = "catalog";
+                @await Html.PartialAsync("_ProductCard", product)
+            }
+        </div>
+
+        @if (Model.TotalPages > 1)
+        {
+            <nav class="pager" aria-label="Страницы каталога">
+                @if (Model.Page > 1)
+                {
+                    <a class="pager__btn"
+                       asp-area="" asp-controller="Home" asp-action="Index"
+                       asp-route-query="@Model.Query" asp-route-genres="@Model.GenresParam" asp-route-sort="@Model.Sort"
+                       asp-route-pageSize="@Model.PageSize" asp-route-page="@(Model.Page - 1)">Назад</a>
+                }
+
+                @for (var i = 1; i <= Model.TotalPages; i++)
+                {
+                    <a class="pager__btn @(i == Model.Page ? "is-active" : null)"
+                       asp-area="" asp-controller="Home" asp-action="Index"
+                       asp-route-query="@Model.Query" asp-route-genres="@Model.GenresParam" asp-route-sort="@Model.Sort"
+                       asp-route-pageSize="@Model.PageSize" asp-route-page="@i">@i</a>
+                }
+
+                @if (Model.Page < Model.TotalPages)
+                {
+                    <a class="pager__btn"
+                       asp-area="" asp-controller="Home" asp-action="Index"
+                       asp-route-query="@Model.Query" asp-route-genres="@Model.GenresParam" asp-route-sort="@Model.Sort"
+                       asp-route-pageSize="@Model.PageSize" asp-route-page="@(Model.Page + 1)">Вперёд</a>
+                }
+            </nav>
+        }
+    }
+</section>

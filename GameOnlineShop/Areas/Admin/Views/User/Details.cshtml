@@ -1,0 +1,36 @@
+﻿@using GameOnlineShop.Db.Models
+@model User;
+
+<div class="row">
+    @await Html.PartialAsync("AdminLeftPanel")
+
+    <div class="col-9">
+        <h3>Пользователь @Model.UserName</h3>
+        <br />
+        <div class="row">
+            <p class="col-4">Логин:</p>
+            <p class="col-5">@Model.UserName</p>
+        </div>
+        <div class="row">
+            <p class="col-4">Телефон:</p>
+            <p class="col-5">@Model.PhoneNumber</p>
+        </div>
+        <div class="row">
+            <p class="col-4">Роль:</p>
+            <p class="col-5">@ViewBag.UserRole</p>
+        </div>
+
+
+        <div class="dropdown">
+            <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                Действия
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li><a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="ChangePassword" asp-route-login="@Model.UserName">Смена пароля</a></li>
+                <li><a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="Edit" asp-route-login="@Model.UserName">Редактирование данных</a></li>
+                <li><a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="Permissions" asp-route-login="@Model.UserName">Права доступа</a></li>
+                <li><a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="Remove" asp-route-login="@Model.UserName">Удалить пользователя</a></li>
+            </ul>
+        </div>
+    </div>
+</div>

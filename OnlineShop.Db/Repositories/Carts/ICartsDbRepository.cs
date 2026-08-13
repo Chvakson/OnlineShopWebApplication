@@ -1,6 +1,6 @@
-﻿using GameOnlineStore.Db.Models;
+﻿using GameOnlineShop.Db.Models;
 
-namespace GameOnlineStore.Db.Repositories.Carts
+namespace GameOnlineShop.Db.Repositories.Carts
 {
     public interface ICartsDbRepository
     {

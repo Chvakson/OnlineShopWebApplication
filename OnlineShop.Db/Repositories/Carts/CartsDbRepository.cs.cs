@@ -1,7 +1,7 @@
-﻿using GameOnlineStore.Db.Models;
+﻿using GameOnlineShop.Db.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace GameOnlineStore.Db.Repositories.Carts
+namespace GameOnlineShop.Db.Repositories.Carts
 {
     public class CartsDbRepository : ICartsDbRepository
     {

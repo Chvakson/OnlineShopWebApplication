@@ -1,0 +1,86 @@
+﻿@model UserDeliveryInfoViewModel
+@{
+    ViewData["Title"] = "Оформление заказа";
+}
+
+<section class="page-section order-page">
+    <h1>Оформление заказа</h1>
+    <form id="userOrderInfoForm" method="post" asp-controller="Order" asp-action="Buy">
+        <div class="order-grid">
+            <div class="order-card">
+                <h4>Адрес доставки</h4>
+                <div class="order-field">
+                    <label>Город</label>
+                    <input asp-for="UserAddress.City">
+                    <span asp-validation-for="UserAddress.City"></span>
+                </div>
+                <div class="order-field">
+                    <label>Улица</label>
+                    <input asp-for="UserAddress.Street">
+                    <span asp-validation-for="UserAddress.Street"></span>
+                </div>
+                <div class="order-field">
+                    <label>Номер дома</label>
+                    <input asp-for="UserAddress.HomeNo">
+                    <span asp-validation-for="UserAddress.HomeNo"></span>
+                </div>
+                <div class="order-row">
+                    <div class="order-field">
+                        <label>Подъезд</label>
+                        <input asp-for="UserAddress.Entrance">
+                        <span asp-validation-for="UserAddress.Entrance"></span>
+                    </div>
+                    <div class="order-field">
+                        <label>Этаж</label>
+                        <input asp-for="UserAddress.FloorNo">
+                        <span asp-validation-for="UserAddress.FloorNo"></span>
+                    </div>
+                    <div class="order-field">
+                        <label>Квартира</label>
+                        <input asp-for="UserAddress.FlatNo">
+                        <span asp-validation-for="UserAddress.FlatNo"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="order-card">
+                <h4>Покупатель</h4>
+                <div class="order-field">
+                    <label>Телефон</label>
+                    <input id="order-phone" asp-for="Phone">
+                    <span asp-validation-for="Phone"></span>
+                </div>
+                <div class="order-field">
+                    <label>Фамилия</label>
+                    <input asp-for="LastName">
+                    <span asp-validation-for="LastName"></span>
+                </div>
+                <div class="order-field">
+                    <label>Имя</label>
+                    <input asp-for="FirstName">
+                    <span asp-validation-for="FirstName"></span>
+                </div>
+                <div class="order-field">
+                    <label>Email</label>
+                    <input asp-for="Email">
+                    <span asp-validation-for="Email"></span>
+                </div>
+                <div class="order-field">
+                    <label>Комментарий к заказу</label>
+                    <textarea asp-for="Comment"></textarea>
+                    <span asp-validation-for="Comment"></span>
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn-shop btn-shop-lg">Подтвердить</button>
+    </form>
+</section>
+
+@section Scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#order-phone").mask("+7(999)999-99-99");
+        });
+    </script>
+}

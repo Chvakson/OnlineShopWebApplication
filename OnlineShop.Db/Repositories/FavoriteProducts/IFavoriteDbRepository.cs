@@ -1,6 +1,6 @@
-﻿using GameOnlineStore.Db.Models;
+﻿using GameOnlineShop.Db.Models;
 
-namespace GameOnlineStore.Repositories.FavoriteProducts
+namespace GameOnlineShop.Repositories.FavoriteProducts
 {
     public interface IFavoriteDbRepository
     {

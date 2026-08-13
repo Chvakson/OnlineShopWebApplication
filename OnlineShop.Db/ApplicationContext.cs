@@ -1,8 +1,8 @@
-﻿using GameOnlineStore.Db.Models;
+﻿using GameOnlineShop.Db.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
-namespace GameOnlineStore.Db
+namespace GameOnlineShop.Db
 {
     public class ApplicationContext : IdentityDbContext<User>
     {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace GameOnlineStore.Db.Models
+namespace GameOnlineShop.Db.Models
 {
     public class User : IdentityUser
     {

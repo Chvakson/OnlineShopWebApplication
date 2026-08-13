@@ -1,4 +1,4 @@
-﻿namespace GameOnlineStore.Db.Models
+﻿namespace GameOnlineShop.Db.Models
 {
     public class FavoriteProduct
     {

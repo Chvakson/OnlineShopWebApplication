@@ -1,6 +1,6 @@
-﻿using GameOnlineStore.Db.Models;
+﻿using GameOnlineShop.Db.Models;
 
-namespace GameOnlineStore.Repositories.ComparedProducts
+namespace GameOnlineShop.Repositories.ComparedProducts
 {
     public interface IComparedDbRepository
     {

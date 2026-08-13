@@ -1,9 +1,9 @@
-﻿using GameOnlineStore.Db.Models;
+﻿using GameOnlineShop.Db.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using OnlineShopWebApplication;
 
-namespace GameOnlineStore.Db
+namespace GameOnlineShop.Db
 {
     public class DbInitializer
     {

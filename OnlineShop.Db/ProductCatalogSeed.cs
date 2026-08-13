@@ -1,6 +1,6 @@
-using GameOnlineStore.Db.Models;
+using GameOnlineShop.Db.Models;
 
-namespace GameOnlineStore.Db
+namespace GameOnlineShop.Db
 {
     public static class ProductCatalogSeed
     {

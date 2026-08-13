@@ -1,8 +1,8 @@
-﻿using GameOnlineStore.Db;
-using GameOnlineStore.Db.Models;
+﻿using GameOnlineShop.Db;
+using GameOnlineShop.Db.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace GameOnlineStore.Repositories.ComparedProducts
+namespace GameOnlineShop.Repositories.ComparedProducts
 {
     public class ComparedDbRepository : IComparedDbRepository
     {

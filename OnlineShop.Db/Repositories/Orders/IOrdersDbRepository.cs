@@ -1,6 +1,6 @@
-﻿using GameOnlineStore.Db.Models;
+﻿using GameOnlineShop.Db.Models;
 
-namespace GameOnlineStore.Db.Repositories.Orders
+namespace GameOnlineShop.Db.Repositories.Orders
 {
     public interface IOrdersDbRepository
     {

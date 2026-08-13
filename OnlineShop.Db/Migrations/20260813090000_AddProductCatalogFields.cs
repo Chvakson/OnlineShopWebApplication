@@ -1,10 +1,10 @@
-using GameOnlineStore.Db;
+using GameOnlineShop.Db;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace GameOnlineStore.Db.Migrations
+namespace GameOnlineShop.Db.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
     [Migration("20260813090000_AddProductCatalogFields")]

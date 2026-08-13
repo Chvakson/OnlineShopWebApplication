@@ -1,8 +1,8 @@
-﻿using GameOnlineStore.Db;
-using GameOnlineStore.Db.Models;
+﻿using GameOnlineShop.Db;
+using GameOnlineShop.Db.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace GameOnlineStore.Repositories.FavoriteProducts
+namespace GameOnlineShop.Repositories.FavoriteProducts
 {
     public class FavoriteDbRepository : IFavoriteDbRepository
     {

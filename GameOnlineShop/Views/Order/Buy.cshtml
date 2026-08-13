@@ -1,0 +1,26 @@
+﻿@{
+    ViewData["Title"] = "Заказ оформлен";
+    var email = ViewBag.CustomerEmail as string;
+    var emailSent = ViewBag.EmailSent as bool? == true;
+    var emailError = ViewBag.EmailError as string;
+}
+
+<section class="page-section">
+    <div class="empty-state">
+        <h1>Заказ успешно оформлен</h1>
+        <p>Спасибо за покупку! Ключи и детали заказа появятся в вашем аккаунте.</p>
+        @if (!string.IsNullOrWhiteSpace(email) && emailSent)
+        {
+            <p>Письмо с информацией о заказе отправлено на <strong>@email</strong>.</p>
+        }
+        else if (!string.IsNullOrWhiteSpace(email))
+        {
+            <p>Заказ сохранён. Письмо на <strong>@email</strong> не удалось отправить.</p>
+            @if (!string.IsNullOrWhiteSpace(emailError))
+            {
+                <p>@emailError</p>
+            }
+        }
+        <a class="btn-shop" asp-area="" asp-controller="Home" asp-action="Index">Вернуться в каталог</a>
+    </div>
+</section>
